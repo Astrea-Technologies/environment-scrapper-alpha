@@ -112,11 +112,19 @@ async def check_redis() -> Dict[str, bool]:
 def check_pinecone() -> Dict[str, bool]:
     """Test Pinecone connection."""
     try:
-        # Pinecone doesn't have a ping method, so we'll check if the index is initialized
-        if pinecone_conn._index is not None:
-            # Try to fetch index stats as a connection test
-            pinecone_conn.index.describe_index_stats()
-            return {"connected": True}
+        # First check if Pinecone is available
+        if not pinecone_conn.available:
+            api_version = pinecone_conn.api_version or "unknown"
+            return {"connected": False, "error": f"Pinecone not available (API version: {api_version})"}
+            
+        # If available, try to fetch index stats as a connection test
+        if pinecone_conn.index:
+            try:
+                pinecone_conn.index.describe_index_stats()
+                return {"connected": True, "api_version": pinecone_conn.api_version}
+            except Exception as e:
+                return {"connected": False, "error": f"Index stats failed: {str(e)}"}
+        
         return {"connected": False, "error": "Index not initialized"}
     except Exception as e:
         logger.error(f"Pinecone health check failed: {e}")
@@ -144,16 +152,20 @@ async def startup_db_client() -> None:
         # Continue without raising the exception
 
     # Pinecone connection (optional)
-    if settings.PINECONE_API_KEY:
-        try:
-            logger.info("Connecting to Pinecone...")
-            pinecone_conn.connect()
-            logger.info("Successfully connected to Pinecone")
-        except Exception as e:
-            logger.warning(f"Failed to connect to Pinecone: {e}")
-            # Continue without raising the exception
-    else:
-        logger.warning("Skipping Pinecone connection - API key not provided")
+    try:
+        logger.info("Connecting to Pinecone...")
+        pinecone_conn.connect()
+        
+        if pinecone_conn.available:
+            logger.info(f"Successfully connected to Pinecone (API version: {pinecone_conn.api_version})")
+        else:
+            if settings.PINECONE_API_KEY:
+                logger.warning("Pinecone connection failed despite API key being provided")
+            else:
+                logger.warning("Skipping Pinecone connection - API key not provided")
+    except Exception as e:
+        logger.warning(f"Failed to connect to Pinecone: {e}")
+        # Continue without raising the exception
 
 
 @app.on_event("shutdown")

@@ -141,6 +141,11 @@ class Settings(BaseSettings):
     TRANSFORMER_MODEL_NAME: str = "distilbert-base-uncased"
     SENTENCE_TRANSFORMER_MODEL_NAME: str = "all-MiniLM-L6-v2"
     
+    # OpenAI settings
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "text-embedding-3-small"
+    OPENAI_EMBEDDING_DIMENSION: int = 1536  # Dimension for text-embedding-3-small
+    
     # Email settings
     SMTP_TLS: bool = True
     SMTP_SSL: bool = False
@@ -181,6 +186,7 @@ class Settings(BaseSettings):
         self._check_default_secret("MONGODB_PASSWORD", self.MONGODB_PASSWORD)
         self._check_default_secret("REDIS_PASSWORD", self.REDIS_PASSWORD)
         self._check_default_secret("PINECONE_API_KEY", self.PINECONE_API_KEY)
+        self._check_default_secret("OPENAI_API_KEY", self.OPENAI_API_KEY)
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
         self._check_default_secret("FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD)
         return self
