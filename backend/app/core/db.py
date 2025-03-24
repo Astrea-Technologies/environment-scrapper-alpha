@@ -33,5 +33,5 @@ def init_db(session: Session) -> None:
             password=settings.FIRST_SUPERUSER_PASSWORD,
             is_superuser=True,
         )
-        # Updated to use the new repositorxy pattern
-        user = user_service.create_user(session=session, obj_in=user_in)
+        # Fixed parameter name to match the service function signature
+        user = user_service.create_user(session=session, user_create=user_in)

@@ -239,7 +239,7 @@ services:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
 
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8000/api/v1/utils/health-check/" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
       interval: 10s
       timeout: 5s
       retries: 5
