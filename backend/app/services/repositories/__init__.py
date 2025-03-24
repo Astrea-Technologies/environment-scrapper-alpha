@@ -6,6 +6,7 @@ from app.services.repositories.entity_relationship import EntityRelationshipRepo
 from app.services.repositories.post_repository import PostRepository
 from app.services.repositories.comment_repository import CommentRepository
 from app.services.repositories.metrics_repository import MetricsRepository
+from app.services.repositories.topic_repository import TopicRepository
 
 __all__ = [
     "UserRepository",
@@ -16,4 +17,5 @@ __all__ = [
     "PostRepository",
     "CommentRepository",
     "MetricsRepository",
+    "TopicRepository",
 ] 
