@@ -4,6 +4,11 @@ Redis service for handling caching and real-time operations.
 This module provides service classes for interacting with Redis,
 implementing key generation, common operations, and caching strategies
 for the Political Social Media Analysis Platform.
+
+NOTE: NOT USED IN MVP - This implementation is reserved for future releases.
+Redis functionality is disabled in the MVP to simplify initial deployment.
+When activating Redis, ensure the appropriate dependencies are installed
+and the feature flags are enabled in the application configuration.
 """
 
 import json

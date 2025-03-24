@@ -3,12 +3,12 @@
 This module provides connection utilities for the hybrid database architecture used in the
 Political Social Media Analysis Platform. It implements connection management for:
 - MongoDB: For storing social media content and engagement data
-- Redis: For caching and real-time operations
+- Redis: For caching and real-time operations (not used in MVP)
 - Pinecone: For vector similarity search and semantic analysis
 """
 
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator, Optional
+from typing import AsyncGenerator, Optional, Union
 from functools import lru_cache
 
 import motor.motor_asyncio
@@ -83,14 +83,26 @@ class MongoDBConnection:
 
 
 class RedisConnection:
-    """Redis connection manager for async operations."""
+    """
+    Redis connection manager for async operations.
+    
+    NOTE: Not used in MVP - This implementation is reserved for future releases.
+    Redis functionality is disabled in the MVP to simplify initial deployment.
+    """
     
     def __init__(self) -> None:
         """Initialize Redis connection manager."""
         self._client: Optional[redis.Redis] = None
 
     async def connect(self) -> None:
-        """Connect to Redis."""
+        """
+        Connect to Redis.
+        
+        If USE_REDIS is False, this will not actually establish a connection.
+        """
+        if not settings.USE_REDIS:
+            return
+            
         try:
             self._client = redis.from_url(
                 settings.REDIS_URI,
@@ -106,7 +118,7 @@ class RedisConnection:
     def client(self) -> redis.Redis:
         """Get the Redis client instance."""
         if self._client is None:
-            raise ConnectionError("Redis connection not initialized")
+            raise ConnectionError("Redis connection not initialized or Redis is disabled in MVP")
         return self._client
 
     async def close(self) -> None:
@@ -114,6 +126,28 @@ class RedisConnection:
         if self._client is not None:
             await self._client.close()
             self._client = None
+
+
+class MockRedisClient:
+    """Mock Redis client used when Redis is disabled (MVP)."""
+    
+    async def get(self, *args, **kwargs):
+        """Mock get that always returns None."""
+        return None
+        
+    async def set(self, *args, **kwargs):
+        """Mock set that does nothing."""
+        return True
+        
+    async def ping(self, *args, **kwargs):
+        """Mock ping that always succeeds."""
+        return True
+        
+    # Add other mock methods as needed for the MVP
+    
+    async def close(self):
+        """Mock close method."""
+        pass
 
 
 class PineconeConnection:
@@ -173,8 +207,21 @@ async def get_mongodb() -> AsyncGenerator[motor.motor_asyncio.AsyncIOMotorDataba
 
 
 @asynccontextmanager
-async def get_redis() -> AsyncGenerator[redis.Redis, None]:
-    """Async context manager for getting Redis client instance."""
+async def get_redis() -> AsyncGenerator[Union[redis.Redis, MockRedisClient], None]:
+    """
+    Async context manager for getting Redis client instance.
+    
+    If Redis is disabled (MVP), returns a mock client that does nothing.
+    """
+    if not settings.USE_REDIS:
+        # In MVP, return a mock client that does nothing
+        mock_client = MockRedisClient()
+        try:
+            yield mock_client
+        finally:
+            await mock_client.close()
+        return
+        
     if redis_conn._client is None:
         await redis_conn.connect()
     try:
@@ -194,5 +241,6 @@ def get_pinecone():
 async def close_db_connections() -> None:
     """Close all database connections."""
     await mongodb.close()
-    await redis_conn.close()
+    if settings.USE_REDIS:
+        await redis_conn.close()
     pinecone_conn.close() 

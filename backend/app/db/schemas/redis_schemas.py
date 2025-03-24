@@ -3,6 +3,11 @@ Redis schema definitions and key pattern constants.
 
 This module defines the key patterns and data structures used for Redis caching
 and real-time operations in the Political Social Media Analysis Platform.
+
+NOTE: NOT USED IN MVP - This implementation is reserved for future releases.
+Redis functionality is disabled in the MVP to simplify initial deployment.
+When activating Redis, ensure the appropriate dependencies are installed
+and the feature flags are enabled in the application configuration.
 """
 
 from enum import Enum
