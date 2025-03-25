@@ -208,7 +208,7 @@ class PineconeConnection:
                                 name=settings.PINECONE_INDEX_NAME,
                                 dimension=settings.OPENAI_EMBEDDING_DIMENSION,
                                 metric="cosine",
-                                spec=ServerlessSpec(cloud="aws", region="us-west-2")
+                                spec=ServerlessSpec(cloud="aws", region="us-east-1")
                             )
                         else:
                             client.create_index(
