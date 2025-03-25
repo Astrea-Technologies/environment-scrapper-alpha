@@ -154,6 +154,9 @@ services:
       db:
         condition: service_healthy
         restart: true
+      mongodb:
+        condition: service_healthy
+        restart: true
     command: bash scripts/prestart.sh
     env_file:
       - .env
@@ -175,10 +178,11 @@ services:
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - SENTRY_DSN=${SENTRY_DSN}
-      - MONGO_SERVER=mongodb
-      - MONGO_USER=${MONGO_USER:-mongouser}
-      - MONGO_PASSWORD=${MONGO_PASSWORD:-mongopassword}
-      - MONGO_DB=${MONGO_DB:-socialmediadb}
+      - MONGODB_SERVER=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DB=${MONGO_DB:-socialmediadb}
+      - MONGODB_USER=${MONGO_USER:-mongouser}
+      - MONGODB_PASSWORD=${MONGO_PASSWORD:-mongopassword}
       - REDIS_SERVER=redis
       - REDIS_PORT=6379
       - RABBITMQ_SERVER=rabbitmq
@@ -227,10 +231,11 @@ services:
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - SENTRY_DSN=${SENTRY_DSN}
-      - MONGO_SERVER=mongodb
-      - MONGO_USER=${MONGO_USER:-mongouser}
-      - MONGO_PASSWORD=${MONGO_PASSWORD:-mongopassword}
-      - MONGO_DB=${MONGO_DB:-socialmediadb}
+      - MONGODB_SERVER=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DB=${MONGO_DB:-socialmediadb}
+      - MONGODB_USER=${MONGO_USER:-mongouser}
+      - MONGODB_PASSWORD=${MONGO_PASSWORD:-mongopassword}
       - REDIS_SERVER=redis
       - REDIS_PORT=6379
       - RABBITMQ_SERVER=rabbitmq
