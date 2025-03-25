@@ -8,18 +8,23 @@ Political Social Media Analysis Platform. It implements connection management fo
 """
 
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator, Optional, Union
+from typing import AsyncGenerator, Optional, Union, Any
 from functools import lru_cache
+import logging
+import importlib
+import sys
 
 import motor.motor_asyncio
-import pinecone
-from pinecone import Index
+# Import pinecone dynamically only when needed
 import redis.asyncio as redis
 from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
 from redis.exceptions import ConnectionError as RedisConnectionError
 from redis.exceptions import RedisError
 
 from app.core.config import settings
+
+
+logger = logging.getLogger(__name__)
 
 
 class MongoDBConnection:
@@ -155,38 +160,124 @@ class PineconeConnection:
     
     def __init__(self) -> None:
         """Initialize Pinecone connection manager."""
-        self._index: Optional[Index] = None
+        self._index = None
+        self._pinecone_client = None
+        self._available = False
+        self._api_version = None
 
     def connect(self) -> None:
-        """Initialize Pinecone connection and ensure index exists."""
+        """
+        Initialize Pinecone connection and ensure index exists.
+        
+        If Pinecone is not available or API key is not provided, 
+        this will log a warning but not fail.
+        """
+        if not settings.PINECONE_API_KEY:
+            logger.warning("Skipping Pinecone connection - API key not provided")
+            return
+
         try:
-            # Initialize Pinecone client
-            pinecone.init(api_key=settings.PINECONE_API_KEY)
+            # Try to import pinecone dynamically to avoid module-level import issues
+            if 'pinecone' in sys.modules:
+                del sys.modules['pinecone']
+                
+            pinecone_module = importlib.import_module('pinecone')
             
-            # Create index if it doesn't exist
-            if settings.PINECONE_INDEX_NAME not in pinecone.list_indexes():
-                pinecone.create_index(
-                    name=settings.PINECONE_INDEX_NAME,
-                    dimension=384,  # Dimension for all-MiniLM-L6-v2 embeddings
-                    metric="cosine"
-                )
+            # First try the new API (pinecone package)
+            try:
+                # Check if we have new Pinecone API (v6+)
+                if hasattr(pinecone_module, 'Pinecone'):
+                    logger.info("Using Pinecone v6+ API")
+                    self._api_version = "v6+"
+                    Pinecone = getattr(pinecone_module, 'Pinecone')
+                    ServerlessSpec = getattr(pinecone_module, 'ServerlessSpec', None)
+                    
+                    client = Pinecone(api_key=settings.PINECONE_API_KEY)
+                    self._pinecone_client = client
+                    
+                    try:
+                        # Try to get the index
+                        self._index = client.Index(settings.PINECONE_INDEX_NAME)
+                        self._available = True
+                        logger.info(f"Connected to Pinecone index: {settings.PINECONE_INDEX_NAME}")
+                    except Exception as e:
+                        logger.info(f"Creating new Pinecone index: {settings.PINECONE_INDEX_NAME}")
+                        # Create a new index
+                        if ServerlessSpec:
+                            client.create_index(
+                                name=settings.PINECONE_INDEX_NAME,
+                                dimension=settings.OPENAI_EMBEDDING_DIMENSION,
+                                metric="cosine",
+                                spec=ServerlessSpec(cloud="aws", region="us-east-1")
+                            )
+                        else:
+                            client.create_index(
+                                name=settings.PINECONE_INDEX_NAME,
+                                dimension=settings.OPENAI_EMBEDDING_DIMENSION,
+                                metric="cosine"
+                            )
+                        self._index = client.Index(settings.PINECONE_INDEX_NAME)
+                        self._available = True
+                
+                # Fall back to old pinecone-client API
+                else:
+                    logger.info("Using pinecone-client legacy API")
+                    self._api_version = "legacy"
+                    # Old API style using pinecone.init()
+                    pinecone_module.init(api_key=settings.PINECONE_API_KEY, 
+                                        environment=settings.PINECONE_ENVIRONMENT)
+                    self._pinecone_client = pinecone_module
+                    
+                    # Create index if it doesn't exist
+                    existing_indexes = pinecone_module.list_indexes()
+                    if settings.PINECONE_INDEX_NAME not in existing_indexes:
+                        logger.info(f"Creating new Pinecone index: {settings.PINECONE_INDEX_NAME}")
+                        pinecone_module.create_index(
+                            name=settings.PINECONE_INDEX_NAME,
+                            dimension=settings.OPENAI_EMBEDDING_DIMENSION,
+                            metric="cosine"
+                        )
+                    
+                    # Get the index
+                    self._index = pinecone_module.Index(settings.PINECONE_INDEX_NAME)
+                    self._available = True
+                    logger.info(f"Connected to Pinecone index: {settings.PINECONE_INDEX_NAME}")
             
-            # Get the index
-            self._index = pinecone.Index(settings.PINECONE_INDEX_NAME)
+            except Exception as e:
+                logger.warning(f"Failed to initialize Pinecone: {str(e)}")
+                self._available = False
+                
+        except ImportError as e:
+            logger.warning(f"Pinecone package not available: {str(e)}")
+            self._available = False
         except Exception as e:
-            raise ConnectionError(f"Failed to initialize Pinecone: {e}")
+            logger.warning(f"Failed to initialize Pinecone: {str(e)}")
+            self._available = False
 
     @property
     def index(self):
         """Get the Pinecone index instance."""
-        if self._index is None:
-            raise ConnectionError("Pinecone connection not initialized")
+        if not self._available or self._index is None:
+            logger.warning("Pinecone connection not initialized or not available")
+            return None
         return self._index
+    
+    @property
+    def available(self) -> bool:
+        """Check if Pinecone is available."""
+        return self._available and self._index is not None
+    
+    @property
+    def api_version(self) -> Optional[str]:
+        """Get the Pinecone API version being used."""
+        return self._api_version
 
     def close(self) -> None:
         """Clean up Pinecone resources."""
         if self._index is not None:
             self._index = None
+            self._pinecone_client = None
+            self._available = False
 
 
 # Singleton instances
@@ -232,7 +323,12 @@ async def get_redis() -> AsyncGenerator[Union[redis.Redis, MockRedisClient], Non
 
 @lru_cache()
 def get_pinecone():
-    """Get Pinecone index instance with caching."""
+    """
+    Get Pinecone index instance with caching.
+    
+    Returns None if Pinecone is not available or not initialized.
+    This function allows the application to work even when Pinecone is not properly configured.
+    """
     if pinecone_conn._index is None:
         pinecone_conn.connect()
     return pinecone_conn.index
