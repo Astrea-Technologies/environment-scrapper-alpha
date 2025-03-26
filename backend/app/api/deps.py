@@ -13,6 +13,7 @@ from app.core.config import settings
 from app.db.session import get_session
 from app.db.models.user import User
 from app.schemas import TokenPayload
+from app.tasks.task_manager import TaskManager, get_task_manager
 
 reusable_oauth2 = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/login/access-token"
@@ -21,6 +22,7 @@ reusable_oauth2 = OAuth2PasswordBearer(
 
 SessionDep = Annotated[Session, Depends(get_session)]
 TokenDep = Annotated[str, Depends(reusable_oauth2)]
+TaskManagerDep = Annotated[TaskManager, Depends(get_task_manager)]
 
 
 def get_current_user(session: SessionDep, token: TokenDep) -> User:
