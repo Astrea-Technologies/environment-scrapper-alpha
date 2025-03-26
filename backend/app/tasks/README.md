@@ -1,6 +1,6 @@
 # Task Processing System (MVP Version)
 
-This module provides a simplified task processing system for the Political Social Media Analysis Platform. It serves as a replacement for a full Celery/Redis implementation in the MVP version, with a focus on simplicity and easy integration with FastAPI.
+This module provides a simplified task processing system for the Political Social Media Analysis Platform. **Important: For the MVP version, Celery, Redis, and related message broker infrastructure will NOT be implemented.** Instead, we use a lightweight approach that leverages FastAPI's built-in features.
 
 ## Key Components
 
@@ -90,9 +90,17 @@ status = task_manager.get_task_status(task_id)
 tasks = task_manager.get_all_tasks()
 ```
 
+## Known Limitations for MVP
+
+- **No Persistent Storage**: Tasks are stored in memory and will be lost if the server restarts
+- **No Distributed Processing**: All tasks run on the same server instance
+- **No Scheduled Tasks**: No mechanism for recurring or scheduled tasks
+- **No Task Prioritization Queue**: Tasks execute in the order they're received
+- **Limited Scalability**: The system is not designed to handle a high volume of concurrent tasks
+
 ## Future Migration to Celery
 
-This implementation is designed for easy future migration to a full Celery/Redis infrastructure:
+In future versions beyond the MVP, this implementation can be replaced with a full Celery/Redis infrastructure:
 
 1. The task function signatures are compatible with Celery task definitions
 2. The status tracking aligns with Celery's task states

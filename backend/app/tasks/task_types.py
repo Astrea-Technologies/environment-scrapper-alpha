@@ -1,3 +1,14 @@
+"""
+MVP Task Type Definitions and Dummy Implementations
+
+This module defines task types and provides dummy implementations for the MVP version.
+IMPORTANT: These are not actual Celery tasks. For the MVP, we are NOT using Celery, Redis, 
+RabbitMQ or any related message broker infrastructure.
+
+These are simple async functions that will be executed directly by the TaskManager
+using FastAPI's background tasks feature.
+"""
+
 from enum import Enum
 from typing import Any, Dict, List, Optional, TypedDict, Union
 import logging
@@ -40,6 +51,9 @@ async def collect_platform_data(
     """
     Collect social media data from a specific platform for given entities.
     
+    MVP NOTE: This is a dummy implementation. In the real implementation, 
+    this would be a Celery task calling platform-specific API clients.
+    
     Args:
         platform: Name of the social media platform (twitter, facebook, etc.)
         entity_ids: List of political entity IDs to collect data for
@@ -78,6 +92,9 @@ async def analyze_content(
 ) -> TaskResult:
     """
     Analyze social media content for sentiment, topics, entities, etc.
+    
+    MVP NOTE: This is a dummy implementation. In the real implementation, 
+    this would be a Celery task using NLP pipelines.
     
     Args:
         content_ids: List of content IDs to analyze
@@ -119,6 +136,9 @@ async def analyze_relationships(
     """
     Analyze relationships between political entities based on social media interactions.
     
+    MVP NOTE: This is a dummy implementation. In the real implementation, 
+    this would be a Celery task analyzing entity interactions.
+    
     Args:
         entity_ids: List of political entity IDs to analyze relationships for
         time_period: Time period for analysis (e.g., "last_30_days", "last_week")
@@ -157,6 +177,9 @@ async def generate_report(
 ) -> TaskResult:
     """
     Generate reports based on analyzed social media data.
+    
+    MVP NOTE: This is a dummy implementation. In the real implementation, 
+    this would be a Celery task aggregating data and formatting reports.
     
     Args:
         report_type: Type of report to generate (e.g., "activity", "influence", "sentiment")

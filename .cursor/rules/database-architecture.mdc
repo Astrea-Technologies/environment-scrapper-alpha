@@ -7,12 +7,12 @@ alwaysApply: false
 
 ## 1. Database Technologies
 
-| Component | Technology | Version | Purpose |
-|-----------|------------|---------|---------|
-| Relational Database | PostgreSQL | 13+ | Entity data and relationships |
-| Document Database | MongoDB | 6.0+ | Social media content and engagement |
-| In-memory Database | Redis | 7.0+ | Caching and real-time operations |
-| Vector Database | Pinecone | Latest | Semantic similarity analysis |
+| Component | Technology | Version | Purpose | MVP Status |
+|-----|---|---|---|---|
+| Relational Database | PostgreSQL | 13+ | Entity data and relationships | ✅ Included |
+| Document Database | MongoDB | 6.0+ | Social media content and engagement | ✅ Included |
+| In-memory Database | Redis | 7.0+ | Caching and real-time operations | ❌ **NOT in MVP** |
+| Vector Database | Pinecone | Latest | Semantic similarity analysis | ✅ Included |
 
 ## 2. Relational Database Design
 
@@ -113,20 +113,30 @@ MongoDB for flexible document storage and querying
 - Text index on `content.text` for content search
 - Single field indexes on `engagement` metrics
 
-## 4. In-memory Database Design
+## 4. In-memory Database Design (NOT in MVP)
 
 ### 4.1 Primary Technology
 
-Redis for caching, real-time metrics and messaging
+Redis for caching, real-time metrics and messaging - **NOT IMPLEMENTED IN MVP**
 
-### 4.2 Key Data Structures
+### 4.2 MVP Alternative
+
+In the MVP version, the application will:
+- Use application-level caching where necessary
+- Store metrics directly in MongoDB
+- Use the TaskManager system for basic message processing
+- Defer real-time notifications to future releases
+
+### 4.3 Post-MVP Implementation
+
+The following Redis features will be implemented after the MVP:
 
 - **Hash maps**: Entity and post metrics (`entity:{id}:metrics`)
 - **Sorted sets**: Trending topics and influencers (`trending:topics:{timeframe}`)
 - **Lists**: Recent activity streams (`activity:entity:{id}`)
 - **Pub/Sub channels**: Real-time alerts and notifications
 
-### 4.3 Caching Strategy
+### 4.4 Caching Strategy (Post-MVP)
 
 - Time-based expiration for volatile metrics
 - LRU eviction policy for cached data
@@ -169,16 +179,22 @@ Pinecone or similar vector database for semantic similarity analysis
 
 - PostgreSQL → MongoDB: UUID references stored as strings
 - MongoDB → Vector DB: Document IDs linked to vector entries
-- All DBs → Redis: Consistent key format for entity references
+- All DBs → Redis: **Not applicable in MVP** (will be implemented post-MVP)
 
-### 6.2 Synchronization Strategy
+### 6.2 Synchronization Strategy (MVP Version)
 
 - PostgreSQL as the source of truth for entity data
+- MongoDB used for document storage
+- Task-based processing for updates between systems
+- Direct connections between databases in the MVP
+
+### 6.3 Post-MVP Synchronization
+
 - MongoDB change streams for data propagation
 - Redis as intermediary for real-time updates
 - Periodic reconciliation for data consistency
 
-### 6.3 Transaction Management
+### 6.4 Transaction Management
 
 - Two-phase commit for critical cross-database operations
 - Eventual consistency model for non-critical updates
@@ -188,11 +204,11 @@ Pinecone or similar vector database for semantic similarity analysis
 
 ### 7.1 Query Optimization
 
-- Materialized views for frequent analytical queries
-- Denormalization of frequently accessed data
-- Query result caching with Redis
+- Direct database queries for frequent operations in MVP
+- Application-level caching for repetitive queries
+- Query result caching with Redis (post-MVP)
 
-### 7.2 Sharding Strategy
+### 7.2 Sharding Strategy (Post-MVP)
 
 - MongoDB sharded by entity and time period
 - Vector database partitioned by content domains
@@ -202,4 +218,4 @@ Pinecone or similar vector database for semantic similarity analysis
 
 - Optimized connection pools for each database
 - Connection reuse across related operations
-- Graceful handling of connection failures
+- Graceful handling of connection failures 

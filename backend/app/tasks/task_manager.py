@@ -1,3 +1,16 @@
+"""
+MVP Task Management System
+
+This module provides a simple task management system for the MVP version of the application.
+IMPORTANT: This implementation intentionally does NOT use Celery, Redis, RabbitMQ or any 
+related message broker infrastructure for the MVP.
+
+Instead, it uses FastAPI's built-in background tasks feature for basic asynchronous processing.
+Tasks are stored in memory and will be lost if the server restarts.
+
+The design allows for easy migration to Celery in future versions.
+"""
+
 import logging
 import uuid
 from typing import Any, Callable, Dict, List, Optional, Union, cast
@@ -71,6 +84,9 @@ class TaskManager:
     
     Handles both synchronous and background task execution,
     with basic task status tracking and error handling.
+    
+    Note: This is an in-memory implementation. Tasks will be lost if the server restarts.
+          No persistent storage, distributed processing, or scheduled tasks are supported.
     """
     
     def __init__(self):
