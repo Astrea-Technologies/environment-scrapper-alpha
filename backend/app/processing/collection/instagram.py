@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 
 from app.core.config import settings
+from app.db.models.social_media_account import Platform
 from app.processing.collection.base import BaseCollector
 from app.services.repositories.social_media_account import SocialMediaAccountRepository
 
@@ -63,6 +64,35 @@ class InstagramCollector(BaseCollector):
             raise ValueError(f"Account {account_id} has no Instagram handle")
         
         return account.handle
+    
+    def get_post_sync(self, post_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get a post by ID using a synchronous approach.
+        
+        Args:
+            post_id: The ID of the post to retrieve
+            
+        Returns:
+            The post data if found, None otherwise
+        """
+        import pymongo
+        from bson import ObjectId
+        from app.core.config import settings
+        
+        # Connect to MongoDB directly (synchronous)
+        client = pymongo.MongoClient(settings.MONGODB_URI)
+        db = client.get_database(settings.MONGODB_DATABASE)
+        collection = db.posts
+        
+        try:
+            # Try to find the post
+            post = collection.find_one({"_id": ObjectId(post_id)})
+            return post
+        except Exception as e:
+            logger.error(f"Error getting post synchronously: {e}")
+            return None
+        finally:
+            client.close()
     
     async def collect_posts(
         self,
@@ -235,6 +265,12 @@ class InstagramCollector(BaseCollector):
         
         # Transform and update account
         account_data = self.transform_profile(profile_info)
+        
+        # Ensure we're not trying to update the account ID or political_entity_id
+        if "id" in account_data:
+            del account_data["id"]
+        
+        # Now update the account
         await self.account_repository.update(account_id, account_data)
         
         logger.info(f"Updated profile information for Instagram account {handle}")
@@ -330,8 +366,89 @@ class InstagramCollector(BaseCollector):
             "comments_count": raw_post.get("commentsCount", 0),
             "shares_count": None,  # Instagram doesn't provide share counts
             "views_count": raw_post.get("videoViewCount", None) if content_type == "video" else None,
-            "engagement_rate": None  # Calculate if needed
+            "engagement_rate": None,  # Calculate if needed
+            "saves_count": raw_post.get("savesCount", None)  # Add saves count if available
         }
+        
+        # Handle dimensions
+        dimensions = None
+        if "dimensions" in raw_post:
+            dimensions = raw_post["dimensions"]
+        elif "imageWidth" in raw_post and "imageHeight" in raw_post:
+            dimensions = {
+                "width": raw_post["imageWidth"],
+                "height": raw_post["imageHeight"]
+            }
+        
+        # Handle location
+        location = None
+        if "location" in raw_post and raw_post["location"]:
+            location = {
+                "name": raw_post["location"].get("name"),
+                "id": raw_post["location"].get("id"),
+                "country": raw_post["location"].get("country"),
+                "state": raw_post["location"].get("state"),
+                "city": raw_post["location"].get("city")
+            }
+        
+        # Handle owner
+        owner = None
+        if "ownerUsername" in raw_post or "ownerId" in raw_post:
+            owner = {
+                "username": raw_post.get("ownerUsername", ""),
+                "id": raw_post.get("ownerId", ""),
+                "verified": raw_post.get("ownerVerified", False)
+            }
+        
+        # Handle tagged users
+        tagged_users = []
+        if "taggedUsers" in raw_post and isinstance(raw_post["taggedUsers"], list):
+            for user in raw_post["taggedUsers"]:
+                if isinstance(user, dict):
+                    tagged_users.append({
+                        "username": user.get("username", ""),
+                        "id": user.get("id", ""),
+                        "full_name": user.get("fullName"),
+                        "is_verified": user.get("isVerified", False)
+                    })
+        
+        # Handle child posts for carousel/sidecar
+        child_posts = None
+        if content_type == "carousel" and "sidecarChildren" in raw_post:
+            child_posts = []
+            for child in raw_post["sidecarChildren"]:
+                child_type = "Video" if child.get("isVideo", False) else "Image"
+                child_post = {
+                    "id": child.get("id", ""),
+                    "type": child_type,
+                    "url": f"https://www.instagram.com/p/{child.get('shortCode', '')}/",
+                    "display_url": child.get("displayUrl", "")
+                }
+                
+                # Add dimensions if available
+                if "dimensions" in child:
+                    child_post["dimensions"] = child["dimensions"]
+                elif "imageWidth" in child and "imageHeight" in child:
+                    child_post["dimensions"] = {
+                        "width": child["imageWidth"],
+                        "height": child["imageHeight"]
+                    }
+                
+                # Add alt_text if available
+                if "accessibilityCaption" in child:
+                    child_post["alt_text"] = child["accessibilityCaption"]
+                
+                child_posts.append(child_post)
+        
+        # Handle video data
+        video_data = None
+        if content_type == "video":
+            video_data = {
+                "duration": raw_post.get("videoDuration"),
+                "video_url": raw_post.get("videoUrl"),
+                "thumbnail_url": raw_post.get("displayUrl"),
+                "is_muted": raw_post.get("isMuted", False)
+            }
         
         # Transform to application post format
         return {
@@ -339,6 +456,8 @@ class InstagramCollector(BaseCollector):
             "platform": self.platform_name,
             "account_id": str(account_id),
             "content_type": content_type,
+            "short_code": shortcode,
+            "url": post_url,
             "content": {
                 "text": caption,
                 "media": media_urls,
@@ -349,13 +468,19 @@ class InstagramCollector(BaseCollector):
             "metadata": {
                 "created_at": created_at,
                 "language": "unknown",  # Instagram doesn't provide language info
-                "location": raw_post.get("location", {}) if "location" in raw_post else None,
+                "location": location,
                 "client": "Instagram",
                 "is_repost": False,  # Instagram doesn't have traditional reposts
                 "is_reply": False,
-                "shortcode": shortcode
+                "dimensions": dimensions,
+                "alt_text": raw_post.get("accessibilityCaption"),
+                "product_type": raw_post.get("productType"),
+                "owner": owner,
+                "tagged_users": tagged_users
             },
             "engagement": engagement,
+            "child_posts": child_posts,
+            "video_data": video_data,
             "analysis": None  # Will be populated by analysis pipelines
         }
     
@@ -374,6 +499,20 @@ class InstagramCollector(BaseCollector):
         Returns:
             Transformed comment data
         """
+        # Fetch parent post to get post_url
+        post_url = None
+        try:
+            # Get post data synchronously
+            post = self.get_post_sync(post_id)
+            if post and "url" in post:
+                post_url = post["url"]
+            elif post and "short_code" in post:
+                post_url = f"https://www.instagram.com/p/{post['short_code']}/"
+            elif post and "metadata" in post and "shortcode" in post["metadata"]:
+                post_url = f"https://www.instagram.com/p/{post['metadata']['shortcode']}/"
+        except Exception as e:
+            logger.warning(f"Could not fetch parent post for url: {str(e)}")
+        
         # Extract basic information
         comment_id = raw_comment.get("id", "")
         text = raw_comment.get("text", "")
@@ -381,6 +520,10 @@ class InstagramCollector(BaseCollector):
         # Extract user info
         user_name = raw_comment.get("ownerUsername", "")
         user_id = raw_comment.get("ownerId", "")
+        user_full_name = raw_comment.get("ownerFullName", None)
+        user_profile_pic = raw_comment.get("ownerProfilePicUrl", None)
+        user_verified = raw_comment.get("ownerVerified", False)
+        user_private = raw_comment.get("ownerIsPrivate", False)
         
         # Handle created_at (Instagram format can vary)
         created_at = datetime.utcnow()
@@ -396,13 +539,60 @@ class InstagramCollector(BaseCollector):
             "replies_count": len(raw_comment.get("replies", []))
         }
         
+        # Handle replies
+        replies = []
+        if "replies" in raw_comment and isinstance(raw_comment["replies"], list):
+            for reply in raw_comment["replies"]:
+                if isinstance(reply, dict):
+                    reply_created_at = datetime.utcnow()
+                    if "timestamp" in reply:
+                        try:
+                            reply_created_at = datetime.fromtimestamp(reply["timestamp"] / 1000)
+                        except (ValueError, TypeError):
+                            pass
+                    
+                    replies.append({
+                        "platform_id": reply.get("id", ""),
+                        "user_id": reply.get("ownerId", ""),
+                        "user_name": reply.get("ownerUsername", ""),
+                        "user_full_name": reply.get("ownerFullName"),
+                        "user_profile_pic": reply.get("ownerProfilePicUrl"),
+                        "user_verified": reply.get("ownerVerified", False),
+                        "text": reply.get("text", ""),
+                        "created_at": reply_created_at,
+                        "likes_count": reply.get("likesCount", 0),
+                        "replies_count": 0  # Instagram doesn't support nested replies
+                    })
+        
+        # Handle user details
+        user_details = None
+        if any(key in raw_comment for key in ["fbid", "is_mentionable", "latest_reel_media", "profile_pic_id"]):
+            user_details = {
+                "fbid_v2": raw_comment.get("fbid"),
+                "is_mentionable": raw_comment.get("is_mentionable"),
+                "latest_reel_media": raw_comment.get("latest_reel_media"),
+                "profile_pic_id": raw_comment.get("profile_pic_id")
+            }
+        
+        # Check for parent comment
+        is_reply = False
+        parent_comment_id = None
+        if "parentCommentId" in raw_comment:
+            is_reply = True
+            parent_comment_id = raw_comment["parentCommentId"]
+        
         # Transform to application comment format
         return {
             "platform_id": comment_id,
             "platform": self.platform_name,
             "post_id": post_id,
+            "post_url": post_url,
             "user_id": user_id,
             "user_name": user_name,
+            "user_full_name": user_full_name,
+            "user_profile_pic": user_profile_pic,
+            "user_verified": user_verified,
+            "user_private": user_private,
             "content": {
                 "text": text,
                 "media": [],  # Instagram comments don't typically have media
@@ -410,9 +600,13 @@ class InstagramCollector(BaseCollector):
             },
             "metadata": {
                 "created_at": created_at,
-                "language": "unknown"  # Instagram doesn't provide language info
+                "language": "unknown",  # Instagram doesn't provide language info
+                "is_reply": is_reply,
+                "parent_comment_id": parent_comment_id
             },
             "engagement": engagement,
+            "replies": replies,
+            "user_details": user_details,
             "analysis": None  # Will be populated by analysis pipelines
         }
     
@@ -435,11 +629,14 @@ class InstagramCollector(BaseCollector):
         
         # Transform to application account format (for PostgreSQL update)
         return {
+            "platform": Platform.INSTAGRAM,  # Use enum value
             "platform_id": raw_profile.get("id", ""),
             "handle": username,
             "name": raw_profile.get("fullName", ""),
             "url": profile_url,
-            "verified": raw_profile.get("isVerified", False),
+            "verified": raw_profile.get("verified", False),
             "follower_count": raw_profile.get("followersCount", 0),
             "following_count": raw_profile.get("followsCount", 0)
+            # Note: political_entity_id is not included here as this is used for updates only
+            # The account should already exist with the political_entity_id set
         } 

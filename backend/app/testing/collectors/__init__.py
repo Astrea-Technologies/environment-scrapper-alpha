@@ -5,6 +5,6 @@ This package provides test collectors for verifying data transformations
 from external APIs.
 """
 
-from app.testing.collectors.instagram_test import InstagramTestCollector
+from backend.app.testing.collectors.instagram_test import InstagramTestCollector
 
 __all__ = ["InstagramTestCollector"] 
