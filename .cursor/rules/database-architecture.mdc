@@ -1,6 +1,6 @@
 ---
 description: Hybrid Database Architecture Specification for the Political Social Media Analysis Platform.
-globs: backend/db/*
+globs: 
 alwaysApply: false
 ---
 # Hybrid Database Architecture

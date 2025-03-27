@@ -53,7 +53,7 @@ Client Request → API Layer → Service Layer → Repository Layer → Database
 ### 2.3 Directory Structure
 
 ```
-/app
+backend/app
 ├── api/                      # API endpoints and routing
 │   ├── api_v1/               # API version 1
 │   │   ├── endpoints/        # Resource endpoints

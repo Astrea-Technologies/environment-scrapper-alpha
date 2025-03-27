@@ -7,7 +7,7 @@ Social Media Analysis Platform.
 """
 
 from datetime import datetime
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
 from uuid import UUID
 
 from pydantic import BaseModel, Field, HttpUrl
@@ -24,33 +24,93 @@ class PostContent(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "text": "Excited to announce our new policy on #ClimateChange with @EPA",
-                "media": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
-                "links": ["https://example.com/policy"],
-                "hashtags": ["ClimateChange", "GreenFuture"],
-                "mentions": ["EPA", "WhiteHouse"]
+                "text": "Hoy tuve el honor de participar en la inauguración del Foro de Alianzas para el Hábitat capítulo Monterrey, un espacio clave para construir la ciudad del futuro.",
+                "media": ["https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/481585399_18485585482052530_5292288465090866871_n.jpg"],
+                "links": [],
+                "hashtags": ["AquíSeResuelve"],
+                "mentions": []
             }
         }
+
+
+class Dimensions(BaseModel):
+    """Image or video dimensions."""
+    height: int
+    width: int
+
+
+class LocationInfo(BaseModel):
+    """Location information for social media posts."""
+    name: Optional[str] = None
+    id: Optional[str] = None
+    country: Optional[str] = None
+    state: Optional[str] = None
+    city: Optional[str] = None
+
+
+class Owner(BaseModel):
+    """Account owner information."""
+    username: str
+    id: str
+    verified: bool = False
+
+
+class TaggedUser(BaseModel):
+    """User tagged in a post."""
+    username: str
+    id: str
+    full_name: Optional[str] = None
+    is_verified: bool = False
 
 
 class PostMetadata(BaseModel):
     """Metadata sub-schema for social media posts."""
     created_at: datetime
     language: str
-    location: Optional[Dict[str, Any]] = None
+    location: Optional[LocationInfo] = None
     client: Optional[str] = None
     is_repost: bool = False
     is_reply: bool = False
+    dimensions: Optional[Dimensions] = None
+    alt_text: Optional[str] = None
+    product_type: Optional[str] = None
+    owner: Optional[Owner] = None
+    tagged_users: List[TaggedUser] = []
     
     class Config:
         schema_extra = {
             "example": {
-                "created_at": "2023-06-15T14:32:19Z",
-                "language": "en",
-                "location": {"country": "USA", "state": "DC"},
-                "client": "Twitter Web App",
+                "created_at": "2025-02-26T20:35:33.000Z",
+                "language": "es",
+                "location": {
+                    "name": "U-ERRE Universidad Regiomontana",
+                    "id": "1954214947989485",
+                    "country": "Mexico",
+                    "state": "Nuevo León",
+                    "city": "Monterrey"
+                },
+                "client": "Instagram Web",
                 "is_repost": False,
-                "is_reply": False
+                "is_reply": False,
+                "dimensions": {
+                    "height": 717,
+                    "width": 1080
+                },
+                "alt_text": "Photo by Adrián de la Garza on February 26, 2025. May be an image of 10 people and text.",
+                "product_type": None,
+                "owner": {
+                    "username": "adriandelagarzas",
+                    "id": "1483444529",
+                    "verified": True
+                },
+                "tagged_users": [
+                    {
+                        "username": "userexample",
+                        "id": "123456789",
+                        "full_name": "User Example",
+                        "is_verified": False
+                    }
+                ]
             }
         }
 
@@ -58,19 +118,21 @@ class PostMetadata(BaseModel):
 class PostEngagement(BaseModel):
     """Engagement metrics sub-schema for social media posts."""
     likes_count: int = 0
-    shares_count: int = 0
+    shares_count: Optional[int] = None
     comments_count: int = 0
     views_count: Optional[int] = None
     engagement_rate: Optional[float] = None
+    saves_count: Optional[int] = None
     
     class Config:
         schema_extra = {
             "example": {
-                "likes_count": 1245,
-                "shares_count": 327,
-                "comments_count": 89,
-                "views_count": 15720,
-                "engagement_rate": 3.8
+                "likes_count": 153,
+                "shares_count": None,
+                "comments_count": 16,
+                "views_count": None,
+                "engagement_rate": 0.97,
+                "saves_count": None
             }
         }
 
@@ -86,13 +148,31 @@ class PostAnalysis(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "sentiment_score": 0.64,
-                "topics": ["climate", "environment", "policy"],
-                "entities_mentioned": ["EPA", "Climate Change Initiative"],
-                "key_phrases": ["new policy", "climate action", "sustainable future"],
-                "emotional_tone": "positive"
+                "sentiment_score": None,
+                "topics": [],
+                "entities_mentioned": [],
+                "key_phrases": [],
+                "emotional_tone": None
             }
         }
+
+
+class ChildPost(BaseModel):
+    """Child post in a carousel/sidecar post."""
+    id: str
+    type: str  # Image, Video
+    url: Optional[HttpUrl] = None
+    display_url: HttpUrl
+    dimensions: Optional[Dimensions] = None
+    alt_text: Optional[str] = None
+
+
+class VideoData(BaseModel):
+    """Video-specific data for video posts."""
+    duration: Optional[float] = None  # In seconds
+    video_url: Optional[HttpUrl] = None
+    thumbnail_url: Optional[HttpUrl] = None
+    is_muted: bool = False
 
 
 class SocialMediaPost(BaseModel):
@@ -105,51 +185,102 @@ class SocialMediaPost(BaseModel):
     platform_id: str = Field(..., description="Original ID from the social media platform")
     platform: str = Field(..., description="Social media platform name (e.g., twitter, facebook)")
     account_id: UUID = Field(..., description="Reference to PostgreSQL SocialMediaAccount UUID")
-    content_type: str = Field(..., description="Type of post (e.g., post, story, video)")
+    content_type: str = Field(..., description="Type of post (e.g., post, sidecar, video)")
+    short_code: Optional[str] = Field(None, description="Platform shortcode for URL (e.g., Instagram)")
+    url: Optional[HttpUrl] = Field(None, description="Direct URL to the post")
     
     content: PostContent
     metadata: PostMetadata
     engagement: PostEngagement
     analysis: Optional[PostAnalysis] = None
+    child_posts: Optional[List[ChildPost]] = None
+    video_data: Optional[VideoData] = None
     vector_id: Optional[str] = Field(None, description="Reference to vector database entry")
     
     class Config:
         schema_extra = {
             "example": {
-                "platform_id": "1458794356725891073",
-                "platform": "twitter",
+                "platform_id": "3576752389826611363",
+                "platform": "instagram",
                 "account_id": "123e4567-e89b-12d3-a456-426614174000",
-                "content_type": "post",
+                "content_type": "sidecar",
+                "short_code": "DGjLVkdJQij",
+                "url": "https://www.instagram.com/p/DGjLVkdJQij/",
                 "content": {
-                    "text": "Excited to announce our new policy on #ClimateChange with @EPA",
-                    "media": ["https://example.com/image1.jpg"],
-                    "links": ["https://example.com/policy"],
-                    "hashtags": ["ClimateChange", "GreenFuture"],
-                    "mentions": ["EPA", "WhiteHouse"]
+                    "text": "Hoy tuve el honor de participar en la inauguración del Foro de Alianzas para el Hábitat capítulo Monterrey, un espacio clave para construir la ciudad del futuro.",
+                    "media": ["https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/481585399_18485585482052530_5292288465090866871_n.jpg"],
+                    "links": [],
+                    "hashtags": ["AquíSeResuelve"],
+                    "mentions": []
                 },
                 "metadata": {
-                    "created_at": "2023-06-15T14:32:19Z",
-                    "language": "en",
-                    "location": {"country": "USA", "state": "DC"},
-                    "client": "Twitter Web App",
+                    "created_at": "2025-02-26T20:35:33.000Z",
+                    "language": "es",
+                    "location": {
+                        "name": "U-ERRE Universidad Regiomontana",
+                        "id": "1954214947989485",
+                        "country": "Mexico",
+                        "state": "Nuevo León",
+                        "city": "Monterrey"
+                    },
+                    "client": "Instagram Web",
                     "is_repost": False,
-                    "is_reply": False
+                    "is_reply": False,
+                    "dimensions": {
+                        "height": 717,
+                        "width": 1080
+                    },
+                    "alt_text": "Photo by Adrián de la Garza on February 26, 2025. May be an image of 10 people and text.",
+                    "product_type": None,
+                    "owner": {
+                        "username": "adriandelagarzas",
+                        "id": "1483444529",
+                        "verified": True
+                    },
+                    "tagged_users": [
+                        {
+                            "username": "userexample",
+                            "id": "123456789",
+                            "full_name": "User Example",
+                            "is_verified": False
+                        }
+                    ]
                 },
                 "engagement": {
-                    "likes_count": 1245,
-                    "shares_count": 327,
-                    "comments_count": 89,
-                    "views_count": 15720,
-                    "engagement_rate": 3.8
+                    "likes_count": 153,
+                    "shares_count": None,
+                    "comments_count": 16,
+                    "views_count": None,
+                    "engagement_rate": 0.97,
+                    "saves_count": None
                 },
+                "child_posts": [
+                    {
+                        "id": "3576752376539157068",
+                        "type": "Image",
+                        "url": "https://www.instagram.com/p/DGjLVYFJpJM/",
+                        "display_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/481585399_18485585482052530_5292288465090866871_n.jpg",
+                        "dimensions": {
+                            "height": 717,
+                            "width": 1080
+                        },
+                        "alt_text": "Photo by Adrián de la Garza on February 26, 2025."
+                    }
+                ],
                 "analysis": {
-                    "sentiment_score": 0.64,
-                    "topics": ["climate", "environment", "policy"],
-                    "entities_mentioned": ["EPA", "Climate Change Initiative"],
-                    "key_phrases": ["new policy", "climate action", "sustainable future"],
-                    "emotional_tone": "positive"
+                    "sentiment_score": None,
+                    "topics": [],
+                    "entities_mentioned": [],
+                    "key_phrases": [],
+                    "emotional_tone": None
                 },
-                "vector_id": "vec_123456789"
+                "video_data": {
+                    "duration": None,
+                    "video_url": None,
+                    "thumbnail_url": None,
+                    "is_muted": False
+                },
+                "vector_id": None
             }
         }
 
