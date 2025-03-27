@@ -288,15 +288,15 @@ class SocialMediaPost(BaseModel):
 class CommentContent(BaseModel):
     """Content sub-schema for social media comments."""
     text: str
-    media: Optional[List[HttpUrl]] = None
+    media: List[HttpUrl] = []
     mentions: List[str] = []
     
     class Config:
         schema_extra = {
             "example": {
-                "text": "Great initiative! @GreenOrg should partner on this",
-                "media": ["https://example.com/comment-img.jpg"],
-                "mentions": ["GreenOrg"]
+                "text": "👏👏",
+                "media": [],
+                "mentions": []
             }
         }
 
@@ -306,13 +306,17 @@ class CommentMetadata(BaseModel):
     created_at: datetime
     language: str
     location: Optional[Dict[str, Any]] = None
+    is_reply: bool = False
+    parent_comment_id: Optional[str] = None
     
     class Config:
         schema_extra = {
             "example": {
-                "created_at": "2023-06-15T15:45:22Z",
-                "language": "en",
-                "location": {"country": "USA", "state": "CA"}
+                "created_at": "2025-02-27T01:31:50.000Z",
+                "language": "es",
+                "location": None,
+                "is_reply": False,
+                "parent_comment_id": None
             }
         }
 
@@ -325,8 +329,8 @@ class CommentEngagement(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "likes_count": 45,
-                "replies_count": 3
+                "likes_count": 2,
+                "replies_count": 1
             }
         }
 
@@ -337,14 +341,66 @@ class CommentAnalysis(BaseModel):
     emotional_tone: Optional[str] = None
     toxicity_flag: Optional[bool] = None
     entities_mentioned: List[str] = []
+    language_detected: Optional[str] = None
+    contains_question: bool = False
     
     class Config:
         schema_extra = {
             "example": {
-                "sentiment_score": 0.78,
-                "emotional_tone": "positive",
+                "sentiment_score": None,
+                "emotional_tone": None,
                 "toxicity_flag": False,
-                "entities_mentioned": ["GreenOrg"]
+                "entities_mentioned": [],
+                "language_detected": None,
+                "contains_question": False
+            }
+        }
+
+
+class CommentUserDetails(BaseModel):
+    """Additional user information for comment authors."""
+    fbid_v2: Optional[int] = None
+    is_mentionable: Optional[bool] = None
+    latest_reel_media: Optional[int] = None
+    profile_pic_id: Optional[str] = None
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "fbid_v2": 17841415278525780,
+                "is_mentionable": True,
+                "latest_reel_media": 0,
+                "profile_pic_id": "3422370971825093335"
+            }
+        }
+
+
+class CommentReply(BaseModel):
+    """Reply to a comment."""
+    platform_id: str
+    user_id: str
+    user_name: str
+    user_full_name: Optional[str] = None
+    user_profile_pic: Optional[HttpUrl] = None
+    user_verified: bool = False
+    text: str
+    created_at: datetime
+    likes_count: int = 0
+    replies_count: int = 0
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "platform_id": "17917498377065887",
+                "user_id": "1483444529",
+                "user_name": "adriandelagarzas",
+                "user_full_name": "Adrián de la Garza",
+                "user_profile_pic": "https://scontent-ber1-1.cdninstagram.com/v/t51.2885-19/476009956_676359164713921_5513413720214908264_n.jpg",
+                "user_verified": True,
+                "text": "@oscarcuellocoronado 🙌🏼😄",
+                "created_at": "2025-02-27T01:39:10.000Z",
+                "likes_count": 0,
+                "replies_count": 0
             }
         }
 
@@ -354,49 +410,96 @@ class SocialMediaComment(BaseModel):
     Schema for social media comments stored in MongoDB.
     
     This model represents a comment on a social media post including
-    its content, metadata, engagement metrics, and analysis.
+    its content, metadata, engagement metrics, replies, and analysis.
     """
     platform_id: str = Field(..., description="Original ID from the social media platform")
     platform: str = Field(..., description="Social media platform name (e.g., twitter, facebook)")
     post_id: str = Field(..., description="Reference to MongoDB post ID")
-    user_id: str = Field(..., description="User ID from the platform")
-    user_name: str = Field(..., description="User name from the platform")
+    post_url: Optional[HttpUrl] = Field(None, description="URL of the original post")
+    
+    user_id: str = Field(..., description="ID of the commenter")
+    user_name: str = Field(..., description="Username of the commenter")
+    user_full_name: Optional[str] = Field(None, description="Full display name of the commenter")
+    user_profile_pic: Optional[HttpUrl] = Field(None, description="Profile picture URL of the commenter")
+    user_verified: bool = Field(False, description="Whether the user has a verification badge")
+    user_private: bool = Field(False, description="Whether the user's account is private")
     
     content: CommentContent
     metadata: CommentMetadata
     engagement: CommentEngagement
+    
+    replies: List[CommentReply] = []
+    
     analysis: Optional[CommentAnalysis] = None
+    user_details: Optional[CommentUserDetails] = None
     vector_id: Optional[str] = Field(None, description="Reference to vector database entry")
     
     class Config:
         schema_extra = {
             "example": {
-                "platform_id": "1458812639457283072",
-                "platform": "twitter",
-                "post_id": "1458794356725891073",
-                "user_id": "987654321",
-                "user_name": "EcoAdvocate",
+                "platform_id": "18021118748474094",
+                "platform": "instagram",
+                "post_id": "3576752389826611363",
+                "post_url": "https://www.instagram.com/p/DGjLVkdJQij/",
+                
+                "user_id": "15166237284",
+                "user_name": "oscarcuellocoronado",
+                "user_full_name": "Oscar Cuello",
+                "user_profile_pic": "https://scontent-ber1-1.cdninstagram.com/v/t51.2885-19/453036863_994371468987224_3689516965341685068_n.jpg",
+                "user_verified": False,
+                "user_private": False,
+                
                 "content": {
-                    "text": "Great initiative! @GreenOrg should partner on this",
-                    "media": ["https://example.com/comment-img.jpg"],
-                    "mentions": ["GreenOrg"]
+                    "text": "👏👏",
+                    "media": [],
+                    "mentions": []
                 },
+                
                 "metadata": {
-                    "created_at": "2023-06-15T15:45:22Z",
-                    "language": "en",
-                    "location": {"country": "USA", "state": "CA"}
+                    "created_at": "2025-02-27T01:31:50.000Z",
+                    "language": "es",
+                    "location": None,
+                    "is_reply": False,
+                    "parent_comment_id": None
                 },
+                
                 "engagement": {
-                    "likes_count": 45,
-                    "replies_count": 3
+                    "likes_count": 2,
+                    "replies_count": 1
                 },
+                
+                "replies": [
+                    {
+                        "platform_id": "17917498377065887",
+                        "user_id": "1483444529",
+                        "user_name": "adriandelagarzas",
+                        "user_full_name": "Adrián de la Garza",
+                        "user_profile_pic": "https://scontent-ber1-1.cdninstagram.com/v/t51.2885-19/476009956_676359164713921_5513413720214908264_n.jpg",
+                        "user_verified": True,
+                        "text": "@oscarcuellocoronado 🙌🏼😄",
+                        "created_at": "2025-02-27T01:39:10.000Z",
+                        "likes_count": 0,
+                        "replies_count": 0
+                    }
+                ],
+                
                 "analysis": {
-                    "sentiment_score": 0.78,
-                    "emotional_tone": "positive",
+                    "sentiment_score": None,
+                    "emotional_tone": None,
                     "toxicity_flag": False,
-                    "entities_mentioned": ["GreenOrg"]
+                    "entities_mentioned": [],
+                    "language_detected": None,
+                    "contains_question": False
                 },
-                "vector_id": "vec_987654321"
+                
+                "user_details": {
+                    "fbid_v2": 17841415278525780,
+                    "is_mentionable": True,
+                    "latest_reel_media": 0,
+                    "profile_pic_id": "3422370971825093335"
+                },
+                
+                "vector_id": None
             }
         }
 

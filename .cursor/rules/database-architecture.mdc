@@ -144,30 +144,54 @@ MongoDB for flexible document storage and querying
 {
   "_id": ObjectId,
   "platform_id": String,       // Original ID from the platform
-  "platform": String,          // twitter, facebook, etc.
+  "platform": String,          // instagram, twitter, facebook, etc.
   "post_id": String,           // Reference to MongoDB post ID
-  "user_id": String,           // User ID from the platform
-  "user_name": String,         // User name from the platform
+  "post_url": String,          // URL of the original post
+  
+  "user_id": String,           // ID of the commenter
+  "user_name": String,         // Username of the commenter
+  "user_full_name": String,    // Full display name of the commenter
+  "user_profile_pic": String,  // Profile picture URL of the commenter
+  "user_verified": Boolean,    // Whether user has a verification badge
+  "user_private": Boolean,     // Whether user's account is private
+  
   "content": {
-    "text": String,
+    "text": String,            // Text content of the comment
     "media": Array,            // Optional media attachments
     "mentions": Array          // User mentions in the comment
   },
+  
   "metadata": {
     "created_at": Date,
     "language": String,
-    "location": Object         // Optional location data
+    "location": Object,        // Optional location data
+    "is_reply": Boolean,       // Whether this is a reply
+    "parent_comment_id": String // For replies, references parent comment
   },
+  
   "engagement": {
     "likes_count": Number,
     "replies_count": Number
   },
+  
+  "replies": Array,            // Array of reply objects with same structure
+  
   "analysis": {
     "sentiment_score": Number,
     "emotional_tone": String,
     "toxicity_flag": Boolean,
-    "entities_mentioned": Array
+    "entities_mentioned": Array,
+    "language_detected": String,
+    "contains_question": Boolean
   },
+  
+  "user_details": {            // Additional user information
+    "fbid_v2": Number,         // Facebook/Meta ID
+    "is_mentionable": Boolean,
+    "latest_reel_media": Number,
+    "profile_pic_id": String
+  },
+  
   "vector_id": String          // Reference to vector database entry
 }
 ```
@@ -286,4 +310,4 @@ Pinecone or similar vector database for semantic similarity analysis
 
 - Optimized connection pools for each database
 - Connection reuse across related operations
-- Graceful handling of connection failures 
+- Graceful handling of connection failures
