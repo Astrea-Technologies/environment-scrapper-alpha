@@ -345,6 +345,8 @@ class FacebookCollector(BaseCollector):
             "platform": self.platform_name,
             "account_id": str(account_id),
             "content_type": content_type,
+            "short_code": raw_post.get("postId", ""),  # Short code for URL (platform's identifier)
+            "url": post_url,  # Top-level URL field
             "content": {
                 "text": text,
                 "media": media_urls,
@@ -358,9 +360,21 @@ class FacebookCollector(BaseCollector):
                 "location": raw_post.get("location", None),
                 "client": "Facebook",
                 "is_repost": content_type == "share",
-                "is_reply": False
+                "is_reply": False,
+                "dimensions": None,  # Facebook API doesn't consistently provide this
+                "alt_text": raw_post.get("imageText", None),  # Alt text if available
+                "tagged_users": []  # Tagged users if available
             },
-            "engagement": engagement,
+            "engagement": {
+                "likes_count": reactions.get("like", 0) + reactions.get("love", 0) + reactions.get("care", 0),
+                "shares_count": raw_post.get("sharesCount", 0),
+                "comments_count": raw_post.get("commentsCount", 0),
+                "views_count": raw_post.get("videoViewCount", None),
+                "engagement_rate": None,  # Calculate if needed
+                "saves_count": None  # Facebook doesn't provide this
+            },
+            "child_posts": self._extract_child_posts(raw_post) if content_type == "carousel" else None,
+            "video_data": self._extract_video_data(raw_post) if content_type == "video" else None,
             "analysis": None  # Will be populated by analysis pipelines
         }
     
@@ -414,13 +428,64 @@ class FacebookCollector(BaseCollector):
             "replies_count": len(raw_comment.get("replies", []))
         }
         
+        # Fetch post URL from post_repository if available
+        post_url = raw_comment.get("postUrl", raw_comment.get("facebookUrl", ""))
+        
+        # Extract additional user fields
+        user_full_name = raw_comment.get("profileName", "")
+        user_profile_pic = raw_comment.get("profilePicture", "")
+        user_verified = False  # Facebook API doesn't consistently provide this
+        user_private = False  # Facebook API doesn't consistently provide this
+        
+        # Process replies if available
+        replies = []
+        if "replies" in raw_comment and isinstance(raw_comment["replies"], list):
+            for reply in raw_comment["replies"]:
+                reply_obj = {
+                    "platform_id": reply.get("id", ""),
+                    "user_id": reply.get("profileId", ""),
+                    "user_name": reply.get("name", ""),
+                    "user_full_name": reply.get("profileName", ""),
+                    "user_profile_pic": reply.get("profilePicture", ""),
+                    "user_verified": False,  # Facebook API doesn't provide this consistently
+                    "text": reply.get("text", ""),
+                    "created_at": datetime.utcnow(),  # Default if not available
+                    "likes_count": int(reply.get("likesCount", 0)) if isinstance(reply.get("likesCount"), str) else reply.get("likesCount", 0),
+                    "replies_count": 0
+                }
+                
+                # Parse created_at if available
+                if "date" in reply:
+                    try:
+                        reply_obj["created_at"] = datetime.fromisoformat(reply["date"].replace('Z', '+00:00'))
+                    except (ValueError, TypeError):
+                        pass
+                
+                replies.append(reply_obj)
+        
+        # Determine if this is a reply
+        is_reply = raw_comment.get("threadingDepth", 0) > 0
+        parent_comment_id = raw_comment.get("parentCommentId", None)
+        
+        # Build user_details
+        user_details = {
+            "fbid_v2": raw_comment.get("feedbackId"),
+            "is_mentionable": True,
+            "profile_pic_id": None
+        }
+        
         # Transform to application comment format
         return {
             "platform_id": comment_id,
             "platform": self.platform_name,
             "post_id": post_id,
+            "post_url": post_url,
             "user_id": user_id,
             "user_name": user_name,
+            "user_full_name": user_full_name,
+            "user_profile_pic": user_profile_pic, 
+            "user_verified": user_verified,
+            "user_private": user_private,
             "content": {
                 "text": text,
                 "media": media_urls,
@@ -428,9 +493,13 @@ class FacebookCollector(BaseCollector):
             },
             "metadata": {
                 "created_at": created_at,
-                "language": raw_comment.get("languageCode", "unknown")
+                "language": raw_comment.get("languageCode", "unknown"),
+                "is_reply": is_reply,
+                "parent_comment_id": parent_comment_id
             },
             "engagement": engagement,
+            "replies": replies,
+            "user_details": user_details,
             "analysis": None  # Will be populated by analysis pipelines
         }
     
@@ -474,4 +543,49 @@ class FacebookCollector(BaseCollector):
             "verified": raw_profile.get("verified", False),
             "follower_count": raw_profile.get("followersCount", raw_profile.get("likes", 0)),
             "following_count": None  # Facebook often doesn't provide this
-        } 
+        }
+    
+    def _extract_child_posts(self, raw_post: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Extract child posts from a carousel/sidecar post."""
+        child_posts = []
+        
+        if "attachments" in raw_post and isinstance(raw_post["attachments"], list):
+            for i, attachment in enumerate(raw_post["attachments"]):
+                if isinstance(attachment, dict) and "url" in attachment:
+                    child_post = {
+                        "id": f"{raw_post.get('postId', '')}_child_{i}",
+                        "type": attachment.get("type", "Image"),
+                        "url": attachment.get("url"),
+                        "display_url": attachment.get("url")
+                    }
+                    
+                    # Add dimensions if available
+                    if "width" in attachment and "height" in attachment:
+                        child_post["dimensions"] = {
+                            "width": attachment["width"],
+                            "height": attachment["height"]
+                        }
+                    
+                    child_posts.append(child_post)
+        
+        return child_posts if child_posts else None
+    
+    def _extract_video_data(self, raw_post: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract video data from a video post."""
+        video_data = {
+            "duration": raw_post.get("videoDuration"),
+            "video_url": None,
+            "thumbnail_url": None,
+            "is_muted": False
+        }
+        
+        # Try to get video URL and thumbnail URL
+        if "attachments" in raw_post and isinstance(raw_post["attachments"], list):
+            for attachment in raw_post["attachments"]:
+                if isinstance(attachment, dict):
+                    if attachment.get("type") == "video" and "url" in attachment:
+                        video_data["video_url"] = attachment["url"]
+                    if "thumbnailUrl" in attachment:
+                        video_data["thumbnail_url"] = attachment["thumbnailUrl"]
+        
+        return video_data 

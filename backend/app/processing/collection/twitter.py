@@ -246,17 +246,149 @@ class TwitterCollector(BaseCollector):
         # Extract basic information
         post_id = raw_post.get("id", "")
         text = raw_post.get("text", "")
-        created_at = datetime.strptime(
-            raw_post.get("createdAt", "").split(".")[0], 
-            "%Y-%m-%dT%H:%M:%S"
-        ) if "createdAt" in raw_post else datetime.utcnow()
+        post_url = raw_post.get("url", "")
+        
+        try:
+            created_at = datetime.strptime(
+                raw_post.get("createdAt", "").split(".")[0], 
+                "%Y-%m-%dT%H:%M:%S"
+            ) if "createdAt" in raw_post else datetime.utcnow()
+        except (ValueError, TypeError):
+            # Handle alternative date formats
+            try:
+                created_at = datetime.strptime(
+                    raw_post.get("createdAt", "").split("+")[0].strip(), 
+                    "%a %b %d %H:%M:%S %Y"
+                )
+            except (ValueError, TypeError):
+                created_at = datetime.utcnow()
         
         # Extract media and links
         media_urls = []
-        if "media" in raw_post:
+        dimensions = None
+        
+        # Extract media from extended entities if available
+        if "extendedEntities" in raw_post and "media" in raw_post["extendedEntities"]:
+            for media_item in raw_post["extendedEntities"]["media"]:
+                if "media_url_https" in media_item:
+                    media_urls.append(media_item["media_url_https"])
+                
+                # Extract dimensions from the first media item
+                if not dimensions and "sizes" in media_item and "large" in media_item["sizes"]:
+                    dimensions = {
+                        "width": media_item["sizes"]["large"].get("w", 0),
+                        "height": media_item["sizes"]["large"].get("h", 0)
+                    }
+        
+        # Extract regular media if extended entities not available
+        elif "media" in raw_post:
             for media_item in raw_post.get("media", []):
                 if "url" in media_item:
                     media_urls.append(media_item["url"])
+        
+        # Process hashtags and mentions from entities
+        hashtags = []
+        mentions = []
+        
+        if "entities" in raw_post:
+            entities = raw_post["entities"]
+            if "hashtags" in entities:
+                hashtags = [tag.get("text", "") for tag in entities.get("hashtags", []) if "text" in tag]
+            if "user_mentions" in entities:
+                mentions = [mention.get("screen_name", "") for mention in entities.get("user_mentions", []) if "screen_name" in mention]
+        else:
+            # Fallback to extraction from text
+            hashtags = self.extract_hashtags(text)
+            mentions = self.extract_mentions(text)
+        
+        # Extract links
+        links = [post_url] if post_url else []
+        links.extend(self.extract_links(text))
+        
+        # Determine content type
+        content_type = "post"
+        if raw_post.get("isRetweet", False):
+            content_type = "retweet"
+        elif raw_post.get("isQuote", False):
+            content_type = "quote"
+        elif raw_post.get("isReply", False):
+            content_type = "reply"
+        
+        # Check for media types
+        has_video = False
+        has_images = False
+        child_posts = None
+        video_data = None
+        
+        if "extendedEntities" in raw_post and "media" in raw_post["extendedEntities"]:
+            media_items = raw_post["extendedEntities"]["media"]
+            
+            # Check for videos
+            for item in media_items:
+                if item.get("type") == "video" or item.get("type") == "animated_gif":
+                    has_video = True
+                    break
+                elif item.get("type") == "photo":
+                    has_images = True
+            
+            # For multiple images, create child posts
+            if len(media_items) > 1:
+                child_posts = []
+                for i, item in enumerate(media_items):
+                    child_post = {
+                        "id": f"{post_id}_child_{i}",
+                        "type": item.get("type", "Image"),
+                        "url": post_url,
+                        "display_url": item.get("media_url_https", "")
+                    }
+                    
+                    # Add dimensions if available
+                    if "sizes" in item and "large" in item["sizes"]:
+                        child_post["dimensions"] = {
+                            "width": item["sizes"]["large"].get("w", 0),
+                            "height": item["sizes"]["large"].get("h", 0)
+                        }
+                    
+                    child_posts.append(child_post)
+            
+            # For videos, extract video data
+            if has_video:
+                for item in media_items:
+                    if item.get("type") == "video" or item.get("type") == "animated_gif":
+                        video_url = None
+                        thumbnail_url = item.get("media_url_https", "")
+                        duration = None
+                        
+                        # Get video URL from variants
+                        if "video_info" in item and "variants" in item["video_info"]:
+                            variants = item["video_info"]["variants"]
+                            best_bitrate = 0
+                            for variant in variants:
+                                if "content_type" in variant and variant["content_type"].startswith("video/"):
+                                    if "bitrate" in variant and variant["bitrate"] > best_bitrate:
+                                        best_bitrate = variant["bitrate"]
+                                        video_url = variant.get("url", "")
+                        
+                        # Get duration
+                        if "video_info" in item and "duration_millis" in item["video_info"]:
+                            duration = item["video_info"]["duration_millis"] / 1000  # Convert to seconds
+                        
+                        video_data = {
+                            "duration": duration,
+                            "video_url": video_url,
+                            "thumbnail_url": thumbnail_url,
+                            "is_muted": item.get("type") == "animated_gif"  # GIFs are typically muted
+                        }
+                        break
+        
+        # Update content type based on media
+        if content_type == "post":
+            if has_video:
+                content_type = "video"
+            elif len(media_urls) > 1:
+                content_type = "carousel"
+            elif has_images:
+                content_type = "image"
         
         # Extract engagement metrics
         engagement = {
@@ -264,31 +396,70 @@ class TwitterCollector(BaseCollector):
             "shares_count": raw_post.get("retweetCount", 0),
             "comments_count": raw_post.get("replyCount", 0),
             "views_count": raw_post.get("viewCount", 0),
-            "engagement_rate": None  # Calculate if needed
+            "engagement_rate": None,  # Calculate if needed
+            "saves_count": raw_post.get("bookmarkCount", 0)  # Twitter now tracks bookmarks
         }
+        
+        # Extract alt text
+        alt_text = None
+        if "extendedEntities" in raw_post and "media" in raw_post["extendedEntities"]:
+            for item in raw_post["extendedEntities"]["media"]:
+                if "ext_alt_text" in item:
+                    alt_text = item["ext_alt_text"]
+                    break
+        
+        # Get tagged users if available
+        tagged_users = []
+        if "entities" in raw_post and "user_mentions" in raw_post["entities"]:
+            for mention in raw_post["entities"]["user_mentions"]:
+                tagged_user = {
+                    "username": mention.get("screen_name", ""),
+                    "id": mention.get("id_str", ""),
+                    "full_name": mention.get("name", ""),
+                    "is_verified": False  # Twitter API doesn't provide this in mentions
+                }
+                tagged_users.append(tagged_user)
+        
+        # Extract owner information
+        owner = None
+        if "author" in raw_post:
+            author = raw_post["author"]
+            owner = {
+                "username": author.get("userName", ""),
+                "id": author.get("id", ""),
+                "verified": author.get("isVerified", False) or author.get("isBlueVerified", False)
+            }
         
         # Transform to application post format
         return {
             "platform_id": post_id,
             "platform": self.platform_name,
             "account_id": str(account_id),
-            "content_type": "retweet" if raw_post.get("isRetweet", False) else "post",
+            "content_type": content_type,
+            "short_code": post_id,  # Twitter uses the ID as the short code
+            "url": post_url,
             "content": {
                 "text": text,
                 "media": media_urls,
-                "links": self.extract_links(text),
-                "hashtags": self.extract_hashtags(text),
-                "mentions": self.extract_mentions(text)
+                "links": links,
+                "hashtags": hashtags,
+                "mentions": mentions
             },
             "metadata": {
                 "created_at": created_at,
                 "language": raw_post.get("lang", "unknown"),
-                "location": None,  # Twitter API doesn't usually provide this
+                "location": raw_post.get("place", None),
                 "client": raw_post.get("source", "Twitter"),
                 "is_repost": raw_post.get("isRetweet", False),
-                "is_reply": raw_post.get("isReply", False)
+                "is_reply": raw_post.get("isReply", False),
+                "dimensions": dimensions,
+                "alt_text": alt_text,
+                "tagged_users": tagged_users,
+                "owner": owner
             },
             "engagement": engagement,
+            "child_posts": child_posts,
+            "video_data": video_data,
             "analysis": None  # Will be populated by analysis pipelines
         }
     
@@ -310,18 +481,49 @@ class TwitterCollector(BaseCollector):
         # Extract basic information
         comment_id = raw_comment.get("id", "")
         text = raw_comment.get("text", "")
-        user = raw_comment.get("user", {})
-        created_at = datetime.strptime(
-            raw_comment.get("createdAt", "").split(".")[0], 
-            "%Y-%m-%dT%H:%M:%S"
-        ) if "createdAt" in raw_comment else datetime.utcnow()
+        
+        # Process author information
+        author = raw_comment.get("author", {})
+        user_id = author.get("id", "")
+        user_name = author.get("userName", "")
+        user_full_name = author.get("name", "")
+        user_profile_pic = author.get("profilePicture", "")
+        user_verified = author.get("isVerified", False) or author.get("isBlueVerified", False)
+        user_private = False  # Twitter API doesn't consistently provide this
+        
+        # Parse created_at date
+        try:
+            created_at = datetime.strptime(
+                raw_comment.get("createdAt", "").split(".")[0], 
+                "%Y-%m-%dT%H:%M:%S"
+            ) if "createdAt" in raw_comment else datetime.utcnow()
+        except (ValueError, TypeError):
+            # Handle alternative date formats
+            try:
+                created_at = datetime.strptime(
+                    raw_comment.get("createdAt", "").split("+")[0].strip(), 
+                    "%a %b %d %H:%M:%S %Y"
+                )
+            except (ValueError, TypeError):
+                created_at = datetime.utcnow()
         
         # Extract media
         media_urls = []
-        if "media" in raw_comment:
+        if "extendedEntities" in raw_comment and "media" in raw_comment["extendedEntities"]:
+            for media_item in raw_comment["extendedEntities"]["media"]:
+                if "media_url_https" in media_item:
+                    media_urls.append(media_item["media_url_https"])
+        elif "media" in raw_comment:
             for media_item in raw_comment.get("media", []):
                 if "url" in media_item:
                     media_urls.append(media_item["url"])
+        
+        # Process mentions
+        mentions = []
+        if "entities" in raw_comment and "user_mentions" in raw_comment["entities"]:
+            mentions = [mention.get("screen_name", "") for mention in raw_comment["entities"]["user_mentions"] if "screen_name" in mention]
+        else:
+            mentions = self.extract_mentions(text)
         
         # Extract engagement metrics
         engagement = {
@@ -329,23 +531,48 @@ class TwitterCollector(BaseCollector):
             "replies_count": raw_comment.get("replyCount", 0)
         }
         
+        # Get post URL
+        post_url = raw_comment.get("url", "").split("?")[0] if raw_comment.get("url") else None
+        
+        # Determine if this is a reply to another comment
+        is_reply = raw_comment.get("isReply", False)
+        parent_comment_id = raw_comment.get("inReplyToId", None)
+        
+        # Extract replies if available
+        replies = []
+        
+        # Build user_details
+        user_details = {
+            "is_mentionable": True,
+            "profile_pic_id": None
+        }
+        
         # Transform to application comment format
         return {
             "platform_id": comment_id,
             "platform": self.platform_name,
             "post_id": post_id,
-            "user_id": user.get("id", ""),
-            "user_name": user.get("username", ""),
+            "post_url": post_url,
+            "user_id": user_id,
+            "user_name": user_name,
+            "user_full_name": user_full_name,
+            "user_profile_pic": user_profile_pic,
+            "user_verified": user_verified,
+            "user_private": user_private,
             "content": {
                 "text": text,
                 "media": media_urls,
-                "mentions": self.extract_mentions(text)
+                "mentions": mentions
             },
             "metadata": {
                 "created_at": created_at,
-                "language": raw_comment.get("lang", "unknown")
+                "language": raw_comment.get("lang", "unknown"),
+                "is_reply": is_reply,
+                "parent_comment_id": parent_comment_id
             },
             "engagement": engagement,
+            "replies": replies,
+            "user_details": user_details,
             "analysis": None  # Will be populated by analysis pipelines
         }
     
