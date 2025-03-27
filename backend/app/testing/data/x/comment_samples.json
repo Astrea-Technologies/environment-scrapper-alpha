@@ -1,0 +1,1118 @@
+[
+    {
+        "type": "tweet",
+        "id": "1904885698240389472",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904885698240389472",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904885698240389472",
+        "text": "¡Mucha precaución al salir de casa! ⚠️\n\nLa lluvia estará constante en nuestra ciudad durante el día, es importante tomar medidas de precauciones: \n🚗 Maneja despacio. \n⏰ Toma tu tiempo. \n🚧 Verifica rutas de traslado.\n⛅️ Revisa constantemente el pronóstico del tiempo.\n📞 Ante una emergencia marca al 911.",
+        "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+        "retweetCount": 5,
+        "replyCount": 13,
+        "likeCount": 41,
+        "quoteCount": 0,
+        "viewCount": "1787",
+        "createdAt": "Wed Mar 26 13:18:36 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "inReplyToId": null,
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "",
+        "inReplyToUsername": "",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72177,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {}
+        },
+        "extendedEntities": {},
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [],
+            "symbols": [],
+            "timestamps": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904962012481753405",
+        "url": "https://x.com/karlaelias387/status/1904962012481753405",
+        "twitterUrl": "https://twitter.com/karlaelias387/status/1904962012481753405",
+        "text": "@AdrianDeLaGarza Hay que manejar con cuidado, luego hay accidentes",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 5,
+        "createdAt": "Wed Mar 26 18:21:50 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "karlaelias387",
+            "url": "https://x.com/karlaelias387",
+            "twitterUrl": "https://twitter.com/karlaelias387",
+            "id": "1893164360580964352",
+            "name": "Karla Elias",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1893164492436934656/0XRBHP5C_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/1893164360580964352/1740200664",
+            "description": "",
+            "location": "",
+            "followers": 0,
+            "following": 15,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 05:02:21 +0000 2025",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 57,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 0,
+            "statusesCount": 51,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {},
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904960877163397329",
+        "url": "https://x.com/edsonrojas1999/status/1904960877163397329",
+        "twitterUrl": "https://twitter.com/edsonrojas1999/status/1904960877163397329",
+        "text": "@AdrianDeLaGarza Hay que manejar con cuidado",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 4,
+        "createdAt": "Wed Mar 26 18:17:20 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "edsonrojas1999",
+            "url": "https://x.com/edsonrojas1999",
+            "twitterUrl": "https://twitter.com/edsonrojas1999",
+            "id": "1893169920999129088",
+            "name": "Edson Rojas",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1893170016465362944/iBVpYZET_normal.jpg",
+            "coverPicture": "",
+            "description": "",
+            "location": "",
+            "followers": 0,
+            "following": 4,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 05:24:23 +0000 2025",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 55,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 0,
+            "statusesCount": 47,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {},
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904960250437939618",
+        "url": "https://x.com/antoniosan970/status/1904960250437939618",
+        "twitterUrl": "https://twitter.com/antoniosan970/status/1904960250437939618",
+        "text": "@AdrianDeLaGarza Hace rato estaba muy fuerte allá para la zona del topo chico",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 12,
+        "createdAt": "Wed Mar 26 18:14:50 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "antoniosan970",
+            "url": "https://x.com/antoniosan970",
+            "twitterUrl": "https://twitter.com/antoniosan970",
+            "id": "1893171956536750080",
+            "name": "Antonio Sandoval",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1893172077722501120/DejQwfug_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/1893171956536750080/1740202561",
+            "description": "",
+            "location": "",
+            "followers": 2,
+            "following": 23,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 05:32:33 +0000 2025",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 57,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 0,
+            "statusesCount": 50,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {},
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904958735732125951",
+        "url": "https://x.com/AbigailTor9682/status/1904958735732125951",
+        "twitterUrl": "https://twitter.com/AbigailTor9682/status/1904958735732125951",
+        "text": "@AdrianDeLaGarza Gracias Alcalde",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 4,
+        "createdAt": "Wed Mar 26 18:08:49 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AbigailTor9682",
+            "url": "https://x.com/AbigailTor9682",
+            "twitterUrl": "https://twitter.com/AbigailTor9682",
+            "id": "1893166710364004352",
+            "name": "Abigail Torres",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1893166819248160768/O9geVNDa_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/1893166710364004352/1740201233",
+            "description": "",
+            "location": "",
+            "followers": 1,
+            "following": 9,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 05:11:44 +0000 2025",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 54,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 0,
+            "statusesCount": 53,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {},
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904958170356686980",
+        "url": "https://x.com/RobertoGar76469/status/1904958170356686980",
+        "twitterUrl": "https://twitter.com/RobertoGar76469/status/1904958170356686980",
+        "text": "@AdrianDeLaGarza Gracias Alcalde por la información",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 7,
+        "createdAt": "Wed Mar 26 18:06:34 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "RobertoGar76469",
+            "url": "https://x.com/RobertoGar76469",
+            "twitterUrl": "https://twitter.com/RobertoGar76469",
+            "id": "1893180995224117250",
+            "name": "Roberto Garza",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1893181081383211008/SV4Bg1Px_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/1893180995224117250/1740204577",
+            "description": "",
+            "location": "",
+            "followers": 0,
+            "following": 14,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 06:08:25 +0000 2025",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 54,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 0,
+            "statusesCount": 47,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {},
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904955280070258823",
+        "url": "https://x.com/everardopej/status/1904955280070258823",
+        "twitterUrl": "https://twitter.com/everardopej/status/1904955280070258823",
+        "text": "@AdrianDeLaGarza Gracias Alcalde",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 11,
+        "createdAt": "Wed Mar 26 17:55:05 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "everardopej",
+            "url": "https://x.com/everardopej",
+            "twitterUrl": "https://twitter.com/everardopej",
+            "id": "1893177936464728064",
+            "name": "Everardo Peña",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1893178018211762176/Erz4rqlz_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/1893177936464728064/1740203874",
+            "description": "",
+            "location": "",
+            "followers": 1,
+            "following": 16,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 05:56:14 +0000 2025",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 55,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 0,
+            "statusesCount": 44,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {},
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904913287080259663",
+        "url": "https://x.com/BeltEmilio/status/1904913287080259663",
+        "twitterUrl": "https://twitter.com/BeltEmilio/status/1904913287080259663",
+        "text": "@AdrianDeLaGarza miles de personas  transitan en carretera nacional una gran parte pertenece a Monterrey y el libramiento un oficial d tránsito lo quitó antes de hora programada urge tus elementos hagan su trabajo correctamente no saben dirigir un caos ahora complica el tráfico @samuel_garcias https://t.co/7p6qLea1PS",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 43,
+        "createdAt": "Wed Mar 26 15:08:13 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "BeltEmilio",
+            "url": "https://x.com/BeltEmilio",
+            "twitterUrl": "https://twitter.com/BeltEmilio",
+            "id": "1423397816131637251",
+            "name": "Emilio Nieto Belt",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1423397994804699145/VJLph9dq_normal.jpg",
+            "coverPicture": "",
+            "description": "",
+            "location": "",
+            "followers": 10,
+            "following": 58,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Thu Aug 05 21:38:21 +0000 2021",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 50,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 37,
+            "statusesCount": 121,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "Soy ferviente seguidor del rock en sus diferentes géneros,  no tolero la injusticia  y el abuso de cualquier tipo, me interesa estar informado para ayudar .",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.twitter.com/7p6qLea1PS",
+                    "expanded_url": "https://twitter.com/BeltEmilio/status/1904913287080259663/photo/1",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "h": 240,
+                                    "w": 240,
+                                    "x": 224,
+                                    "y": 318
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "h": 240,
+                                    "w": 240,
+                                    "x": 224,
+                                    "y": 318
+                                }
+                            ]
+                        }
+                    },
+                    "id_str": "1904913279333302272",
+                    "indices": [
+                        295,
+                        318
+                    ],
+                    "media_key": "3_1904913279333302272",
+                    "media_results": {
+                        "id": "QXBpTWVkaWFSZXN1bHRzOgwAAQoAARpvnIjulgAACgACGm+cirxXME8AAA==",
+                        "result": {
+                            "__typename": "ApiMedia",
+                            "id": "QXBpTWVkaWE6DAABCgABGm+ciO6WAAAKAAIab5yKvFcwTwAA",
+                            "media_key": "3_1904913279333302272"
+                        }
+                    },
+                    "media_url_https": "https://pbs.twimg.com/media/Gm-ciO6WAAATOnL.jpg",
+                    "original_info": {
+                        "focus_rects": [
+                            {
+                                "h": 645,
+                                "w": 1152,
+                                "x": 0,
+                                "y": 958
+                            },
+                            {
+                                "h": 1152,
+                                "w": 1152,
+                                "x": 0,
+                                "y": 704
+                            },
+                            {
+                                "h": 1313,
+                                "w": 1152,
+                                "x": 0,
+                                "y": 624
+                            },
+                            {
+                                "h": 2048,
+                                "w": 1024,
+                                "x": 0,
+                                "y": 0
+                            },
+                            {
+                                "h": 2048,
+                                "w": 1152,
+                                "x": 0,
+                                "y": 0
+                            }
+                        ],
+                        "height": 2048,
+                        "width": 1152
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 2048,
+                            "w": 1152
+                        }
+                    },
+                    "type": "photo",
+                    "url": "https://t.co/7p6qLea1PS"
+                }
+            ]
+        },
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                },
+                {
+                    "id_str": "258973851",
+                    "indices": [
+                        279,
+                        294
+                    ],
+                    "name": "Samuel García",
+                    "screen_name": "samuel_garcias"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904912459091042436",
+        "url": "https://x.com/ja_flores52/status/1904912459091042436",
+        "twitterUrl": "https://twitter.com/ja_flores52/status/1904912459091042436",
+        "text": "@AdrianDeLaGarza Un buen alcalde diría:\n\nEstá lloviendo, pero el pavimento es antiderrapante, los semáforos están perfectamente sincronizados, no hay baches y puedes llegar a tiempo a tu trabajo. Pero si excedes la velocidad, te voy a quitar mucho dinero.",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 20,
+        "createdAt": "Wed Mar 26 15:04:56 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904885698240389472",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "2357040230",
+        "inReplyToUsername": "AdrianDeLaGarza",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "ja_flores52",
+            "url": "https://x.com/ja_flores52",
+            "twitterUrl": "https://twitter.com/ja_flores52",
+            "id": "482614022",
+            "name": "Boanerge⚡Hijo del Trueno",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1589256254588948480/MM4YTcC8_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/482614022/1702924630",
+            "description": "",
+            "location": "Monterrey",
+            "followers": 454,
+            "following": 449,
+            "status": "",
+            "canDm": true,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 04 03:41:23 +0000 2012",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 16522,
+            "hasCustomTimelines": true,
+            "isTranslator": true,
+            "mediaCount": 3573,
+            "statusesCount": 44159,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "Andrés Manuel López Obrador, el más inepto, corrupto, espurio y mitómano presidente en toda la historia de México!",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {},
+        "card": null,
+        "place": {
+            "bounding_box_polygon": {
+                "coordinates": [
+                    [
+                        [
+                            -100.421037,
+                            25.4805381
+                        ],
+                        [
+                            -100.421037,
+                            25.802899
+                        ],
+                        [
+                            -100.166146,
+                            25.802899
+                        ],
+                        [
+                            -100.166146,
+                            25.4805381
+                        ],
+                        [
+                            -100.421037,
+                            25.4805381
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            },
+            "country": "Mexico",
+            "country_code": "MX",
+            "full_name": "Monterrey, Nuevo León",
+            "id": "b19e24ce42ccd6aa",
+            "name": "Monterrey",
+            "place_type": "city"
+        },
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "2357040230",
+            "result": {
+                "__typename": "User",
+                "rest_id": "2357040230",
+                "core": {
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904904237324136494",
+        "url": "https://x.com/manriquez_95454/status/1904904237324136494",
+        "twitterUrl": "https://twitter.com/manriquez_95454/status/1904904237324136494",
+        "text": "@AdrianDeLaGarza https://t.co/ocnBnSdoFc",
+        "source": "",
+        "retweetCount": 0,
+        "replyCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "viewCount": 5,
+        "createdAt": "Wed Mar 26 14:32:16 +0000 2025",
+        "lang": "qme",
+        "bookmarkCount": 0,
+        "isReply": true,
+        "inReplyToId": "1904900290119139722",
+        "conversationId": "1904885698240389472",
+        "inReplyToUserId": "1712660960366755840",
+        "inReplyToUsername": "manriquez_95454",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "manriquez_95454",
+            "url": "https://x.com/manriquez_95454",
+            "twitterUrl": "https://twitter.com/manriquez_95454",
+            "id": "1712660960366755840",
+            "name": "José sixto Verdasco",
+            "isVerified": false,
+            "isBlueVerified": false,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1848026271311069185/yIFM00-6_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/1712660960366755840/1726674351",
+            "description": "",
+            "location": "",
+            "followers": 12,
+            "following": 153,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": false,
+            "createdAt": "Fri Oct 13 02:47:03 +0000 2023",
+            "entities": {
+                "description": {
+                    "urls": []
+                },
+                "url": {}
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 2348,
+            "hasCustomTimelines": true,
+            "isTranslator": false,
+            "mediaCount": 86,
+            "statusesCount": 1020,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": [],
+            "profile_bio": {
+                "description": "",
+                "entities": {
+                    "description": {}
+                }
+            }
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "additional_media_info": {
+                        "monetizable": false
+                    },
+                    "display_url": "pic.twitter.com/ocnBnSdoFc",
+                    "expanded_url": "https://twitter.com/manriquez_95454/status/1904904237324136494/video/1",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "id_str": "1904904205179015168",
+                    "indices": [
+                        17,
+                        40
+                    ],
+                    "media_key": "7_1904904205179015168",
+                    "media_results": {
+                        "id": "QXBpTWVkaWFSZXN1bHRzOgwAAwoAARpvlEgw19AACgACGm+UT6zXcC4AAA==",
+                        "result": {
+                            "__typename": "ApiMedia",
+                            "id": "QXBpTWVkaWE6DAADCgABGm+USDDX0AAKAAIab5RPrNdwLgAA",
+                            "media_key": "7_1904904205179015168"
+                        }
+                    },
+                    "media_url_https": "https://pbs.twimg.com/ext_tw_video_thumb/1904904205179015168/pu/img/8WKB5c2w_dkpjchc.jpg",
+                    "original_info": {
+                        "focus_rects": [],
+                        "height": 864,
+                        "width": 480
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 864,
+                            "w": 480
+                        }
+                    },
+                    "type": "video",
+                    "url": "https://t.co/ocnBnSdoFc",
+                    "video_info": {
+                        "aspect_ratio": [
+                            5,
+                            9
+                        ],
+                        "duration_millis": 46954,
+                        "variants": [
+                            {
+                                "content_type": "application/x-mpegURL",
+                                "url": "https://video.twimg.com/ext_tw_video/1904904205179015168/pu/pl/LICZf7mEKr1ZepeA.m3u8?tag=12"
+                            },
+                            {
+                                "bitrate": 632000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/ext_tw_video/1904904205179015168/pu/vid/avc1/320x576/XN70PNXs4rJmXtL-.mp4?tag=12"
+                            },
+                            {
+                                "bitrate": 950000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/ext_tw_video/1904904205179015168/pu/vid/avc1/480x864/IwNS1luTuU-MjuaG.mp4?tag=12"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "card": null,
+        "place": {},
+        "entities": {
+            "user_mentions": [
+                {
+                    "id_str": "2357040230",
+                    "indices": [
+                        0,
+                        16
+                    ],
+                    "name": "Adrián de la Garza",
+                    "screen_name": "AdrianDeLaGarza"
+                }
+            ]
+        },
+        "reply_to_user_results": {
+            "rest_id": "1712660960366755840",
+            "result": {
+                "__typename": "User",
+                "rest_id": "1712660960366755840",
+                "core": {
+                    "screen_name": "manriquez_95454"
+                }
+            }
+        },
+        "quoted_tweet_results": null,
+        "quoted_tweet": null,
+        "retweeted_tweet": null,
+        "isConversationControlled": false
+    }
+]
