@@ -7,7 +7,7 @@ Social Media Analysis Platform.
 """
 
 from datetime import datetime
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
 from uuid import UUID
 
 from pydantic import BaseModel, Field, HttpUrl
@@ -24,33 +24,93 @@ class PostContent(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "text": "Excited to announce our new policy on #ClimateChange with @EPA",
-                "media": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
-                "links": ["https://example.com/policy"],
-                "hashtags": ["ClimateChange", "GreenFuture"],
-                "mentions": ["EPA", "WhiteHouse"]
+                "text": "Hoy tuve el honor de participar en la inauguración del Foro de Alianzas para el Hábitat capítulo Monterrey, un espacio clave para construir la ciudad del futuro.",
+                "media": ["https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/481585399_18485585482052530_5292288465090866871_n.jpg"],
+                "links": [],
+                "hashtags": ["AquíSeResuelve"],
+                "mentions": []
             }
         }
+
+
+class Dimensions(BaseModel):
+    """Image or video dimensions."""
+    height: int
+    width: int
+
+
+class LocationInfo(BaseModel):
+    """Location information for social media posts."""
+    name: Optional[str] = None
+    id: Optional[str] = None
+    country: Optional[str] = None
+    state: Optional[str] = None
+    city: Optional[str] = None
+
+
+class Owner(BaseModel):
+    """Account owner information."""
+    username: str
+    id: str
+    verified: bool = False
+
+
+class TaggedUser(BaseModel):
+    """User tagged in a post."""
+    username: str
+    id: str
+    full_name: Optional[str] = None
+    is_verified: bool = False
 
 
 class PostMetadata(BaseModel):
     """Metadata sub-schema for social media posts."""
     created_at: datetime
     language: str
-    location: Optional[Dict[str, Any]] = None
+    location: Optional[LocationInfo] = None
     client: Optional[str] = None
     is_repost: bool = False
     is_reply: bool = False
+    dimensions: Optional[Dimensions] = None
+    alt_text: Optional[str] = None
+    product_type: Optional[str] = None
+    owner: Optional[Owner] = None
+    tagged_users: List[TaggedUser] = []
     
     class Config:
         schema_extra = {
             "example": {
-                "created_at": "2023-06-15T14:32:19Z",
-                "language": "en",
-                "location": {"country": "USA", "state": "DC"},
-                "client": "Twitter Web App",
+                "created_at": "2025-02-26T20:35:33.000Z",
+                "language": "es",
+                "location": {
+                    "name": "U-ERRE Universidad Regiomontana",
+                    "id": "1954214947989485",
+                    "country": "Mexico",
+                    "state": "Nuevo León",
+                    "city": "Monterrey"
+                },
+                "client": "Instagram Web",
                 "is_repost": False,
-                "is_reply": False
+                "is_reply": False,
+                "dimensions": {
+                    "height": 717,
+                    "width": 1080
+                },
+                "alt_text": "Photo by Adrián de la Garza on February 26, 2025. May be an image of 10 people and text.",
+                "product_type": None,
+                "owner": {
+                    "username": "adriandelagarzas",
+                    "id": "1483444529",
+                    "verified": True
+                },
+                "tagged_users": [
+                    {
+                        "username": "userexample",
+                        "id": "123456789",
+                        "full_name": "User Example",
+                        "is_verified": False
+                    }
+                ]
             }
         }
 
@@ -58,19 +118,21 @@ class PostMetadata(BaseModel):
 class PostEngagement(BaseModel):
     """Engagement metrics sub-schema for social media posts."""
     likes_count: int = 0
-    shares_count: int = 0
+    shares_count: Optional[int] = None
     comments_count: int = 0
     views_count: Optional[int] = None
     engagement_rate: Optional[float] = None
+    saves_count: Optional[int] = None
     
     class Config:
         schema_extra = {
             "example": {
-                "likes_count": 1245,
-                "shares_count": 327,
-                "comments_count": 89,
-                "views_count": 15720,
-                "engagement_rate": 3.8
+                "likes_count": 153,
+                "shares_count": None,
+                "comments_count": 16,
+                "views_count": None,
+                "engagement_rate": 0.97,
+                "saves_count": None
             }
         }
 
@@ -86,13 +148,31 @@ class PostAnalysis(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "sentiment_score": 0.64,
-                "topics": ["climate", "environment", "policy"],
-                "entities_mentioned": ["EPA", "Climate Change Initiative"],
-                "key_phrases": ["new policy", "climate action", "sustainable future"],
-                "emotional_tone": "positive"
+                "sentiment_score": None,
+                "topics": [],
+                "entities_mentioned": [],
+                "key_phrases": [],
+                "emotional_tone": None
             }
         }
+
+
+class ChildPost(BaseModel):
+    """Child post in a carousel/sidecar post."""
+    id: str
+    type: str  # Image, Video
+    url: Optional[HttpUrl] = None
+    display_url: HttpUrl
+    dimensions: Optional[Dimensions] = None
+    alt_text: Optional[str] = None
+
+
+class VideoData(BaseModel):
+    """Video-specific data for video posts."""
+    duration: Optional[float] = None  # In seconds
+    video_url: Optional[HttpUrl] = None
+    thumbnail_url: Optional[HttpUrl] = None
+    is_muted: bool = False
 
 
 class SocialMediaPost(BaseModel):
@@ -105,51 +185,102 @@ class SocialMediaPost(BaseModel):
     platform_id: str = Field(..., description="Original ID from the social media platform")
     platform: str = Field(..., description="Social media platform name (e.g., twitter, facebook)")
     account_id: UUID = Field(..., description="Reference to PostgreSQL SocialMediaAccount UUID")
-    content_type: str = Field(..., description="Type of post (e.g., post, story, video)")
+    content_type: str = Field(..., description="Type of post (e.g., post, sidecar, video)")
+    short_code: Optional[str] = Field(None, description="Platform shortcode for URL (e.g., Instagram)")
+    url: Optional[HttpUrl] = Field(None, description="Direct URL to the post")
     
     content: PostContent
     metadata: PostMetadata
     engagement: PostEngagement
     analysis: Optional[PostAnalysis] = None
+    child_posts: Optional[List[ChildPost]] = None
+    video_data: Optional[VideoData] = None
     vector_id: Optional[str] = Field(None, description="Reference to vector database entry")
     
     class Config:
         schema_extra = {
             "example": {
-                "platform_id": "1458794356725891073",
-                "platform": "twitter",
+                "platform_id": "3576752389826611363",
+                "platform": "instagram",
                 "account_id": "123e4567-e89b-12d3-a456-426614174000",
-                "content_type": "post",
+                "content_type": "sidecar",
+                "short_code": "DGjLVkdJQij",
+                "url": "https://www.instagram.com/p/DGjLVkdJQij/",
                 "content": {
-                    "text": "Excited to announce our new policy on #ClimateChange with @EPA",
-                    "media": ["https://example.com/image1.jpg"],
-                    "links": ["https://example.com/policy"],
-                    "hashtags": ["ClimateChange", "GreenFuture"],
-                    "mentions": ["EPA", "WhiteHouse"]
+                    "text": "Hoy tuve el honor de participar en la inauguración del Foro de Alianzas para el Hábitat capítulo Monterrey, un espacio clave para construir la ciudad del futuro.",
+                    "media": ["https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/481585399_18485585482052530_5292288465090866871_n.jpg"],
+                    "links": [],
+                    "hashtags": ["AquíSeResuelve"],
+                    "mentions": []
                 },
                 "metadata": {
-                    "created_at": "2023-06-15T14:32:19Z",
-                    "language": "en",
-                    "location": {"country": "USA", "state": "DC"},
-                    "client": "Twitter Web App",
+                    "created_at": "2025-02-26T20:35:33.000Z",
+                    "language": "es",
+                    "location": {
+                        "name": "U-ERRE Universidad Regiomontana",
+                        "id": "1954214947989485",
+                        "country": "Mexico",
+                        "state": "Nuevo León",
+                        "city": "Monterrey"
+                    },
+                    "client": "Instagram Web",
                     "is_repost": False,
-                    "is_reply": False
+                    "is_reply": False,
+                    "dimensions": {
+                        "height": 717,
+                        "width": 1080
+                    },
+                    "alt_text": "Photo by Adrián de la Garza on February 26, 2025. May be an image of 10 people and text.",
+                    "product_type": None,
+                    "owner": {
+                        "username": "adriandelagarzas",
+                        "id": "1483444529",
+                        "verified": True
+                    },
+                    "tagged_users": [
+                        {
+                            "username": "userexample",
+                            "id": "123456789",
+                            "full_name": "User Example",
+                            "is_verified": False
+                        }
+                    ]
                 },
                 "engagement": {
-                    "likes_count": 1245,
-                    "shares_count": 327,
-                    "comments_count": 89,
-                    "views_count": 15720,
-                    "engagement_rate": 3.8
+                    "likes_count": 153,
+                    "shares_count": None,
+                    "comments_count": 16,
+                    "views_count": None,
+                    "engagement_rate": 0.97,
+                    "saves_count": None
                 },
+                "child_posts": [
+                    {
+                        "id": "3576752376539157068",
+                        "type": "Image",
+                        "url": "https://www.instagram.com/p/DGjLVYFJpJM/",
+                        "display_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/481585399_18485585482052530_5292288465090866871_n.jpg",
+                        "dimensions": {
+                            "height": 717,
+                            "width": 1080
+                        },
+                        "alt_text": "Photo by Adrián de la Garza on February 26, 2025."
+                    }
+                ],
                 "analysis": {
-                    "sentiment_score": 0.64,
-                    "topics": ["climate", "environment", "policy"],
-                    "entities_mentioned": ["EPA", "Climate Change Initiative"],
-                    "key_phrases": ["new policy", "climate action", "sustainable future"],
-                    "emotional_tone": "positive"
+                    "sentiment_score": None,
+                    "topics": [],
+                    "entities_mentioned": [],
+                    "key_phrases": [],
+                    "emotional_tone": None
                 },
-                "vector_id": "vec_123456789"
+                "video_data": {
+                    "duration": None,
+                    "video_url": None,
+                    "thumbnail_url": None,
+                    "is_muted": False
+                },
+                "vector_id": None
             }
         }
 
@@ -157,15 +288,15 @@ class SocialMediaPost(BaseModel):
 class CommentContent(BaseModel):
     """Content sub-schema for social media comments."""
     text: str
-    media: Optional[List[HttpUrl]] = None
+    media: List[HttpUrl] = []
     mentions: List[str] = []
     
     class Config:
         schema_extra = {
             "example": {
-                "text": "Great initiative! @GreenOrg should partner on this",
-                "media": ["https://example.com/comment-img.jpg"],
-                "mentions": ["GreenOrg"]
+                "text": "👏👏",
+                "media": [],
+                "mentions": []
             }
         }
 
@@ -175,13 +306,17 @@ class CommentMetadata(BaseModel):
     created_at: datetime
     language: str
     location: Optional[Dict[str, Any]] = None
+    is_reply: bool = False
+    parent_comment_id: Optional[str] = None
     
     class Config:
         schema_extra = {
             "example": {
-                "created_at": "2023-06-15T15:45:22Z",
-                "language": "en",
-                "location": {"country": "USA", "state": "CA"}
+                "created_at": "2025-02-27T01:31:50.000Z",
+                "language": "es",
+                "location": None,
+                "is_reply": False,
+                "parent_comment_id": None
             }
         }
 
@@ -194,8 +329,8 @@ class CommentEngagement(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "likes_count": 45,
-                "replies_count": 3
+                "likes_count": 2,
+                "replies_count": 1
             }
         }
 
@@ -206,14 +341,66 @@ class CommentAnalysis(BaseModel):
     emotional_tone: Optional[str] = None
     toxicity_flag: Optional[bool] = None
     entities_mentioned: List[str] = []
+    language_detected: Optional[str] = None
+    contains_question: bool = False
     
     class Config:
         schema_extra = {
             "example": {
-                "sentiment_score": 0.78,
-                "emotional_tone": "positive",
+                "sentiment_score": None,
+                "emotional_tone": None,
                 "toxicity_flag": False,
-                "entities_mentioned": ["GreenOrg"]
+                "entities_mentioned": [],
+                "language_detected": None,
+                "contains_question": False
+            }
+        }
+
+
+class CommentUserDetails(BaseModel):
+    """Additional user information for comment authors."""
+    fbid_v2: Optional[int] = None
+    is_mentionable: Optional[bool] = None
+    latest_reel_media: Optional[int] = None
+    profile_pic_id: Optional[str] = None
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "fbid_v2": 17841415278525780,
+                "is_mentionable": True,
+                "latest_reel_media": 0,
+                "profile_pic_id": "3422370971825093335"
+            }
+        }
+
+
+class CommentReply(BaseModel):
+    """Reply to a comment."""
+    platform_id: str
+    user_id: str
+    user_name: str
+    user_full_name: Optional[str] = None
+    user_profile_pic: Optional[HttpUrl] = None
+    user_verified: bool = False
+    text: str
+    created_at: datetime
+    likes_count: int = 0
+    replies_count: int = 0
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "platform_id": "17917498377065887",
+                "user_id": "1483444529",
+                "user_name": "adriandelagarzas",
+                "user_full_name": "Adrián de la Garza",
+                "user_profile_pic": "https://scontent-ber1-1.cdninstagram.com/v/t51.2885-19/476009956_676359164713921_5513413720214908264_n.jpg",
+                "user_verified": True,
+                "text": "@oscarcuellocoronado 🙌🏼😄",
+                "created_at": "2025-02-27T01:39:10.000Z",
+                "likes_count": 0,
+                "replies_count": 0
             }
         }
 
@@ -223,49 +410,96 @@ class SocialMediaComment(BaseModel):
     Schema for social media comments stored in MongoDB.
     
     This model represents a comment on a social media post including
-    its content, metadata, engagement metrics, and analysis.
+    its content, metadata, engagement metrics, replies, and analysis.
     """
     platform_id: str = Field(..., description="Original ID from the social media platform")
     platform: str = Field(..., description="Social media platform name (e.g., twitter, facebook)")
     post_id: str = Field(..., description="Reference to MongoDB post ID")
-    user_id: str = Field(..., description="User ID from the platform")
-    user_name: str = Field(..., description="User name from the platform")
+    post_url: Optional[HttpUrl] = Field(None, description="URL of the original post")
+    
+    user_id: str = Field(..., description="ID of the commenter")
+    user_name: str = Field(..., description="Username of the commenter")
+    user_full_name: Optional[str] = Field(None, description="Full display name of the commenter")
+    user_profile_pic: Optional[HttpUrl] = Field(None, description="Profile picture URL of the commenter")
+    user_verified: bool = Field(False, description="Whether the user has a verification badge")
+    user_private: bool = Field(False, description="Whether the user's account is private")
     
     content: CommentContent
     metadata: CommentMetadata
     engagement: CommentEngagement
+    
+    replies: List[CommentReply] = []
+    
     analysis: Optional[CommentAnalysis] = None
+    user_details: Optional[CommentUserDetails] = None
     vector_id: Optional[str] = Field(None, description="Reference to vector database entry")
     
     class Config:
         schema_extra = {
             "example": {
-                "platform_id": "1458812639457283072",
-                "platform": "twitter",
-                "post_id": "1458794356725891073",
-                "user_id": "987654321",
-                "user_name": "EcoAdvocate",
+                "platform_id": "18021118748474094",
+                "platform": "instagram",
+                "post_id": "3576752389826611363",
+                "post_url": "https://www.instagram.com/p/DGjLVkdJQij/",
+                
+                "user_id": "15166237284",
+                "user_name": "oscarcuellocoronado",
+                "user_full_name": "Oscar Cuello",
+                "user_profile_pic": "https://scontent-ber1-1.cdninstagram.com/v/t51.2885-19/453036863_994371468987224_3689516965341685068_n.jpg",
+                "user_verified": False,
+                "user_private": False,
+                
                 "content": {
-                    "text": "Great initiative! @GreenOrg should partner on this",
-                    "media": ["https://example.com/comment-img.jpg"],
-                    "mentions": ["GreenOrg"]
+                    "text": "👏👏",
+                    "media": [],
+                    "mentions": []
                 },
+                
                 "metadata": {
-                    "created_at": "2023-06-15T15:45:22Z",
-                    "language": "en",
-                    "location": {"country": "USA", "state": "CA"}
+                    "created_at": "2025-02-27T01:31:50.000Z",
+                    "language": "es",
+                    "location": None,
+                    "is_reply": False,
+                    "parent_comment_id": None
                 },
+                
                 "engagement": {
-                    "likes_count": 45,
-                    "replies_count": 3
+                    "likes_count": 2,
+                    "replies_count": 1
                 },
+                
+                "replies": [
+                    {
+                        "platform_id": "17917498377065887",
+                        "user_id": "1483444529",
+                        "user_name": "adriandelagarzas",
+                        "user_full_name": "Adrián de la Garza",
+                        "user_profile_pic": "https://scontent-ber1-1.cdninstagram.com/v/t51.2885-19/476009956_676359164713921_5513413720214908264_n.jpg",
+                        "user_verified": True,
+                        "text": "@oscarcuellocoronado 🙌🏼😄",
+                        "created_at": "2025-02-27T01:39:10.000Z",
+                        "likes_count": 0,
+                        "replies_count": 0
+                    }
+                ],
+                
                 "analysis": {
-                    "sentiment_score": 0.78,
-                    "emotional_tone": "positive",
+                    "sentiment_score": None,
+                    "emotional_tone": None,
                     "toxicity_flag": False,
-                    "entities_mentioned": ["GreenOrg"]
+                    "entities_mentioned": [],
+                    "language_detected": None,
+                    "contains_question": False
                 },
-                "vector_id": "vec_987654321"
+                
+                "user_details": {
+                    "fbid_v2": 17841415278525780,
+                    "is_mentionable": True,
+                    "latest_reel_media": 0,
+                    "profile_pic_id": "3422370971825093335"
+                },
+                
+                "vector_id": None
             }
         }
 

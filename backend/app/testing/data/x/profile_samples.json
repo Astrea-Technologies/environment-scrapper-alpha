@@ -1,0 +1,4557 @@
+[
+    {
+        "type": "tweet",
+        "id": "1905018863219364194",
+        "url": "https://x.com/AdrianDeLaGarza/status/1905018863219364194",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1905018863219364194",
+        "text": "Mejorar la seguridad es una de nuestras prioridades; hoy damos un paso más para tener una ciudad con orden y paz. \n\nPresenté la nueva imagen de nuestra Policía y relanzamos la campaña de reclutamiento para seguir fortaleciendo a nuestra corporación. \n\nEn Monterrey, reconocemos el esfuerzo de quienes nos protegen, por eso mejoramos sus condiciones laborales, con un salario competitivo, prestaciones de calidad y un plan de vida y carrera que garantiza su bienestar y el de sus familias.\n\n¡Únete a la Policía de Monterrey! Más que un trabajo, un proyecto de vida. \n\n📞 Teléfono: 81 5102 6750\n📲 WhatsApp: 81 1533 1942\n\n#AquíSeResuelve",
+        "fullText": "Mejorar la seguridad es una de nuestras prioridades; hoy damos un paso más para tener una ciudad con orden y paz. \n\nPresenté la nueva imagen de nuestra Policía y relanzamos la campaña de reclutamiento para seguir fortaleciendo a nuestra corporación. \n\nEn Monterrey, reconocemos el https://t.co/QftMT1FQ0e",
+        "source": "Twitter for iPhone",
+        "retweetCount": 4,
+        "replyCount": 4,
+        "likeCount": 12,
+        "quoteCount": 0,
+        "viewCount": 627,
+        "createdAt": "Wed Mar 26 22:07:45 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "conversationId": "1905018863219364194",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/QftMT1FQ0e",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1905018863219364194/photo/1",
+                    "id_str": "1905018858219487232",
+                    "indices": [
+                        281,
+                        304
+                    ],
+                    "media_key": "3_1905018858219487232",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm_8ju6XwAAstFg.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/QftMT1FQ0e",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 656,
+                                    "y": 495,
+                                    "h": 48,
+                                    "w": 48
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 583,
+                                    "y": 440,
+                                    "h": 42,
+                                    "w": 42
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 330,
+                                    "y": 249,
+                                    "h": 24,
+                                    "w": 24
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 656,
+                                    "y": 495,
+                                    "h": 48,
+                                    "w": 48
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1350,
+                            "w": 1080,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 1200,
+                            "w": 960,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 680,
+                            "w": 544,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1350,
+                        "width": 1080,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 744,
+                                "w": 1080,
+                                "h": 605
+                            },
+                            {
+                                "x": 0,
+                                "y": 270,
+                                "w": 1080,
+                                "h": 1080
+                            },
+                            {
+                                "x": 0,
+                                "y": 119,
+                                "w": 1080,
+                                "h": 1231
+                            },
+                            {
+                                "x": 405,
+                                "y": 0,
+                                "w": 675,
+                                "h": 1350
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 1350
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1905018858219487232"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/QftMT1FQ0e",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1905018863219364194/photo/1",
+                    "id_str": "1905018858223665152",
+                    "indices": [
+                        281,
+                        304
+                    ],
+                    "media_key": "3_1905018858223665152",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm_8ju7XgAAVS6I.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/QftMT1FQ0e",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 842,
+                                    "y": 191,
+                                    "h": 48,
+                                    "w": 48
+                                },
+                                {
+                                    "x": 721,
+                                    "y": 930,
+                                    "h": 60,
+                                    "w": 60
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 748,
+                                    "y": 169,
+                                    "h": 42,
+                                    "w": 42
+                                },
+                                {
+                                    "x": 640,
+                                    "y": 826,
+                                    "h": 53,
+                                    "w": 53
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 424,
+                                    "y": 96,
+                                    "h": 24,
+                                    "w": 24
+                                },
+                                {
+                                    "x": 363,
+                                    "y": 468,
+                                    "h": 30,
+                                    "w": 30
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 842,
+                                    "y": 191,
+                                    "h": 48,
+                                    "w": 48
+                                },
+                                {
+                                    "x": 721,
+                                    "y": 930,
+                                    "h": 60,
+                                    "w": 60
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1350,
+                            "w": 1080,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 1200,
+                            "w": 960,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 680,
+                            "w": 544,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1350,
+                        "width": 1080,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 605
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 1080
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 1231
+                            },
+                            {
+                                "x": 304,
+                                "y": 0,
+                                "w": 675,
+                                "h": 1350
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 1350
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1905018858223665152"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/QftMT1FQ0e",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1905018863219364194/photo/1",
+                    "id_str": "1905018858219384832",
+                    "indices": [
+                        281,
+                        304
+                    ],
+                    "media_key": "3_1905018858219384832",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm_8ju6WMAAX98A.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/QftMT1FQ0e",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 458,
+                                    "y": 444,
+                                    "h": 77,
+                                    "w": 77
+                                },
+                                {
+                                    "x": 742,
+                                    "y": 341,
+                                    "h": 105,
+                                    "w": 105
+                                },
+                                {
+                                    "x": 411,
+                                    "y": 185,
+                                    "h": 100,
+                                    "w": 100
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 407,
+                                    "y": 394,
+                                    "h": 68,
+                                    "w": 68
+                                },
+                                {
+                                    "x": 659,
+                                    "y": 303,
+                                    "h": 93,
+                                    "w": 93
+                                },
+                                {
+                                    "x": 365,
+                                    "y": 164,
+                                    "h": 88,
+                                    "w": 88
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 230,
+                                    "y": 223,
+                                    "h": 38,
+                                    "w": 38
+                                },
+                                {
+                                    "x": 373,
+                                    "y": 171,
+                                    "h": 52,
+                                    "w": 52
+                                },
+                                {
+                                    "x": 207,
+                                    "y": 93,
+                                    "h": 50,
+                                    "w": 50
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 458,
+                                    "y": 444,
+                                    "h": 77,
+                                    "w": 77
+                                },
+                                {
+                                    "x": 742,
+                                    "y": 341,
+                                    "h": 105,
+                                    "w": 105
+                                },
+                                {
+                                    "x": 411,
+                                    "y": 185,
+                                    "h": 100,
+                                    "w": 100
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1350,
+                            "w": 1080,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 1200,
+                            "w": 960,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 680,
+                            "w": 544,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1350,
+                        "width": 1080,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 541,
+                                "w": 1080,
+                                "h": 605
+                            },
+                            {
+                                "x": 0,
+                                "y": 270,
+                                "w": 1080,
+                                "h": 1080
+                            },
+                            {
+                                "x": 0,
+                                "y": 119,
+                                "w": 1080,
+                                "h": 1231
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 675,
+                                "h": 1350
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 1350
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1905018858219384832"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        618,
+                        633
+                    ],
+                    "text": "AquíSeResuelve"
+                }
+            ],
+            "symbols": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/media/Gm_8ju6XwAAstFg.jpg",
+            "https://pbs.twimg.com/media/Gm_8ju7XgAAVS6I.jpg",
+            "https://pbs.twimg.com/media/Gm_8ju6WMAAX98A.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904944171422474407",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904944171422474407",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904944171422474407",
+        "text": "Hoy más que nunca, buscamos personas valientes, con vocación de servicio y el deseo de sumar por la seguridad en Monterrey. \n\nSi tienes el compromiso, la disciplina y el orgullo de proteger a tu comunidad, este es tu momento para unirte a la Policía de Monterrey. No es sólo un trabajo, es un proyecto de vida. \n\nÚnete a la mejor policía de México y sé parte del equipo que mantiene segura nuestra ciudad.\n\n¡Inscríbete hoy y transforma tu futuro! 🚓\n\n📞 Teléfono: 81 5102 6750\n📲 WhatsApp: 81 1533 1942\n\n#AquíSeResuelve",
+        "fullText": "Hoy más que nunca, buscamos personas valientes, con vocación de servicio y el deseo de sumar por la seguridad en Monterrey. \n\nSi tienes el compromiso, la disciplina y el orgullo de proteger a tu comunidad, este es tu momento para unirte a la Policía de Monterrey. No es sólo un https://t.co/aFbCzB8qQa",
+        "source": "Twitter for iPhone",
+        "retweetCount": 50,
+        "replyCount": 25,
+        "likeCount": 91,
+        "quoteCount": 13,
+        "viewCount": 9294,
+        "createdAt": "Wed Mar 26 17:10:57 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 2,
+        "isReply": false,
+        "conversationId": "1904944171422474407",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/aFbCzB8qQa",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904944171422474407/video/1",
+                    "id_str": "1904944027696320512",
+                    "indices": [
+                        278,
+                        301
+                    ],
+                    "media_key": "13_1904944027696320512",
+                    "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/1904944027696320512/img/XcoguvI4BV2Sap1r.jpg",
+                    "type": "video",
+                    "url": "https://t.co/aFbCzB8qQa",
+                    "additional_media_info": {
+                        "monetizable": false
+                    },
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 720,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 675,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 383,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 720,
+                        "width": 1280,
+                        "focus_rects": []
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "video_info": {
+                        "aspect_ratio": [
+                            16,
+                            9
+                        ],
+                        "duration_millis": 60000,
+                        "variants": [
+                            {
+                                "content_type": "application/x-mpegURL",
+                                "url": "https://video.twimg.com/amplify_video/1904944027696320512/pl/iRvK1LAeMXJgyAc7.m3u8?tag=16"
+                            },
+                            {
+                                "bitrate": 288000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1904944027696320512/vid/avc1/480x270/e6FRIqoCgq30SuEl.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 832000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1904944027696320512/vid/avc1/640x360/ll5fw51aIg7sVA-l.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 2176000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1904944027696320512/vid/avc1/1280x720/vPu5x7snMsEd6TTO.mp4?tag=16"
+                            }
+                        ]
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "13_1904944027696320512"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        501,
+                        516
+                    ],
+                    "text": "AquíSeResuelve"
+                }
+            ],
+            "symbols": [],
+            "timestamps": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/amplify_video_thumb/1904944027696320512/img/XcoguvI4BV2Sap1r.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904885698240389472",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904885698240389472",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904885698240389472",
+        "text": "¡Mucha precaución al salir de casa! ⚠️\n\nLa lluvia estará constante en nuestra ciudad durante el día, es importante tomar medidas de precauciones: \n🚗 Maneja despacio. \n⏰ Toma tu tiempo. \n🚧 Verifica rutas de traslado.\n⛅️ Revisa constantemente el pronóstico del tiempo.\n📞 Ante una emergencia marca al 911.",
+        "fullText": "¡Mucha precaución al salir de casa! ⚠️\n\nLa lluvia estará constante en nuestra ciudad durante el día, es importante tomar medidas de precauciones: \n🚗 Maneja despacio. \n⏰ Toma tu tiempo. \n🚧 Verifica rutas de traslado.\n⛅️ Revisa constantemente el pronóstico del tiempo.\n📞 Ante",
+        "source": "Twitter for iPhone",
+        "retweetCount": 5,
+        "replyCount": 13,
+        "likeCount": 41,
+        "quoteCount": 0,
+        "viewCount": 1783,
+        "createdAt": "Wed Mar 26 13:18:36 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "conversationId": "1904885698240389472",
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {},
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [],
+            "symbols": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904675146415112204",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904675146415112204",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904675146415112204",
+        "text": "Hoy me reuní con el Embajador de Taiwán, Iván Yueh-Jung Lee, para fortalecer lazos y explorar oportunidades de inversión e innovación para Monterrey. Compartimos la visión de trabajar y resolver para seguir impulsando el desarrollo de nuestra ciudad. \n\n#AquíSeResuelve https://t.co/ve0DjXICyw",
+        "fullText": "Hoy me reuní con el Embajador de Taiwán, Iván Yueh-Jung Lee, para fortalecer lazos y explorar oportunidades de inversión e innovación para Monterrey. Compartimos la visión de trabajar y resolver para seguir impulsando el desarrollo de nuestra ciudad. \n\n#AquíSeResuelve https://t.co/ve0DjXICyw",
+        "source": "Twitter for iPhone",
+        "retweetCount": 6,
+        "replyCount": 20,
+        "likeCount": 42,
+        "quoteCount": 0,
+        "viewCount": 1320,
+        "createdAt": "Tue Mar 25 23:21:56 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "conversationId": "1904675146415112204",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/ve0DjXICyw",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904675146415112204/photo/1",
+                    "id_str": "1904675139788173312",
+                    "indices": [
+                        269,
+                        292
+                    ],
+                    "media_key": "3_1904675139788173312",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm7D8r-XcAALziq.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/ve0DjXICyw",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 741,
+                                    "y": 173,
+                                    "h": 113,
+                                    "w": 113
+                                },
+                                {
+                                    "x": 350,
+                                    "y": 123,
+                                    "h": 120,
+                                    "w": 120
+                                },
+                                {
+                                    "x": 947,
+                                    "y": 502,
+                                    "h": 145,
+                                    "w": 145
+                                },
+                                {
+                                    "x": 113,
+                                    "y": 515,
+                                    "h": 137,
+                                    "w": 137
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 694,
+                                    "y": 162,
+                                    "h": 105,
+                                    "w": 105
+                                },
+                                {
+                                    "x": 328,
+                                    "y": 115,
+                                    "h": 112,
+                                    "w": 112
+                                },
+                                {
+                                    "x": 887,
+                                    "y": 470,
+                                    "h": 135,
+                                    "w": 135
+                                },
+                                {
+                                    "x": 105,
+                                    "y": 482,
+                                    "h": 128,
+                                    "w": 128
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 393,
+                                    "y": 91,
+                                    "h": 60,
+                                    "w": 60
+                                },
+                                {
+                                    "x": 185,
+                                    "y": 65,
+                                    "h": 63,
+                                    "w": 63
+                                },
+                                {
+                                    "x": 503,
+                                    "y": 266,
+                                    "h": 77,
+                                    "w": 77
+                                },
+                                {
+                                    "x": 60,
+                                    "y": 273,
+                                    "h": 72,
+                                    "w": 72
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 741,
+                                    "y": 173,
+                                    "h": 113,
+                                    "w": 113
+                                },
+                                {
+                                    "x": 350,
+                                    "y": 123,
+                                    "h": 120,
+                                    "w": 120
+                                },
+                                {
+                                    "x": 947,
+                                    "y": 502,
+                                    "h": 145,
+                                    "w": 145
+                                },
+                                {
+                                    "x": 113,
+                                    "y": 515,
+                                    "h": 137,
+                                    "w": 137
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 42,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 203,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904675139788173312"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/ve0DjXICyw",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904675146415112204/photo/1",
+                    "id_str": "1904675139788173315",
+                    "indices": [
+                        269,
+                        292
+                    ],
+                    "media_key": "3_1904675139788173315",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm7D8r-XcAMuXiQ.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/ve0DjXICyw",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 135,
+                                    "y": 438,
+                                    "h": 58,
+                                    "w": 58
+                                },
+                                {
+                                    "x": 247,
+                                    "y": 130,
+                                    "h": 153,
+                                    "w": 153
+                                },
+                                {
+                                    "x": 1121,
+                                    "y": 546,
+                                    "h": 138,
+                                    "w": 138
+                                },
+                                {
+                                    "x": 711,
+                                    "y": 196,
+                                    "h": 191,
+                                    "w": 191
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 126,
+                                    "y": 410,
+                                    "h": 54,
+                                    "w": 54
+                                },
+                                {
+                                    "x": 231,
+                                    "y": 121,
+                                    "h": 143,
+                                    "w": 143
+                                },
+                                {
+                                    "x": 1050,
+                                    "y": 511,
+                                    "h": 129,
+                                    "w": 129
+                                },
+                                {
+                                    "x": 666,
+                                    "y": 183,
+                                    "h": 179,
+                                    "w": 179
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 71,
+                                    "y": 232,
+                                    "h": 30,
+                                    "w": 30
+                                },
+                                {
+                                    "x": 131,
+                                    "y": 69,
+                                    "h": 81,
+                                    "w": 81
+                                },
+                                {
+                                    "x": 595,
+                                    "y": 290,
+                                    "h": 73,
+                                    "w": 73
+                                },
+                                {
+                                    "x": 377,
+                                    "y": 104,
+                                    "h": 101,
+                                    "w": 101
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 135,
+                                    "y": 438,
+                                    "h": 58,
+                                    "w": 58
+                                },
+                                {
+                                    "x": 247,
+                                    "y": 130,
+                                    "h": 153,
+                                    "w": 153
+                                },
+                                {
+                                    "x": 1121,
+                                    "y": 546,
+                                    "h": 138,
+                                    "w": 138
+                                },
+                                {
+                                    "x": 711,
+                                    "y": 196,
+                                    "h": 191,
+                                    "w": 191
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 75,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904675139788173315"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        253,
+                        268
+                    ],
+                    "text": "AquíSeResuelve"
+                }
+            ],
+            "media": [
+                {
+                    "display_url": "pic.x.com/ve0DjXICyw",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904675146415112204/photo/1",
+                    "id_str": "1904675139788173312",
+                    "indices": [
+                        269,
+                        292
+                    ],
+                    "media_key": "3_1904675139788173312",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm7D8r-XcAALziq.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/ve0DjXICyw",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 741,
+                                    "y": 173,
+                                    "h": 113,
+                                    "w": 113
+                                },
+                                {
+                                    "x": 350,
+                                    "y": 123,
+                                    "h": 120,
+                                    "w": 120
+                                },
+                                {
+                                    "x": 947,
+                                    "y": 502,
+                                    "h": 145,
+                                    "w": 145
+                                },
+                                {
+                                    "x": 113,
+                                    "y": 515,
+                                    "h": 137,
+                                    "w": 137
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 694,
+                                    "y": 162,
+                                    "h": 105,
+                                    "w": 105
+                                },
+                                {
+                                    "x": 328,
+                                    "y": 115,
+                                    "h": 112,
+                                    "w": 112
+                                },
+                                {
+                                    "x": 887,
+                                    "y": 470,
+                                    "h": 135,
+                                    "w": 135
+                                },
+                                {
+                                    "x": 105,
+                                    "y": 482,
+                                    "h": 128,
+                                    "w": 128
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 393,
+                                    "y": 91,
+                                    "h": 60,
+                                    "w": 60
+                                },
+                                {
+                                    "x": 185,
+                                    "y": 65,
+                                    "h": 63,
+                                    "w": 63
+                                },
+                                {
+                                    "x": 503,
+                                    "y": 266,
+                                    "h": 77,
+                                    "w": 77
+                                },
+                                {
+                                    "x": 60,
+                                    "y": 273,
+                                    "h": 72,
+                                    "w": 72
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 741,
+                                    "y": 173,
+                                    "h": 113,
+                                    "w": 113
+                                },
+                                {
+                                    "x": 350,
+                                    "y": 123,
+                                    "h": 120,
+                                    "w": 120
+                                },
+                                {
+                                    "x": 947,
+                                    "y": 502,
+                                    "h": 145,
+                                    "w": 145
+                                },
+                                {
+                                    "x": 113,
+                                    "y": 515,
+                                    "h": 137,
+                                    "w": 137
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 42,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 203,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904675139788173312"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/ve0DjXICyw",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904675146415112204/photo/1",
+                    "id_str": "1904675139788173315",
+                    "indices": [
+                        269,
+                        292
+                    ],
+                    "media_key": "3_1904675139788173315",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm7D8r-XcAMuXiQ.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/ve0DjXICyw",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 135,
+                                    "y": 438,
+                                    "h": 58,
+                                    "w": 58
+                                },
+                                {
+                                    "x": 247,
+                                    "y": 130,
+                                    "h": 153,
+                                    "w": 153
+                                },
+                                {
+                                    "x": 1121,
+                                    "y": 546,
+                                    "h": 138,
+                                    "w": 138
+                                },
+                                {
+                                    "x": 711,
+                                    "y": 196,
+                                    "h": 191,
+                                    "w": 191
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 126,
+                                    "y": 410,
+                                    "h": 54,
+                                    "w": 54
+                                },
+                                {
+                                    "x": 231,
+                                    "y": 121,
+                                    "h": 143,
+                                    "w": 143
+                                },
+                                {
+                                    "x": 1050,
+                                    "y": 511,
+                                    "h": 129,
+                                    "w": 129
+                                },
+                                {
+                                    "x": 666,
+                                    "y": 183,
+                                    "h": 179,
+                                    "w": 179
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 71,
+                                    "y": 232,
+                                    "h": 30,
+                                    "w": 30
+                                },
+                                {
+                                    "x": 131,
+                                    "y": 69,
+                                    "h": 81,
+                                    "w": 81
+                                },
+                                {
+                                    "x": 595,
+                                    "y": 290,
+                                    "h": 73,
+                                    "w": 73
+                                },
+                                {
+                                    "x": 377,
+                                    "y": 104,
+                                    "h": 101,
+                                    "w": 101
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 135,
+                                    "y": 438,
+                                    "h": 58,
+                                    "w": 58
+                                },
+                                {
+                                    "x": 247,
+                                    "y": 130,
+                                    "h": 153,
+                                    "w": 153
+                                },
+                                {
+                                    "x": 1121,
+                                    "y": 546,
+                                    "h": 138,
+                                    "w": 138
+                                },
+                                {
+                                    "x": 711,
+                                    "y": 196,
+                                    "h": 191,
+                                    "w": 191
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 75,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904675139788173315"
+                        }
+                    }
+                }
+            ],
+            "symbols": [],
+            "timestamps": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/media/Gm7D8r-XcAALziq.jpg",
+            "https://pbs.twimg.com/media/Gm7D8r-XcAMuXiQ.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904640970614071526",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904640970614071526",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904640970614071526",
+        "text": "¡Corramos por una causa! \nEl 21K Monterrey y la carrera 5K están de regreso este 6 de abril, en una ruta ya conocida como es la Vía Deportiva y en el circuito interior del Parque España.\n\nTodo lo recaudado será para apoyar a atletas con discapacidad de nuestra ciudad.\n\nInscríbete antes del 3 de abril en Innovasport o Trotime.\n\n#AquíSeResuelve",
+        "fullText": "¡Corramos por una causa! \nEl 21K Monterrey y la carrera 5K están de regreso este 6 de abril, en una ruta ya conocida como es la Vía Deportiva y en el circuito interior del Parque España.\n\nTodo lo recaudado será para apoyar a atletas con discapacidad de nuestra ciudad.\n\nInscríbete https://t.co/KLRfejrvOr",
+        "source": "Twitter for iPhone",
+        "retweetCount": 5,
+        "replyCount": 28,
+        "likeCount": 25,
+        "quoteCount": 0,
+        "viewCount": 1328,
+        "createdAt": "Tue Mar 25 21:06:08 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "conversationId": "1904640970614071526",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/KLRfejrvOr",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904640970614071526/photo/1",
+                    "id_str": "1904640964775260160",
+                    "indices": [
+                        281,
+                        304
+                    ],
+                    "media_key": "3_1904640964775260160",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm6k3cIWMAAQEsB.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/KLRfejrvOr",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": []
+                        },
+                        "medium": {
+                            "faces": []
+                        },
+                        "small": {
+                            "faces": []
+                        },
+                        "orig": {
+                            "faces": []
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 54,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 106,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 267,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904640964775260160"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/KLRfejrvOr",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904640970614071526/photo/1",
+                    "id_str": "1904640964779491328",
+                    "indices": [
+                        281,
+                        304
+                    ],
+                    "media_key": "3_1904640964779491328",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm6k3cJWwAArQFG.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/KLRfejrvOr",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 810,
+                                    "y": 238,
+                                    "h": 61,
+                                    "w": 61
+                                },
+                                {
+                                    "x": 483,
+                                    "y": 302,
+                                    "h": 53,
+                                    "w": 53
+                                },
+                                {
+                                    "x": 653,
+                                    "y": 242,
+                                    "h": 63,
+                                    "w": 63
+                                },
+                                {
+                                    "x": 332,
+                                    "y": 310,
+                                    "h": 61,
+                                    "w": 61
+                                },
+                                {
+                                    "x": 205,
+                                    "y": 512,
+                                    "h": 45,
+                                    "w": 45
+                                },
+                                {
+                                    "x": 832,
+                                    "y": 393,
+                                    "h": 62,
+                                    "w": 62
+                                },
+                                {
+                                    "x": 735,
+                                    "y": 468,
+                                    "h": 267,
+                                    "w": 267
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 759,
+                                    "y": 223,
+                                    "h": 57,
+                                    "w": 57
+                                },
+                                {
+                                    "x": 452,
+                                    "y": 283,
+                                    "h": 49,
+                                    "w": 49
+                                },
+                                {
+                                    "x": 612,
+                                    "y": 226,
+                                    "h": 59,
+                                    "w": 59
+                                },
+                                {
+                                    "x": 311,
+                                    "y": 290,
+                                    "h": 57,
+                                    "w": 57
+                                },
+                                {
+                                    "x": 192,
+                                    "y": 480,
+                                    "h": 42,
+                                    "w": 42
+                                },
+                                {
+                                    "x": 780,
+                                    "y": 368,
+                                    "h": 58,
+                                    "w": 58
+                                },
+                                {
+                                    "x": 689,
+                                    "y": 438,
+                                    "h": 250,
+                                    "w": 250
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 430,
+                                    "y": 126,
+                                    "h": 32,
+                                    "w": 32
+                                },
+                                {
+                                    "x": 256,
+                                    "y": 160,
+                                    "h": 28,
+                                    "w": 28
+                                },
+                                {
+                                    "x": 346,
+                                    "y": 128,
+                                    "h": 33,
+                                    "w": 33
+                                },
+                                {
+                                    "x": 176,
+                                    "y": 164,
+                                    "h": 32,
+                                    "w": 32
+                                },
+                                {
+                                    "x": 108,
+                                    "y": 272,
+                                    "h": 23,
+                                    "w": 23
+                                },
+                                {
+                                    "x": 442,
+                                    "y": 208,
+                                    "h": 32,
+                                    "w": 32
+                                },
+                                {
+                                    "x": 390,
+                                    "y": 248,
+                                    "h": 141,
+                                    "w": 141
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 810,
+                                    "y": 238,
+                                    "h": 61,
+                                    "w": 61
+                                },
+                                {
+                                    "x": 483,
+                                    "y": 302,
+                                    "h": 53,
+                                    "w": 53
+                                },
+                                {
+                                    "x": 653,
+                                    "y": 242,
+                                    "h": 63,
+                                    "w": 63
+                                },
+                                {
+                                    "x": 332,
+                                    "y": 310,
+                                    "h": 61,
+                                    "w": 61
+                                },
+                                {
+                                    "x": 205,
+                                    "y": 512,
+                                    "h": 45,
+                                    "w": 45
+                                },
+                                {
+                                    "x": 832,
+                                    "y": 393,
+                                    "h": 62,
+                                    "w": 62
+                                },
+                                {
+                                    "x": 735,
+                                    "y": 468,
+                                    "h": 267,
+                                    "w": 267
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 310,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 362,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 523,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904640964779491328"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        329,
+                        344
+                    ],
+                    "text": "AquíSeResuelve"
+                }
+            ],
+            "symbols": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/media/Gm6k3cIWMAAQEsB.jpg",
+            "https://pbs.twimg.com/media/Gm6k3cJWwAArQFG.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904543049268572301",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904543049268572301",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904543049268572301",
+        "text": "En relación a la situación de maltrato animal que sufrió un tlacuache, por parte de un trabajador de un carwash al poniente de la ciudad. Les comento que desde ayer se realizó una inspección al lugar de los hechos y ya se tiene identificado al responsable, el Municipio de Monterrey dará seguimiento al caso a través de Justicia Cívica, donde se determinarán las sanciones o medidas que apliquen en este caso conforme al reglamento de Protección y Bienestar Animal.\n\nAdemás, colaboraremos con autoridades estatales y federales de protección de fauna silvestre para que estas agresiones sean sancionadas y evitar su repetición.",
+        "fullText": "En relación a la situación de maltrato animal que sufrió un tlacuache, por parte de un trabajador de un carwash al poniente de la ciudad. Les comento que desde ayer se realizó una inspección al lugar de los hechos y ya se tiene identificado al responsable, el Municipio de https://t.co/3xUuYVbrOZ",
+        "source": "Twitter for iPhone",
+        "retweetCount": 104,
+        "replyCount": 117,
+        "likeCount": 553,
+        "quoteCount": 13,
+        "viewCount": 49667,
+        "createdAt": "Tue Mar 25 14:37:02 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 19,
+        "isReply": false,
+        "conversationId": "1904543049268572301",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/3xUuYVbrOZ",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904543049268572301/photo/1",
+                    "id_str": "1904543044126318592",
+                    "indices": [
+                        273,
+                        296
+                    ],
+                    "media_key": "3_1904543044126318592",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm5LztSXIAA3k-s.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/3xUuYVbrOZ",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 15,
+                                    "y": 725,
+                                    "h": 78,
+                                    "w": 78
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 11,
+                                    "y": 543,
+                                    "h": 58,
+                                    "w": 58
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 6,
+                                    "y": 308,
+                                    "h": 33,
+                                    "w": 33
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 15,
+                                    "y": 725,
+                                    "h": 78,
+                                    "w": 78
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1200,
+                            "w": 1600,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 900,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 510,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1200,
+                        "width": 1600,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1600,
+                                "h": 896
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1200,
+                                "h": 1200
+                            },
+                            {
+                                "x": 74,
+                                "y": 0,
+                                "w": 1053,
+                                "h": 1200
+                            },
+                            {
+                                "x": 300,
+                                "y": 0,
+                                "w": 600,
+                                "h": 1200
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1600,
+                                "h": 1200
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904543044126318592"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/3xUuYVbrOZ",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904543049268572301/photo/1",
+                    "id_str": "1904543044113780736",
+                    "indices": [
+                        273,
+                        296
+                    ],
+                    "media_key": "3_1904543044113780736",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm5LztPX0AATgx5.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/3xUuYVbrOZ",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": []
+                        },
+                        "medium": {
+                            "faces": []
+                        },
+                        "small": {
+                            "faces": []
+                        },
+                        "orig": {
+                            "faces": []
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1200,
+                            "w": 1600,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 900,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 510,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1200,
+                        "width": 1600,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 304,
+                                "w": 1600,
+                                "h": 896
+                            },
+                            {
+                                "x": 400,
+                                "y": 0,
+                                "w": 1200,
+                                "h": 1200
+                            },
+                            {
+                                "x": 547,
+                                "y": 0,
+                                "w": 1053,
+                                "h": 1200
+                            },
+                            {
+                                "x": 780,
+                                "y": 0,
+                                "w": 600,
+                                "h": 1200
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1600,
+                                "h": 1200
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904543044113780736"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [],
+            "symbols": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/media/Gm5LztSXIAA3k-s.jpg",
+            "https://pbs.twimg.com/media/Gm5LztPX0AATgx5.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904279979539431737",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904279979539431737",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904279979539431737",
+        "text": "¡Se va a armar la carnita asada! \n\nBienvenidos los @RedSox a tierras regias. Aquí tienen su casa y esperamos verlos de nuevo. Felicidades a todo el equipo de @SultanesOficial por la gran fiesta que han armado. \n\n¡Play Ball! ⚾️ https://t.co/6R4jhd2rf9",
+        "fullText": "¡Se va a armar la carnita asada! \n\nBienvenidos los @RedSox a tierras regias. Aquí tienen su casa y esperamos verlos de nuevo. Felicidades a todo el equipo de @SultanesOficial por la gran fiesta que han armado. \n\n¡Play Ball! ⚾️ https://t.co/6R4jhd2rf9",
+        "source": "Twitter for iPhone",
+        "retweetCount": 7,
+        "replyCount": 31,
+        "likeCount": 46,
+        "quoteCount": 0,
+        "viewCount": 1463,
+        "createdAt": "Mon Mar 24 21:11:41 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "conversationId": "1904279979539431737",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/6R4jhd2rf9",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904279979539431737/photo/1",
+                    "id_str": "1904279976058253312",
+                    "indices": [
+                        227,
+                        250
+                    ],
+                    "media_key": "3_1904279976058253312",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm1cjIXXcAAPCqO.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/6R4jhd2rf9",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 747,
+                                    "y": 888,
+                                    "h": 83,
+                                    "w": 83
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 664,
+                                    "y": 789,
+                                    "h": 73,
+                                    "w": 73
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 376,
+                                    "y": 447,
+                                    "h": 41,
+                                    "w": 41
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 747,
+                                    "y": 888,
+                                    "h": 83,
+                                    "w": 83
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1350,
+                            "w": 1080,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 1200,
+                            "w": 960,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 680,
+                            "w": 544,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1350,
+                        "width": 1080,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 744,
+                                "w": 1080,
+                                "h": 605
+                            },
+                            {
+                                "x": 0,
+                                "y": 270,
+                                "w": 1080,
+                                "h": 1080
+                            },
+                            {
+                                "x": 0,
+                                "y": 119,
+                                "w": 1080,
+                                "h": 1231
+                            },
+                            {
+                                "x": 405,
+                                "y": 0,
+                                "w": 675,
+                                "h": 1350
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 1350
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904279976058253312"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [],
+            "media": [
+                {
+                    "display_url": "pic.x.com/6R4jhd2rf9",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904279979539431737/photo/1",
+                    "id_str": "1904279976058253312",
+                    "indices": [
+                        227,
+                        250
+                    ],
+                    "media_key": "3_1904279976058253312",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm1cjIXXcAAPCqO.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/6R4jhd2rf9",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 747,
+                                    "y": 888,
+                                    "h": 83,
+                                    "w": 83
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 664,
+                                    "y": 789,
+                                    "h": 73,
+                                    "w": 73
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 376,
+                                    "y": 447,
+                                    "h": 41,
+                                    "w": 41
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 747,
+                                    "y": 888,
+                                    "h": 83,
+                                    "w": 83
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1350,
+                            "w": 1080,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 1200,
+                            "w": 960,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 680,
+                            "w": 544,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1350,
+                        "width": 1080,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 744,
+                                "w": 1080,
+                                "h": 605
+                            },
+                            {
+                                "x": 0,
+                                "y": 270,
+                                "w": 1080,
+                                "h": 1080
+                            },
+                            {
+                                "x": 0,
+                                "y": 119,
+                                "w": 1080,
+                                "h": 1231
+                            },
+                            {
+                                "x": 405,
+                                "y": 0,
+                                "w": 675,
+                                "h": 1350
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1080,
+                                "h": 1350
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904279976058253312"
+                        }
+                    }
+                }
+            ],
+            "symbols": [],
+            "timestamps": [],
+            "urls": [],
+            "user_mentions": [
+                {
+                    "id_str": "40918816",
+                    "name": "Red Sox",
+                    "screen_name": "RedSox",
+                    "indices": [
+                        51,
+                        58
+                    ]
+                },
+                {
+                    "id_str": "254287870",
+                    "name": "Sultanes de Monterrey",
+                    "screen_name": "SultanesOficial",
+                    "indices": [
+                        158,
+                        174
+                    ]
+                }
+            ]
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/media/Gm1cjIXXcAAPCqO.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1904237367273111711",
+        "url": "https://x.com/AdrianDeLaGarza/status/1904237367273111711",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1904237367273111711",
+        "text": "Bajo la estrategia ESCUDO nos comprometimos a una nueva proximidad de la Policía de Monterrey. \n\nCon esto, se ha fortalecido gradualmente la tranquilidad en las colonias. Por ejemplo, un oficial de Tránsito localizó a un menor de edad extraviado en las calles de la Col. Independencia. \n\nLuego de canalizarlo al área de la Unidad de Violencia Familiar y de Género, el adolescente fue entregado a su mamá. \n\nSeguimos resolviendo para que las familias regias tengan paz y tranquilidad.\n\n#AquíSeResuelve",
+        "fullText": "Bajo la estrategia ESCUDO nos comprometimos a una nueva proximidad de la Policía de Monterrey. \n\nCon esto, se ha fortalecido gradualmente la tranquilidad en las colonias. Por ejemplo, un oficial de Tránsito localizó a un menor de edad extraviado en las calles de la Col. https://t.co/jpXQgYpa6l",
+        "source": "Twitter for iPhone",
+        "retweetCount": 5,
+        "replyCount": 33,
+        "likeCount": 35,
+        "quoteCount": 0,
+        "viewCount": 1251,
+        "createdAt": "Mon Mar 24 18:22:22 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "conversationId": "1904237367273111711",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/jpXQgYpa6l",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904237367273111711/photo/1",
+                    "id_str": "1904237361849851904",
+                    "indices": [
+                        271,
+                        294
+                    ],
+                    "media_key": "3_1904237361849851904",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm01yqEWYAA4PTn.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/jpXQgYpa6l",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 529,
+                                    "y": 86,
+                                    "h": 153,
+                                    "w": 153
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 444,
+                                    "y": 72,
+                                    "h": 128,
+                                    "w": 128
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 251,
+                                    "y": 40,
+                                    "h": 72,
+                                    "w": 72
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 529,
+                                    "y": 86,
+                                    "h": 153,
+                                    "w": 153
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1071,
+                            "w": 1428,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 900,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 510,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1071,
+                        "width": 1428,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1428,
+                                "h": 800
+                            },
+                            {
+                                "x": 357,
+                                "y": 0,
+                                "w": 1071,
+                                "h": 1071
+                            },
+                            {
+                                "x": 489,
+                                "y": 0,
+                                "w": 939,
+                                "h": 1071
+                            },
+                            {
+                                "x": 892,
+                                "y": 0,
+                                "w": 536,
+                                "h": 1071
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1428,
+                                "h": 1071
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904237361849851904"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/jpXQgYpa6l",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1904237367273111711/photo/1",
+                    "id_str": "1904237361997008896",
+                    "indices": [
+                        271,
+                        294
+                    ],
+                    "media_key": "3_1904237361997008896",
+                    "media_url_https": "https://pbs.twimg.com/media/Gm01yqnb0AANKMy.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/jpXQgYpa6l",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 910,
+                                    "y": 701,
+                                    "h": 68,
+                                    "w": 68
+                                },
+                                {
+                                    "x": 603,
+                                    "y": 178,
+                                    "h": 125,
+                                    "w": 125
+                                },
+                                {
+                                    "x": 314,
+                                    "y": 176,
+                                    "h": 128,
+                                    "w": 128
+                                },
+                                {
+                                    "x": 1095,
+                                    "y": 70,
+                                    "h": 154,
+                                    "w": 154
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 682,
+                                    "y": 525,
+                                    "h": 51,
+                                    "w": 51
+                                },
+                                {
+                                    "x": 452,
+                                    "y": 133,
+                                    "h": 93,
+                                    "w": 93
+                                },
+                                {
+                                    "x": 235,
+                                    "y": 132,
+                                    "h": 96,
+                                    "w": 96
+                                },
+                                {
+                                    "x": 821,
+                                    "y": 52,
+                                    "h": 115,
+                                    "w": 115
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 386,
+                                    "y": 297,
+                                    "h": 28,
+                                    "w": 28
+                                },
+                                {
+                                    "x": 256,
+                                    "y": 75,
+                                    "h": 53,
+                                    "w": 53
+                                },
+                                {
+                                    "x": 133,
+                                    "y": 74,
+                                    "h": 54,
+                                    "w": 54
+                                },
+                                {
+                                    "x": 465,
+                                    "y": 29,
+                                    "h": 65,
+                                    "w": 65
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 910,
+                                    "y": 701,
+                                    "h": 68,
+                                    "w": 68
+                                },
+                                {
+                                    "x": 603,
+                                    "y": 178,
+                                    "h": 125,
+                                    "w": 125
+                                },
+                                {
+                                    "x": 314,
+                                    "y": 176,
+                                    "h": 128,
+                                    "w": 128
+                                },
+                                {
+                                    "x": 1095,
+                                    "y": 70,
+                                    "h": 154,
+                                    "w": 154
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1200,
+                            "w": 1600,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 900,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 510,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1200,
+                        "width": 1600,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 72,
+                                "w": 1600,
+                                "h": 896
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1200,
+                                "h": 1200
+                            },
+                            {
+                                "x": 74,
+                                "y": 0,
+                                "w": 1053,
+                                "h": 1200
+                            },
+                            {
+                                "x": 300,
+                                "y": 0,
+                                "w": 600,
+                                "h": 1200
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1600,
+                                "h": 1200
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1904237361997008896"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        485,
+                        500
+                    ],
+                    "text": "AquíSeResuelve"
+                }
+            ],
+            "symbols": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/media/Gm01yqEWYAA4PTn.jpg",
+            "https://pbs.twimg.com/media/Gm01yqnb0AANKMy.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1903948214320971904",
+        "url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1903948214320971904",
+        "text": "La espera terminó, el día de hoy inauguramos la tan esperada Temporada Acuática 2025 💦\n\n#AquíSeResuelve https://t.co/Ow0RB6Yurn",
+        "fullText": "La espera terminó, el día de hoy inauguramos la tan esperada Temporada Acuática 2025 💦\n\n#AquíSeResuelve https://t.co/Ow0RB6Yurn",
+        "source": "Twitter for iPhone",
+        "retweetCount": 14,
+        "replyCount": 46,
+        "likeCount": 89,
+        "quoteCount": 0,
+        "viewCount": 3108,
+        "createdAt": "Sun Mar 23 23:13:22 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 0,
+        "isReply": false,
+        "conversationId": "1903948214320971904",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948208029487104",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948208029487104",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzsJW0AArEK6.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 562,
+                                    "y": 225,
+                                    "h": 85,
+                                    "w": 85
+                                },
+                                {
+                                    "x": 733,
+                                    "y": 165,
+                                    "h": 102,
+                                    "w": 102
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 526,
+                                    "y": 210,
+                                    "h": 79,
+                                    "w": 79
+                                },
+                                {
+                                    "x": 687,
+                                    "y": 154,
+                                    "h": 95,
+                                    "w": 95
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 298,
+                                    "y": 119,
+                                    "h": 45,
+                                    "w": 45
+                                },
+                                {
+                                    "x": 389,
+                                    "y": 87,
+                                    "h": 54,
+                                    "w": 54
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 562,
+                                    "y": 225,
+                                    "h": 85,
+                                    "w": 85
+                                },
+                                {
+                                    "x": 733,
+                                    "y": 165,
+                                    "h": 102,
+                                    "w": 102
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 310,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 362,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 523,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948208029487104"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948208033710080",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948208033710080",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzsKXQAAPID7.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 515,
+                                    "y": 645,
+                                    "h": 62,
+                                    "w": 62
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 482,
+                                    "y": 604,
+                                    "h": 58,
+                                    "w": 58
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 273,
+                                    "y": 342,
+                                    "h": 32,
+                                    "w": 32
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 515,
+                                    "y": 645,
+                                    "h": 62,
+                                    "w": 62
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 122,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 374,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 426,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 587,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948208033710080"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948207861735424",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948207861735424",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzrhXIAAFa_l.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 326,
+                                    "y": 251,
+                                    "h": 147,
+                                    "w": 147
+                                },
+                                {
+                                    "x": 1072,
+                                    "y": 261,
+                                    "h": 150,
+                                    "w": 150
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 305,
+                                    "y": 235,
+                                    "h": 137,
+                                    "w": 137
+                                },
+                                {
+                                    "x": 1005,
+                                    "y": 244,
+                                    "h": 140,
+                                    "w": 140
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 173,
+                                    "y": 133,
+                                    "h": 78,
+                                    "w": 78
+                                },
+                                {
+                                    "x": 569,
+                                    "y": 138,
+                                    "h": 79,
+                                    "w": 79
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 326,
+                                    "y": 251,
+                                    "h": 147,
+                                    "w": 147
+                                },
+                                {
+                                    "x": 1072,
+                                    "y": 261,
+                                    "h": 150,
+                                    "w": 150
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 42,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 203,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948207861735424"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948207870160896",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948207870160896",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzrjXsAAGKd1.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 577,
+                                    "y": 205,
+                                    "h": 135,
+                                    "w": 135
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 540,
+                                    "y": 192,
+                                    "h": 126,
+                                    "w": 126
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 306,
+                                    "y": 108,
+                                    "h": 71,
+                                    "w": 71
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 577,
+                                    "y": 205,
+                                    "h": 135,
+                                    "w": 135
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 182,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 234,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 395,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948207870160896"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        88,
+                        103
+                    ],
+                    "text": "AquíSeResuelve"
+                }
+            ],
+            "media": [
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948208029487104",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948208029487104",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzsJW0AArEK6.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 562,
+                                    "y": 225,
+                                    "h": 85,
+                                    "w": 85
+                                },
+                                {
+                                    "x": 733,
+                                    "y": 165,
+                                    "h": 102,
+                                    "w": 102
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 526,
+                                    "y": 210,
+                                    "h": 79,
+                                    "w": 79
+                                },
+                                {
+                                    "x": 687,
+                                    "y": 154,
+                                    "h": 95,
+                                    "w": 95
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 298,
+                                    "y": 119,
+                                    "h": 45,
+                                    "w": 45
+                                },
+                                {
+                                    "x": 389,
+                                    "y": 87,
+                                    "h": 54,
+                                    "w": 54
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 562,
+                                    "y": 225,
+                                    "h": 85,
+                                    "w": 85
+                                },
+                                {
+                                    "x": 733,
+                                    "y": 165,
+                                    "h": 102,
+                                    "w": 102
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 310,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 362,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 523,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948208029487104"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948208033710080",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948208033710080",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzsKXQAAPID7.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 515,
+                                    "y": 645,
+                                    "h": 62,
+                                    "w": 62
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 482,
+                                    "y": 604,
+                                    "h": 58,
+                                    "w": 58
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 273,
+                                    "y": 342,
+                                    "h": 32,
+                                    "w": 32
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 515,
+                                    "y": 645,
+                                    "h": 62,
+                                    "w": 62
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 122,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 374,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 426,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 587,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948208033710080"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948207861735424",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948207861735424",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzrhXIAAFa_l.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 326,
+                                    "y": 251,
+                                    "h": 147,
+                                    "w": 147
+                                },
+                                {
+                                    "x": 1072,
+                                    "y": 261,
+                                    "h": 150,
+                                    "w": 150
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 305,
+                                    "y": 235,
+                                    "h": 137,
+                                    "w": 137
+                                },
+                                {
+                                    "x": 1005,
+                                    "y": 244,
+                                    "h": 140,
+                                    "w": 140
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 173,
+                                    "y": 133,
+                                    "h": 78,
+                                    "w": 78
+                                },
+                                {
+                                    "x": 569,
+                                    "y": 138,
+                                    "h": 79,
+                                    "w": 79
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 326,
+                                    "y": 251,
+                                    "h": 147,
+                                    "w": 147
+                                },
+                                {
+                                    "x": 1072,
+                                    "y": 261,
+                                    "h": 150,
+                                    "w": 150
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 42,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 203,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948207861735424"
+                        }
+                    }
+                },
+                {
+                    "display_url": "pic.x.com/Ow0RB6Yurn",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903948214320971904/photo/1",
+                    "id_str": "1903948207870160896",
+                    "indices": [
+                        104,
+                        127
+                    ],
+                    "media_key": "3_1903948207870160896",
+                    "media_url_https": "https://pbs.twimg.com/media/GmwuzrjXsAAGKd1.jpg",
+                    "type": "photo",
+                    "url": "https://t.co/Ow0RB6Yurn",
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "features": {
+                        "large": {
+                            "faces": [
+                                {
+                                    "x": 577,
+                                    "y": 205,
+                                    "h": 135,
+                                    "w": 135
+                                }
+                            ]
+                        },
+                        "medium": {
+                            "faces": [
+                                {
+                                    "x": 540,
+                                    "y": 192,
+                                    "h": 126,
+                                    "w": 126
+                                }
+                            ]
+                        },
+                        "small": {
+                            "faces": [
+                                {
+                                    "x": 306,
+                                    "y": 108,
+                                    "h": 71,
+                                    "w": 71
+                                }
+                            ]
+                        },
+                        "orig": {
+                            "faces": [
+                                {
+                                    "x": 577,
+                                    "y": 205,
+                                    "h": 135,
+                                    "w": 135
+                                }
+                            ]
+                        }
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 853,
+                            "w": 1280,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 800,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 453,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 853,
+                        "width": 1280,
+                        "focus_rects": [
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 717
+                            },
+                            {
+                                "x": 182,
+                                "y": 0,
+                                "w": 853,
+                                "h": 853
+                            },
+                            {
+                                "x": 234,
+                                "y": 0,
+                                "w": 748,
+                                "h": 853
+                            },
+                            {
+                                "x": 395,
+                                "y": 0,
+                                "w": 427,
+                                "h": 853
+                            },
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "w": 1280,
+                                "h": 853
+                            }
+                        ]
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "3_1903948207870160896"
+                        }
+                    }
+                }
+            ],
+            "symbols": [],
+            "timestamps": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/media/GmwuzsJW0AArEK6.jpg",
+            "https://pbs.twimg.com/media/GmwuzsKXQAAPID7.jpg",
+            "https://pbs.twimg.com/media/GmwuzrhXIAAFa_l.jpg",
+            "https://pbs.twimg.com/media/GmwuzrjXsAAGKd1.jpg"
+        ],
+        "isConversationControlled": false
+    },
+    {
+        "type": "tweet",
+        "id": "1903617133097197760",
+        "url": "https://x.com/AdrianDeLaGarza/status/1903617133097197760",
+        "twitterUrl": "https://twitter.com/AdrianDeLaGarza/status/1903617133097197760",
+        "text": "Es momento de sacar el short y las chanclas para disfrutar de la Temporada Acuática en Monterrey. 💦🛟\n\nVen con tu familia y amigos a los parques Aztlán, España, Tucán y Monterrey 400. \n\n¡Te esperamos!\n\n🎥: Video Gob MTY\n\n#AquíSeResuelve https://t.co/Ezv7eE6dnS",
+        "fullText": "Es momento de sacar el short y las chanclas para disfrutar de la Temporada Acuática en Monterrey. 💦🛟\n\nVen con tu familia y amigos a los parques Aztlán, España, Tucán y Monterrey 400. \n\n¡Te esperamos!\n\n🎥: Video Gob MTY\n\n#AquíSeResuelve https://t.co/Ezv7eE6dnS",
+        "source": "Twitter for iPhone",
+        "retweetCount": 10,
+        "replyCount": 52,
+        "likeCount": 50,
+        "quoteCount": 1,
+        "viewCount": 2206,
+        "createdAt": "Sun Mar 23 01:17:46 +0000 2025",
+        "lang": "es",
+        "bookmarkCount": 1,
+        "isReply": false,
+        "conversationId": "1903617133097197760",
+        "possiblySensitive": false,
+        "isPinned": false,
+        "author": {
+            "type": "user",
+            "userName": "AdrianDeLaGarza",
+            "url": "https://x.com/AdrianDeLaGarza",
+            "twitterUrl": "https://twitter.com/AdrianDeLaGarza",
+            "id": "2357040230",
+            "name": "Adrián de la Garza",
+            "isVerified": false,
+            "isBlueVerified": true,
+            "profilePicture": "https://pbs.twimg.com/profile_images/1886823379035963392/pzJUw5aV_normal.jpg",
+            "coverPicture": "https://pbs.twimg.com/profile_banners/2357040230/1740779857",
+            "description": "Alcalde de Monterrey 2024 - 2027",
+            "location": "Monterrey, Nuevo León, México",
+            "followers": 72178,
+            "following": 309,
+            "status": "",
+            "canDm": false,
+            "canMediaTag": true,
+            "createdAt": "Sat Feb 22 22:40:14 +0000 2014",
+            "entities": {
+                "description": {
+                    "urls": []
+                }
+            },
+            "fastFollowersCount": 0,
+            "favouritesCount": 6630,
+            "hasCustomTimelines": false,
+            "isTranslator": false,
+            "mediaCount": 11495,
+            "statusesCount": 36076,
+            "withheldInCountries": [],
+            "affiliatesHighlightedLabel": {},
+            "possiblySensitive": false,
+            "pinnedTweetIds": []
+        },
+        "extendedEntities": {
+            "media": [
+                {
+                    "display_url": "pic.x.com/Ezv7eE6dnS",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903617133097197760/video/1",
+                    "id_str": "1903617018823385088",
+                    "indices": [
+                        235,
+                        258
+                    ],
+                    "media_key": "13_1903617018823385088",
+                    "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/1903617018823385088/img/8FaJCJkzNRIZa1Zg.jpg",
+                    "type": "video",
+                    "url": "https://t.co/Ezv7eE6dnS",
+                    "additional_media_info": {
+                        "monetizable": false
+                    },
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1080,
+                            "w": 1920,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 675,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 383,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1080,
+                        "width": 1920,
+                        "focus_rects": []
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "video_info": {
+                        "aspect_ratio": [
+                            16,
+                            9
+                        ],
+                        "duration_millis": 20020,
+                        "variants": [
+                            {
+                                "content_type": "application/x-mpegURL",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/pl/elWX8QgI3_z2VL_J.m3u8?tag=16&v=bf3"
+                            },
+                            {
+                                "bitrate": 288000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/480x270/nhuPuboxMDSyNXVF.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 832000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/640x360/EF0BzPe7UH38mjpE.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 2176000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/1280x720/XY38_gXA5afNrPLv.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 10368000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/1920x1080/zg-IbwGbn9Fitbln.mp4?tag=16"
+                            }
+                        ]
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "13_1903617018823385088"
+                        }
+                    }
+                }
+            ]
+        },
+        "card": {},
+        "place": {},
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        219,
+                        234
+                    ],
+                    "text": "AquíSeResuelve"
+                }
+            ],
+            "media": [
+                {
+                    "display_url": "pic.x.com/Ezv7eE6dnS",
+                    "expanded_url": "https://x.com/AdrianDeLaGarza/status/1903617133097197760/video/1",
+                    "id_str": "1903617018823385088",
+                    "indices": [
+                        235,
+                        258
+                    ],
+                    "media_key": "13_1903617018823385088",
+                    "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/1903617018823385088/img/8FaJCJkzNRIZa1Zg.jpg",
+                    "type": "video",
+                    "url": "https://t.co/Ezv7eE6dnS",
+                    "additional_media_info": {
+                        "monetizable": false
+                    },
+                    "ext_media_availability": {
+                        "status": "Available"
+                    },
+                    "sizes": {
+                        "large": {
+                            "h": 1080,
+                            "w": 1920,
+                            "resize": "fit"
+                        },
+                        "medium": {
+                            "h": 675,
+                            "w": 1200,
+                            "resize": "fit"
+                        },
+                        "small": {
+                            "h": 383,
+                            "w": 680,
+                            "resize": "fit"
+                        },
+                        "thumb": {
+                            "h": 150,
+                            "w": 150,
+                            "resize": "crop"
+                        }
+                    },
+                    "original_info": {
+                        "height": 1080,
+                        "width": 1920,
+                        "focus_rects": []
+                    },
+                    "allow_download_status": {
+                        "allow_download": true
+                    },
+                    "video_info": {
+                        "aspect_ratio": [
+                            16,
+                            9
+                        ],
+                        "duration_millis": 20020,
+                        "variants": [
+                            {
+                                "content_type": "application/x-mpegURL",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/pl/elWX8QgI3_z2VL_J.m3u8?tag=16&v=bf3"
+                            },
+                            {
+                                "bitrate": 288000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/480x270/nhuPuboxMDSyNXVF.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 832000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/640x360/EF0BzPe7UH38mjpE.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 2176000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/1280x720/XY38_gXA5afNrPLv.mp4?tag=16"
+                            },
+                            {
+                                "bitrate": 10368000,
+                                "content_type": "video/mp4",
+                                "url": "https://video.twimg.com/amplify_video/1903617018823385088/vid/avc1/1920x1080/zg-IbwGbn9Fitbln.mp4?tag=16"
+                            }
+                        ]
+                    },
+                    "media_results": {
+                        "result": {
+                            "media_key": "13_1903617018823385088"
+                        }
+                    }
+                }
+            ],
+            "symbols": [],
+            "timestamps": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "isRetweet": false,
+        "isQuote": false,
+        "media": [
+            "https://pbs.twimg.com/amplify_video_thumb/1903617018823385088/img/8FaJCJkzNRIZa1Zg.jpg"
+        ],
+        "isConversationControlled": false
+    }
+]
