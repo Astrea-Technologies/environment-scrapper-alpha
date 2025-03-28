@@ -3,62 +3,52 @@ description: Next Implementations
 globs: 
 alwaysApply: false
 ---
-# Backend Implementation Plan: Political Social Media Analysis Platform
+# Backend Implementation Plan: Political Social Media Analysis Platform (MVP)
 
-This implementation plan addresses the gap between the specified technical stack in the documentation and the current implementation. The plan follows a phased approach focusing on implementing the hybrid database architecture and data processing capabilities.
+This implementation plan addresses the gap between the specified technical stack in the documentation and the current implementation, with a focus on building a Minimum Viable Product (MVP). The plan follows a phased approach prioritizing essential features while deferring more complex components until after the MVP.
 
 ## Phase 1: Environment and Dependency Setup
 
 ### Task 1.1: Update requirements.txt
-Add the following dependencies to the project:
+Add the following MVP-critical dependencies to the project:
 
 - **Database Clients**
-  - `motor>=3.1.1` - MongoDB async driver
-  - `pymongo>=4.3.3` - MongoDB sync driver
-  - `redis>=4.5.4` - Redis client
-  - `pinecone-client>=2.2.1` - Vector database client
+  - `pymongo>=4.3.3` - MongoDB client for document storage
+  - `motor>=3.1.1` - Async MongoDB client
 
-- **Task Processing**
-  - `celery>=5.3.0` - Task queue
-  - `kafka-python>=2.0.2` - Kafka client
-  - `pika>=1.3.1` - RabbitMQ client
+- **External Integrations**
+  - `apify-client>=1.1.0` - Client for APIFY web scraping platform
+  - `anthropic>=0.5.0` - Client for Claude LLM API
 
-- **ML/NLP**
-  - `spacy>=3.6.0` - NLP processing
-  - `transformers>=4.28.0` - Hugging Face transformers
-  - `sentence-transformers>=2.2.2` - Text embeddings
-  - `scikit-learn>=1.2.0` - ML utilities
-  - `torch>=2.0.0` - Deep learning
+- **Web/HTTP**
+  - `httpx>=0.24.0` - Async HTTP client
+
+- **Data Processing**
+  - `pydantic>=2.0.0` - Data validation (ensure compatibility with FastAPI)
 
 ### Task 1.2: Update Docker Configuration
 Add the following services to docker-compose.yml:
 - MongoDB (version 6.0+)
-- Redis (version 7.0+)
-- RabbitMQ (version 3.12+)
-- Apache Kafka (version 3.4+)
-- Celery worker and beat services
 
 ### Task 1.3: Update Configuration Module
 Extend the application configuration to include settings for:
 - MongoDB connection parameters
-- Redis connection parameters
-- Pinecone API credentials
-- Celery broker and backend URLs
-- Kafka bootstrap servers
-- NLP model settings
+- APIFY API credentials and actor IDs
+- Claude/Anthropic API credentials
+- Task processing settings
 
 ## Phase 2: Database Infrastructure Implementation
 
-### Task 2.1: Create Database Connection Utilities
-Create connection modules for:
-- MongoDB async client
-- Redis async client
-- Pinecone vector database client
+### Task 2.1: Create MongoDB Connection Utilities
+Create connection module for MongoDB:
+- Implement async client setup
+- Create connection and shutdown functions
+- Implement database and collection access patterns
 
 ### Task 2.2: Implement Database Startup and Shutdown Events
 Update the FastAPI application to:
-- Connect to all databases on startup
-- Close all connections on shutdown
+- Connect to MongoDB on startup
+- Close MongoDB connection on shutdown
 
 ### Task 2.3: Create SQL Database Models
 Implement SQLModel classes for:
@@ -70,15 +60,7 @@ Implement SQLModel classes for:
 Create Pydantic models for MongoDB collections:
 - SocialMediaPost
 - SocialMediaComment
-- MetricsAggregation
-- TopicAnalysis
-
-### Task 2.5: Redis Data Structure Definitions
-Define Redis key patterns and data structures for:
-- Entity metrics caching
-- Trending topics tracking
-- Activity streams
-- Real-time alerts
+- TopicAnalysis (simplified version for MVP)
 
 ## Phase 3: Repository and Service Layer Implementation
 
@@ -92,176 +74,134 @@ Create repositories for SQL models:
 Create repositories for MongoDB collections:
 - PostRepository
 - CommentRepository
-- MetricsRepository
-- TopicRepository
+- TopicRepository (simplified version for MVP)
 
-### Task 3.3: Implement Redis Service
-Create service for Redis operations:
-- CacheService - for general caching
-- MetricsService - for real-time metrics
-- ActivityService - for activity streams
+### Task 3.4: Implement Search Service
+Create basic search service for content:
+- Text-based search across posts and comments
+- Filter by political entity, platform, date range
+- Sort by relevance or engagement metrics
 
-### Task 3.4: Implement Vector Database Service
-Create service for vector database operations:
-- VectorEmbeddingService - for creating and managing embeddings
-- SimilaritySearchService - for semantic search operations
+## Phase 4: Task Processing Implementation (Simplified for MVP)
 
-## Phase 4: Task Processing Implementation
+### Task 4.1: Implement Simple Task Processing System
+Create a lightweight task processor instead of Celery:
+- Design a task manager using FastAPI background tasks
+- Implement task status tracking and error handling
+- Create task type definitions
+- Handle task dependencies and workflows
 
-### Task 4.1: Set up Celery Infrastructure
-Create core Celery configuration:
-- Worker setup with queues
-- Task routing configuration
-- Beat scheduling for periodic tasks
+### Task 4.2: Implement Data Collection Tasks Using APIFY
+Create the data collection system:
+- Implement APIFY client wrapper
+- Create base collector and platform-specific collectors
+- Implement data transformation and storage
+- Create collector factory for extensibility
 
-### Task 4.2: Implement Data Collection Tasks
-Create tasks for scraping social media platforms:
-- TwitterScraper
-- FacebookScraper
-- InstagramScraper
-- TikTokScraper
+### Task 4.3: Implement Content Analysis Tasks Using LLMs
+Create the content analysis system:
+- Implement Claude/Anthropic API client wrapper
+- Design prompt templates for different analysis types
+- Create analyzers for sentiment, topics, and entities
+- Implement result parsing and database updates
 
-### Task 4.3: Implement Analysis Tasks
-Create tasks for content analysis:
-- SentimentAnalysisTask
-- TopicModelingTask
-- EntityRecognitionTask
-- RelationshipAnalysisTask
+## Phase 5: API Endpoint Implementation
 
-### Task 4.4: Implement Vector Embedding Tasks
-Create tasks for generating embeddings:
-- TextEmbeddingTask
-- RelationshipEmbeddingTask
-
-### Task 4.5: Setup Kafka Stream Processors
-Implement Kafka producers and consumers:
-- RawContentProducer
-- EntityMentionConsumer
-- SentimentChangeConsumer
-- EngagementMetricsConsumer
-
-## Phase 5: NLP and ML Pipeline Implementation
-
-### Task 5.1: Set up NLP Models
-Initialize and configure NLP models:
-- spaCy pipeline for entity recognition
-- Transformer models for sentiment analysis
-- Sentence transformers for embeddings
-
-### Task 5.2: Implement Sentiment Analysis
-Create sentiment analysis pipeline:
-- Text preprocessing
-- Sentiment scoring
-- Emotional tone classification
-
-### Task 5.3: Implement Topic Modeling
-Create topic modeling pipeline:
-- Text preprocessing
-- Topic extraction
-- Topic categorization
-
-### Task 5.4: Implement Entity Recognition
-Create entity recognition pipeline:
-- Named entity recognition
-- Entity linking to database
-- Relationship extraction
-
-### Task 5.5: Implement Vector Embedding Generation
-Create embedding pipeline:
-- Text preprocessing
-- Embedding generation
-- Vector storage and indexing
-
-## Phase 6: API Endpoint Implementation
-
-### Task 6.1: Implement Entity Management Endpoints
+### Task 5.1: Implement Entity Management Endpoints
 Create endpoints for entity management:
 - CRUD operations for political entities
 - Social media account management
 - Relationship management
 
-### Task 6.2: Implement Content Search Endpoints
+### Task 5.2: Implement Content Collection Endpoints
+Create endpoints for data collection:
+- Trigger scraping for accounts/platforms
+- Retrieve collected content with filtering
+- Manage scraping configurations and schedules
+
+### Task 5.3: Implement Content Analysis Endpoints
+Create endpoints for content analysis:
+- Trigger analysis for specific content
+- Retrieve analysis results with filtering
+- Configure analysis parameters
+
+### Task 5.4: Implement Content Search Endpoints
 Create endpoints for content search:
 - Text search across platforms
 - Advanced filtering options
-- Semantic similarity search
+- Search by sentiment, topics, or entities
 
-### Task 6.3: Implement Analytics Endpoints
-Create endpoints for analytics:
-- Sentiment analysis results
-- Topic distribution
-- Engagement metrics
-- Relationship graphs
+## Phase 6: Testing and Integration
 
-### Task 6.4: Implement Real-time Monitoring Endpoints
-Create endpoints for real-time monitoring:
-- Activity streams
-- Alert configuration
-- Trend detection
-
-## Phase 7: Testing and Integration
-
-### Task 7.1: Create Unit Tests
+### Task 6.1: Create Unit Tests
 Develop unit tests for:
 - Repository layer
 - Service layer
 - Task processing
-- NLP components
+- API endpoints
 
-### Task 7.2: Create Integration Tests
+### Task 6.2: Create Integration Tests
 Develop integration tests for:
 - Cross-database operations
-- Task queue processing
-- Stream processing
+- Data collection flows
+- Analysis flows
 
-### Task 7.3: Create Performance Tests
-Develop performance tests for:
-- Database query performance
-- Task processing throughput
-- API endpoint response times
-
-### Task 7.4: Create End-to-End Tests
+### Task 6.3: Create End-to-End Tests
 Develop end-to-end tests for:
-- Complete data processing pipeline
+- Complete data collection and analysis pipeline
 - API endpoint workflows
 
-## Phase 8: Documentation and Deployment
+## Phase 7: Documentation and Deployment
 
-### Task 8.1: Update API Documentation
+### Task 7.1: Update API Documentation
 Update OpenAPI documentation for:
 - New endpoints
 - Request/response models
 - Authentication requirements
 
-### Task 8.2: Create Technical Documentation
+### Task 7.2: Create Technical Documentation
 Create documentation for:
 - Architecture overview
 - Database schema
+- External integrations (APIFY, Claude)
 - Task processing workflow
-- NLP pipeline
 
-### Task 8.3: Create Deployment Scripts
+### Task 7.3: Create Deployment Scripts
 Create scripts for:
 - Database initialization
 - Initial data seeding
 - Environment provisioning
-
-### Task 8.4: Create Monitoring Setup
-Configure monitoring for:
-- Application performance
-- Database health
-- Task queue status
-- Stream processing lag
 
 ## Implementation Sequence
 
 1. Start with dependency and environment setup (Phase 1)
 2. Implement core database infrastructure (Phase 2)
 3. Create repository and service layers (Phase 3)
-4. Set up task processing framework (Phase 4)
-5. Build NLP and ML pipelines (Phase 5)
-6. Develop API endpoints (Phase 6)
-7. Implement testing (Phase 7)
-8. Finalize documentation and deployment (Phase 8)
+4. Set up simplified task processing system (Phase 4.1)
+5. Implement data collection with APIFY (Phase 4.2)
+6. Implement content analysis with LLMs (Phase 4.3)
+7. Develop API endpoints (Phase 5)
+8. Implement testing (Phase 6)
+9. Finalize documentation and deployment (Phase 7)
 
-By following this implementation plan, the application will align with the specified technical stack in the documentation, including the hybrid database architecture and advanced data processing capabilities required for the Political Social Media Analysis Platform.
+## Components Deferred for Post-MVP Development
+
+1. **Advanced Database Architecture**
+   - Redis for caching and real-time operations
+   - Pinecone or other vector database for semantic search
+
+2. **Distributed Task Processing**
+   - Celery for task queues
+   - RabbitMQ as message broker
+   - Scheduled task processing with Celery Beat
+
+3. **Stream Processing**
+   - Kafka for real-time event streams
+   - Stream processors for continuous analysis
+
+4. **Advanced ML/NLP Pipeline**
+   - Custom trained models for political content
+   - Self-hosted language models
+   - Complex vector embeddings and similarity search
+
+By following this implementation plan, the application will deliver a functional MVP that provides the core features of social media content collection and analysis, while laying the groundwork for more advanced features in future iterations.

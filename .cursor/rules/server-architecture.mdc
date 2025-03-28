@@ -3,9 +3,43 @@ description: Server architectur of the project.
 globs: 
 alwaysApply: false
 ---
+# Server Architecture (MVP and Future Implementation)
+
 ## 1. System Overview
 
-The Political Social Media Analysis Platform follows a modern, containerized microservices architecture designed for scalability, resilience, and maintainable development. This document outlines the overall system architecture, deployment strategy, and service interaction patterns.
+The Political Social Media Analysis Platform follows a modern, containerized architecture designed for scalability, resilience, and maintainable development. This document outlines both the MVP system architecture and the target future implementation.
+
+### 1.1 MVP Architecture
+
+```
+┌───────────────────────┐     ┌───────────────────────┐
+│                       │     │                       │
+│  Frontend (React/TS)  │◄────┤  Backend (FastAPI)    │
+│                       │     │                       │
+└───────────────────────┘     └───────────┬───────────┘
+                                          │
+                                          ▼
+┌───────────────────────┐     ┌───────────────────────┐
+│  Database Layer       │     │  Task Processing      │
+│                       │     │  (MVP Version)        │
+│  ┌─────────────────┐  │     │                       │
+│  │  PostgreSQL     │  │     │  ┌─────────────────┐  │
+│  │  (Relational)   │  │     │  │  FastAPI        │  │
+│  └─────────────────┘  │     │  │  BackgroundTasks│  │
+│                       │     │  └─────────────────┘  │
+│  ┌─────────────────┐  │     │                       │
+│  │  MongoDB        │  │     │  ┌─────────────────┐  │
+│  │  (Document)     │  │     │  │  In-Memory      │  │
+│  └─────────────────┘  │     │  │  TaskManager    │  │
+│  ┌─────────────────┐  │     │  └─────────────────┘  │
+│  │  Pinecone       │  │     │                       │
+│  │  (Vector)       │  │     └───────────────────────┘
+│  └─────────────────┘  │     
+│                       │     
+└───────────────────────┘     
+```
+
+### 1.2 Future Architecture (Post-MVP)
 
 ```
 ┌───────────────────────┐     ┌───────────────────────┐
@@ -43,18 +77,18 @@ The Political Social Media Analysis Platform follows a modern, containerized mic
 
 ## 2. Containerization Strategy
 
-### 2.1 Docker Compose Architecture
+### 2.1 Docker Compose Architecture (MVP)
 
-The system uses Docker Compose for container orchestration with a dual-file approach:
+The MVP system uses Docker Compose with a simplified service structure:
 
 | File | Purpose | Usage |
-|------|---------|-------|
+|---|---|----|
 | `docker-compose.yml` | Production-ready base configuration | Primary service definitions |
 | `docker-compose.override.yml` | Development environment customizations | Automatically merged during development |
 
-### 2.2 Service Organization
+### 2.2 Service Organization (MVP)
 
-Services are organized into logical groups:
+Services included in the MVP:
 
 1. **Frontend Services**
    - React frontend application
@@ -66,40 +100,34 @@ Services are organized into logical groups:
 3. **Database Services**
    - PostgreSQL (relational data)
    - MongoDB (document data)
-   - Redis (caching and real-time operations)
    - Pinecone (vector embeddings)
 
-4. **Message Processing**
-   - RabbitMQ (message broker)
-   - Celery Worker (task execution)
-   - Celery Beat (task scheduling)
-
-5. **Stream Processing**
-   - Kafka (event streaming)
-   - Zookeeper (Kafka coordination)
-
-6. **Development Tools**
+4. **Development Tools**
    - Adminer (PostgreSQL management)
    - MongoDB Express (MongoDB management)
    - Traefik Proxy (API gateway)
    - Mailcatcher (email testing)
+
+### 2.3 Future Services (Post-MVP)
+
+These services will be added after the MVP phase:
+
+1. **Message Processing**
+   - RabbitMQ (message broker)
+   - Celery Worker (task execution)
+   - Celery Beat (task scheduling)
    - Celery Flower (task monitoring)
 
-### 2.3 Development vs. Production
+2. **Caching**
+   - Redis (caching and real-time operations)
 
-| Aspect | Development | Production |
-|--------|------------|------------|
-| Restart Policy | `restart: "no"` | `restart: always` |
-| Port Exposure | Ports exposed to host | Only necessary ports exposed |
-| Volume Mounts | Source code mounted | Built artifacts only |
-| Network Configuration | Local networks | External Traefik network |
-| Health Checks | Simple checks | Comprehensive checks with retries |
-| Environment | Development settings | Production settings |
-| Logging | Verbose logging | Production logging levels |
+3. **Stream Processing**
+   - Kafka (event streaming)
+   - Zookeeper (Kafka coordination)
 
 ## 3. Network Architecture
 
-### 3.1 Network Configuration
+### 3.1 Network Configuration (MVP)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -111,6 +139,21 @@ Services are organized into logical groups:
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 
+┌─────────────────────────────────────────────────────────────┐
+│                        default                              │
+│                                                             │
+│  ┌─────────┐   ┌─────────┐                                  │
+│  │PostgreSQL│   │ MongoDB │                                  │
+│  └─────────┘   └─────────┘                                  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 3.2 Future Network Configuration (Post-MVP)
+
+The full network configuration will add these additional services:
+
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                        default                              │
 │                                                             │
@@ -126,32 +169,20 @@ Services are organized into logical groups:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 3.2 Traefik Integration
-
-- **Production**: Uses external Traefik network with proper TLS termination
-- **Development**: Includes local Traefik instance with insecure dashboard
-- Routing follows pattern: `{service}.{domain}` → appropriate container
-
-### 3.3 HTTPS Configuration
-
-- Automatic TLS certificate issuance via Let's Encrypt
-- HTTP to HTTPS redirection enforced
-- Custom middleware for security headers
-
 ## 4. Data Architecture
 
-### 4.1 Hybrid Database Strategy
+### 4.1 Hybrid Database Strategy (MVP)
 
-The system employs a polyglot persistence approach using specialized databases:
+The MVP employs a polyglot persistence approach with a subset of the full database strategy:
 
-| Database | Purpose | Data Types |
-|----------|---------|------------|
-| PostgreSQL | Relational data, user accounts, structured entities | Users, political entities, relationships, configuration |
-| MongoDB | Document storage, social media content | Posts, comments, media items, engagement metrics |
-| Redis | Caching, real-time operations, task management | Session data, counters, leaderboards, task queues |
-| Pinecone | Vector embeddings for semantic search | Text embeddings, similarity models |
+| Database | Purpose | Data Types | MVP Status |
+|----|---|---|---|
+| PostgreSQL | Relational data, user accounts, structured entities | Users, political entities, relationships, configuration | ✅ Included |
+| MongoDB | Document storage, social media content | Posts, comments, media items, engagement metrics | ✅ Included |
+| Pinecone | Vector embeddings for semantic search | Text embeddings, similarity models | ✅ Included |
+| Redis | Caching, real-time operations, task management | Session data, counters, leaderboards, task queues | ❌ **Not in MVP** |
 
-### 4.2 Data Flow Patterns
+### 4.2 Data Flow Patterns (MVP)
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -161,30 +192,74 @@ The system employs a polyglot persistence approach using specialized databases:
 └─────────────┘     └──────┬──────┘     └─────────────┘
                            │
                            ▼
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│             │     │             │     │             │
-│ Celery Task │◄────┤ Task Queue  │◄────┤ RabbitMQ    │
-│             │     │             │     │             │
-└──────┬──────┘     └─────────────┘     └─────────────┘
+┌─────────────┐     ┌─────────────┐     
+│             │     │             │     
+│ Background  │◄────┤ In-Memory   │     
+│ Task        │     │ TaskManager │     
+│             │     │             │     
+└──────┬──────┘     └─────────────┘     
        │
        ▼
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│             │     │             │     │             │
-│ MongoDB     │     │ Redis Cache │     │ Pinecone    │
-│ Storage     │     │             │     │ Vectors     │
-│             │     │             │     │             │
-└─────────────┘     └─────────────┘     └─────────────┘
+┌─────────────┐                  ┌─────────────┐
+│             │                  │             │
+│ MongoDB     │                  │ Pinecone    │
+│ Storage     │                  │ Vectors     │
+│             │                  │             │
+└─────────────┘                  └─────────────┘
 ```
-
-### 4.3 Data Persistence
-
-- Volume mapping for all databases to ensure data persistence
-- Standardized volume naming: `{service-name}_data`
-- Consistent backup solutions for each database type
 
 ## 5. Task Processing Architecture
 
-### 5.1 Celery Integration
+### 5.1 MVP Implementation
+
+The MVP uses a simplified task processing system:
+
+```
+┌─────────────┐     ┌─────────────┐     
+│             │     │             │     
+│ FastAPI     │────►│ BackgroundTasks  │
+│ Backend     │     │ (Built-in)  │     
+│             │     │             │     
+└─────────────┘     └──────┬──────┘     
+                           │
+                           ▼
+┌─────────────┐     ┌─────────────┐
+│             │     │             │
+│ TaskManager │────►│ Task        │
+│ (In-Memory) │     │ Execution   │
+│             │     │             │
+└─────────────┘     └─────────────┘
+```
+
+#### 5.1.1 MVP Task Manager
+
+```python
+class TaskManager:
+    """Simple in-memory task management system for MVP."""
+    
+    def __init__(self):
+        self.tasks = {}
+        self.status = {}
+    
+    async def create_task(self, task_type: str, params: dict):
+        """Create and track a new task."""
+        task_id = str(uuid4())
+        self.tasks[task_id] = {
+            "type": task_type,
+            "params": params,
+            "status": "pending",
+            "created_at": datetime.utcnow()
+        }
+        return task_id
+    
+    async def get_task_status(self, task_id: str):
+        """Get the current status of a task."""
+        return self.tasks.get(task_id, {}).get("status", "not_found")
+```
+
+### 5.2 Future Task Processing (Post-MVP)
+
+The full Celery-based implementation will be added post-MVP:
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -210,141 +285,94 @@ The system employs a polyglot persistence approach using specialized databases:
 └─────────────┘     └─────────────┘
 ```
 
-### 5.2 Task Types
-
-- **Data Collection Tasks**: Social media scraping, data acquisition
-- **Analysis Tasks**: Content analysis, sentiment scoring, entity extraction
-- **Reporting Tasks**: Report generation, alert/notification creation
-- **Maintenance Tasks**: Database cleanup, analytics generation
-
-### 5.3 Kafka Stream Processing
-
-- Event-driven architecture for real-time data streams
-- Topic-based segregation of event types
-- Consumer groups for scalable processing
-
 ## 6. Security Architecture
 
-### 6.1 Authentication and Authorization
+### 6.1 Authentication and Authorization (MVP)
 
 - JWT-based authentication with appropriate expiration
 - Role-based access control (RBAC)
 - OAuth2 password flow with secure password hashing
 
-### 6.2 Network Security
+### 6.2 Network Security (MVP)
 
 - Traefik as edge gateway with TLS termination
 - Internal network isolation
 - Minimal port exposure
 
-### 6.3 Secret Management
-
-- Environment variable-based secret injection
-- No hardcoded credentials
-- Support for container secrets in production
-
 ## 7. Deployment Strategy
 
-### 7.1 Development Workflow
+### 7.1 MVP Deployment
 
-```
-Local Development → CI/CD Pipeline → Staging → Production
-```
+- **Development**: Docker Compose with override file
+- **Production**: Simple Docker Compose deployment
+- Scripts for container orchestration and monitoring
 
-- **Local**: Docker Compose with override file
-- **CI/CD**: Automated testing and container building
-- **Staging**: Production-like environment for validation
-- **Production**: Optimized for performance and security
+### 7.2 Future Deployment Options (Post-MVP)
 
-### 7.2 Scaling Strategy
-
-- Horizontal scaling of stateless services
-- Vertical scaling of database services
-- Load balancing through Traefik
+- Kubernetes migration
+- CI/CD pipeline integration
+- Horizontal scaling with load balancing
 
 ## 8. Monitoring and Observability
 
-### 8.1 Logging
+### 8.1 MVP Monitoring
 
 - Structured logging format
-- Log aggregation across services
+- Health check endpoints
 - Sentry integration for error tracking
 
-### 8.2 Metrics
+### 8.2 Future Monitoring (Post-MVP)
 
-- Health check endpoints for all services
-- Prometheus-compatible metrics endpoints
+- Prometheus metrics collection
+- Grafana dashboards
 - Celery Flower for task monitoring
+- Log aggregation system
 
-## 9. Resilience Features
+## 9. Development Environment
 
-### 9.1 Health Checks
-
-- Database connectivity checks
-- API endpoint checks
-- Appropriate retry policies
-
-### 9.2 Failover Strategy
-
-- Restart policies for critical services
-- Connection retry logic
-- Graceful degradation when components are unavailable
-
-## 10. Development Environment
-
-### 10.1 Local Setup
+### 9.1 Local Setup (MVP)
 
 - Simple startup with `docker-compose up`
 - Hot-reloading for backend and frontend
-- Development admin interfaces for all databases
+- Development admin interfaces for databases
+- Standardized environment variables
 
-### 10.2 Testing
+### 9.2 Testing Infrastructure (MVP)
 
-- Environment-specific testing configuration
-- Integration tests with in-memory databases
-- E2E testing with Playwright
+- Unit tests for all components
+- Integration tests for core functionality
+- Mock data for social media platform collectors
 
-## 11. Future Considerations
-
-### 11.1 Kubernetes Migration Path
-
-- Current Docker Compose structure designed for easy K8s migration
-- Service definitions align with Kubernetes patterns
-- Volume definitions compatible with persistent volume claims
-
-### 11.2 Service Mesh Integration
-
-- Prepared for Istio or Linkerd integration
-- Service-to-service communication patterns established
-- Observability foundations in place
-
-## Appendix A: Environment Variables
+## Appendix A: Environment Variables (MVP)
 
 | Variable | Purpose | Example |
-|----------|---------|---------|
+|----|---|---|
 | `DOMAIN` | Base domain for all services | `example.com` |
 | `POSTGRES_*` | PostgreSQL configuration | `POSTGRES_USER=postgres` |
 | `MONGO_*` | MongoDB configuration | `MONGO_USER=mongo` |
-| `RABBITMQ_*` | RabbitMQ configuration | `RABBITMQ_USER=guest` |
-| `REDIS_*` | Redis configuration | `REDIS_PORT=6379` |
 | `SECRET_KEY` | Application encryption key | `supersecretkey` |
 | `SENTRY_DSN` | Sentry error tracking | `https://...` |
+| `APIFY_API_KEY` | APIFY integration for social media collection | `apify_api_key_123` |
 
-## Appendix B: Network Ports
+## Appendix B: Network Ports (MVP)
 
 | Service | Port | Purpose |
-|---------|------|---------|
+|---|---|---|
 | Traefik | 80, 443 | HTTP/HTTPS |
 | PostgreSQL | 5432 | Database access |
 | MongoDB | 27017 | Database access |
-| Redis | 6379 | Cache access |
-| RabbitMQ | 5672, 15672 | AMQP and management |
-| Kafka | 9092 | Stream processing |
 | FastAPI | 8000 | API access |
 | Frontend | 5173 | Web UI (development) |
 
-## Appendix C: Related Documentation
+## Appendix C: MVP vs Future Implementation Summary
 
-- `backend-technical-stack.mdc` - Backend technology details
-- `database-architecture.mdc` - Detailed database design
-- `data-processing-architecture.mdc` - Data processing pipeline details
+| Component | MVP Implementation | Future Implementation |
+|---|---|---|
+| Frontend | React SPA | Enhanced React SPA |
+| Backend | FastAPI | FastAPI with expanded capabilities |
+| Task Processing | In-memory TaskManager | Celery, RabbitMQ, Redis |
+| Data Storage | PostgreSQL, MongoDB, Pinecone | PostgreSQL, MongoDB, Pinecone, Redis |
+| Message Queuing | None | RabbitMQ, Kafka |
+| Caching | None | Redis |
+| Stream Processing | None | Kafka, Zookeeper |
+| Monitoring | Basic logging, Sentry | Prometheus, Grafana, Log aggregation |
