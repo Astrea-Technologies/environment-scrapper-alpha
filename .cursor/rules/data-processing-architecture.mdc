@@ -1,333 +1,188 @@
 ---
 description: Data Processing Architecture Specification for the Political Social Media Analysis Platform.
-globs: backend/tasks/*, backend/processing/*
+globs: 
 alwaysApply: false
 ---
-# Data Processing Architecture
+# Data Processing Architecture (MVP Version)
 
 ## 1. Technology Stack Overview
 
-| Component | Technology | Version | Purpose |
-|-----------|------------|---------|---------|
-| Task Queue | Celery | 5.3.0+ | Asynchronous task processing |
-| Message Broker | RabbitMQ | 3.12+ | Task distribution and messaging |
-| Stream Processing | Apache Kafka | 3.4+ | Real-time event streaming |
-| Text Processing | spaCy | 3.6+ | NLP and entity recognition |
-| Sentiment Analysis | Transformers | 4.28+ | Content sentiment detection |
-| Vector Embeddings | sentence-transformers | 2.2.2+ | Text embedding generation |
-| Machine Learning | scikit-learn | 1.2+ | Classification and regression |
-| Full-Text Search | MongoDB Atlas Search | N/A | Content search capabilities |
+| Component | Technology | Version | Purpose | MVP Status |
+|-----|---|---|---|---|
+| Text Processing | spaCy | 3.6+ | NLP and entity recognition | ✅ Included |
+| Sentiment Analysis | Transformers | 4.28+ | Content sentiment detection | ✅ Included |
+| Vector Embeddings | sentence-transformers | 2.2.2+ | Text embedding generation | ✅ Included |
+| Machine Learning | scikit-learn | 1.2+ | Classification and regression | ✅ Included |
+| Full-Text Search | MongoDB Atlas Search | N/A | Content search capabilities | ✅ Included |
+| Task Queue | Celery | 5.3.0+ | Asynchronous task processing | ❌ **NOT in MVP** |
+| Message Broker | RabbitMQ | 3.12+ | Task distribution and messaging | ❌ **NOT in MVP** |
+| Stream Processing | Apache Kafka | 3.4+ | Real-time event streaming | ❌ **NOT in MVP** |
 
 ## 2. Processing Pipeline Components
 
 ### 2.1 Data Collection Components
 
-- **Platform-specific scrapers**: Modular adapters for each social media platform
-- **Rate limiters**: Respects platform API constraints
-- **Scheduled collection**: Configurable intervals for data collection
-- **Content processors**: Standardizes data from different platforms
+#### Platform Collectors
+- **Standardized Base Collector**: `BaseCollector` class providing common functionality
+- **Platform-Specific Collectors**:
+  - `InstagramCollector`: Instagram data collection and transformation
+  - `FacebookCollector`: Facebook data collection and transformation
+  - `TwitterCollector`: Twitter/X data collection and transformation
+  - `TikTokCollector`: TikTok data collection and transformation
 
-### 2.2 Analysis Components
+#### Collection Features
+- **Rate Limiting**: Built-in respect for platform API constraints
+- **Error Handling**: Robust error handling and retry mechanisms
+- **Data Transformation**: Standardized data structures across platforms
+- **Validation**: Schema validation using Pydantic models
 
-- **Sentiment analyzer**: Determines content sentiment
-- **Topic modeler**: Identifies content themes and categories
-- **Entity recognizer**: Detects mentions of political entities
-- **Vector embedder**: Generates semantic representations
-- **Relationship mapper**: Builds entity relationship graphs
+### 2.2 Data Models
 
-### 2.3 Real-time Components
-
-- **Stream processors**: Kafka consumers for real-time analysis
-- **Alert generators**: Triggers based on configurable thresholds
-- **Metric calculators**: Real-time engagement statistics
-- **Notification services**: Delivery of critical alerts
-
-## 3. Task Distribution
-
-### 3.1 Task Queue Design
-
-Celery task queues with priority-based routing:
-
-| Queue Name | Priority | Purpose |
-|------------|----------|---------|
-| scraping | High | Content collection from social platforms |
-| analysis | Medium | Content processing and analysis |
-| embeddings | Low | Vector embedding generation |
-| alerts | Critical | Real-time notification processing |
-| reports | Low | Scheduled report generation |
-
-### 3.2 Task Implementation Pattern
-
+#### MongoDB Schema Models
 ```python
-@app.task(queue="analysis", rate_limit="100/m")
-def analyze_sentiment(post_id: str, text: str):
-    """
-    Analyze the sentiment of a social media post.
-    
-    Args:
-        post_id: The MongoDB ID of the post
-        text: The text content to analyze
-        
-    Returns:
-        Dict containing sentiment scores and emotional classification
-    """
-    # Sentiment analysis implementation
-    sentiment_score = sentiment_model.predict(text)
-    
-    # Update the post in MongoDB with sentiment results
-    mongodb.posts.update_one(
-        {"_id": ObjectId(post_id)},
-        {"$set": {"analysis.sentiment_score": sentiment_score}}
-    )
-    
-    # Return result for potential chaining
-    return {
-        "post_id": post_id,
-        "sentiment_score": sentiment_score
-    }
+class SocialMediaPost(BaseModel):
+    platform_id: str
+    platform: str
+    account_id: UUID
+    content_type: str
+    short_code: Optional[str]
+    url: Optional[HttpUrl]
+    content: PostContent
+    metadata: PostMetadata
+    engagement: PostEngagement
+    analysis: Optional[PostAnalysis]
+    child_posts: Optional[List[ChildPost]]
+    video_data: Optional[VideoData]
+    vector_id: Optional[str]
+
+class SocialMediaComment(BaseModel):
+    platform_id: str
+    platform: str
+    post_id: str
+    post_url: Optional[HttpUrl]
+    user_id: str
+    user_name: str
+    content: CommentContent
+    metadata: CommentMetadata
+    engagement: CommentEngagement
+    replies: List[CommentReply]
+    analysis: Optional[CommentAnalysis]
+    user_details: Optional[CommentUserDetails]
+    vector_id: Optional[str]
 ```
 
-## 4. Stream Processing Design
+### 2.3 Data Processing Flow
 
-### 4.1 Kafka Topic Design
+1. **Collection**:
+   - Platform collector fetches data from social media API
+   - Data is transformed to standardized format
+   - Validation against Pydantic models
 
-| Topic | Purpose | Retention | Partitioning |
-|-------|---------|-----------|--------------|
-| social-media-raw | Raw content from platforms | 7 days | By platform and entity |
-| entity-mentions | Mentions of tracked entities | 30 days | By mentioned entity |
-| sentiment-changes | Significant sentiment shifts | 30 days | By entity |
-| engagement-metrics | Real-time engagement updates | 2 days | By entity |
+2. **Storage**:
+   - Posts and comments stored in MongoDB
+   - Profile data stored in PostgreSQL
+   - References maintained between databases
 
-### 4.2 Stream Processing Pattern
+3. **Analysis** (Background Processing):
+   - Content analysis (sentiment, topics)
+   - Engagement metrics calculation
+   - Vector embedding generation
 
+## 3. Task Processing (MVP Implementation)
+
+### 3.1 Task Manager
 ```python
-def process_sentiment_stream():
-    """
-    Process the sentiment stream to detect significant changes.
-    """
-    consumer = KafkaConsumer(
-        'social-media-raw',
-        bootstrap_servers='kafka:9092',
-        group_id='sentiment-analyzer',
-        auto_offset_reset='latest'
-    )
+class TaskManager:
+    """Simple in-memory task management system for MVP."""
     
-    for message in consumer:
-        # Decode message
-        post = json.loads(message.value)
-        
-        # Calculate sentiment
-        sentiment = analyze_content(post['content']['text'])
-        
-        # Check for significant changes
-        if is_significant_change(post, sentiment):
-            # Publish to sentiment-changes topic
-            publish_sentiment_change(post, sentiment)
-            
-            # Generate alert if needed
-            if requires_alert(post, sentiment):
-                generate_alert(post, sentiment)
-```
-
-## 5. Machine Learning Implementation
-
-### 5.1 Model Management
-
-- **Model Registry**: Central repository for trained models
-- **Versioning**: Tracking model versions and performance
-- **A/B Testing**: Framework for evaluating model improvements
-- **Automated Retraining**: Scheduled model updates
-
-### 5.2 Core Models
-
-| Model | Purpose | Architecture | Training Data |
-|-------|---------|--------------|--------------|
-| Sentiment Analyzer | Content sentiment scoring | Fine-tuned transformer | Labeled political content |
-| Topic Classifier | Content categorization | Multi-label classification | Domain-specific corpus |
-| Entity Relationship | Relationship scoring | Graph neural network | Historical interaction data |
-| Audience Segmenter | User clustering | Unsupervised model | Engagement patterns |
-| Performance Predictor | Engagement prediction | Gradient boosting | Historical post performance |
-
-### 5.3 Vector Embedding Process
-
-```python
-@app.task(queue="embeddings")
-def generate_embedding(content_id: str, content_type: str, text: str):
-    """
-    Generate vector embedding for text content.
+    def __init__(self):
+        self.tasks = {}
+        self.status = {}
     
-    Args:
-        content_id: MongoDB ID of the content
-        content_type: Type of content (post, comment)
-        text: Text to embed
-        
-    Returns:
-        ID of the created vector entry
-    """
-    # Generate embedding
-    embedding = embedding_model.encode(text)
-    
-    # Get metadata from MongoDB
-    if content_type == "post":
-        content = mongodb.posts.find_one({"_id": ObjectId(content_id)})
-    else:
-        content = mongodb.comments.find_one({"_id": ObjectId(content_id)})
-    
-    # Create metadata for vector DB
-    metadata = {
-        "content_type": content_type,
-        "source_id": str(content["_id"]),
-        "entity_id": content.get("account_id"),
-        "platform": content["platform"],
-        "created_at": content["metadata"]["created_at"],
-        "topics": content.get("analysis", {}).get("topics", []),
-        "sentiment_score": content.get("analysis", {}).get("sentiment_score")
-    }
-    
-    # Store in vector database
-    vector_id = vector_client.upsert(
-        vectors=[embedding.tolist()],
-        metadata=metadata,
-        namespace="social_content"
-    )
-    
-    # Update reference in MongoDB
-    collection = mongodb.posts if content_type == "post" else mongodb.comments
-    collection.update_one(
-        {"_id": ObjectId(content_id)},
-        {"$set": {"vector_id": vector_id}}
-    )
-    
-    return vector_id
-```
-
-## 6. Search Implementation
-
-### 6.1 MongoDB Atlas Search Configuration
-
-```javascript
-// Search index configuration
-{
-  "mappings": {
-    "dynamic": false,
-    "fields": {
-      "content.text": {
-        "type": "string",
-        "analyzer": "lucene.standard",
-        "searchAnalyzer": "lucene.standard"
-      },
-      "metadata.location.country": {
-        "type": "string"
-      },
-      "metadata.language": {
-        "type": "string"
-      },
-      "analysis.topics": {
-        "type": "string"
-      },
-      "analysis.entities_mentioned": {
-        "type": "string"
-      }
-    }
-  }
-}
-```
-
-### 6.2 Search Implementation
-
-```python
-async def search_content(query: str, filters: dict = None):
-    """
-    Search social media content using MongoDB Atlas Search.
-    
-    Args:
-        query: Text query to search for
-        filters: Optional filters to apply (topics, entities, etc.)
-        
-    Returns:
-        List of matching documents
-    """
-    search_pipeline = [
-        {
-            "$search": {
-                "index": "social_content",
-                "text": {
-                    "query": query,
-                    "path": "content.text"
-                }
-            }
+    async def create_task(self, task_type: str, params: dict):
+        """Create and track a new task."""
+        task_id = str(uuid4())
+        self.tasks[task_id] = {
+            "type": task_type,
+            "params": params,
+            "status": "pending",
+            "created_at": datetime.utcnow()
         }
-    ]
+        return task_id
     
-    # Add filters if provided
-    if filters:
-        search_pipeline.append({"$match": filters})
-    
-    # Add projection to limit fields returned
-    search_pipeline.append({
-        "$project": {
-            "_id": 1,
-            "content": 1,
-            "metadata": 1,
-            "analysis": 1,
-            "score": {"$meta": "searchScore"}
-        }
-    })
-    
-    # Execute search
-    results = await mongodb.posts.aggregate(search_pipeline).to_list(length=50)
-    return results
+    async def get_task_status(self, task_id: str):
+        """Get the current status of a task."""
+        return self.tasks.get(task_id, {}).get("status", "not_found")
 ```
 
-## 7. Performance Considerations
+### 3.2 Background Tasks
+- Uses FastAPI's `BackgroundTasks` for asynchronous processing
+- Simple task queue with in-memory status tracking
+- Basic retry mechanism for failed tasks
 
-### 7.1 Resource Allocation
+## 4. Data Transformation
 
-| Component | CPU Allocation | Memory Allocation | Scaling Trigger |
-|-----------|---------------|-------------------|-----------------|
-| Scraping Workers | Medium | Low | Queue depth > 1000 tasks |
-| Analysis Workers | High | High | Queue depth > 500 tasks |
-| Vector Workers | High | Medium | Queue depth > 200 tasks |
-| Stream Processors | Medium | High | Consumer lag > 1000 messages |
+### 4.1 Platform-Specific Transformers
+Each collector implements transformation methods:
+```python
+def transform_post(self, raw_post: Dict[str, Any], account_id: UUID) -> Dict[str, Any]:
+    """Transform platform-specific post data to standard format."""
+    
+def transform_comment(self, raw_comment: Dict[str, Any], post_id: str) -> Dict[str, Any]:
+    """Transform platform-specific comment data to standard format."""
+    
+def transform_profile(self, raw_profile: Dict[str, Any]) -> Dict[str, Any]:
+    """Transform platform-specific profile data to standard format."""
+```
 
-### 7.2 Processing Patterns
+### 4.2 Standardization Rules
+- Consistent datetime formats
+- Normalized engagement metrics
+- Platform-agnostic content structure
+- Uniform handling of media content
 
-- **Real-time processing**: Critical alerts, high-priority entity updates
-- **Near real-time processing**: Sentiment analysis, engagement metrics
-- **Batch processing**: Vector embedding, relationship analysis, historical trends
+## 5. Error Handling and Validation
 
-### 7.3 Rate Limiting
+### 5.1 Error Types
+- API rate limiting errors
+- Network connectivity issues
+- Data validation errors
+- Transformation errors
 
-- Platform-specific API rate limits
-- Resource-based rate limits for compute-intensive tasks
-- Prioritization of critical entity monitoring
+### 5.2 Validation Strategy
+- Schema validation using Pydantic models
+- Data type checking and conversion
+- Required field verification
+- Cross-reference validation
 
-## 8. Monitoring and Observability
+## 6. Future Enhancements (Post-MVP)
 
-### 8.1 Key Metrics
+### 6.1 Task Queue System
+- Implementation of Celery for robust task processing
+- RabbitMQ integration for message queuing
+- Distributed task execution
+- Task prioritization and scheduling
 
-- Task processing rates and success/failure ratios
-- Model inference latency and throughput
-- Stream processing lag and throughput
-- Database operation latency
-- Queue depths and processing backlogs
+### 6.2 Stream Processing
+- Kafka integration for real-time data streaming
+- Event-driven architecture
+- Real-time analytics pipeline
+- Notification system
 
-### 8.2 Implementation Strategy
+### 6.3 Caching Layer
+- Redis integration for caching
+- Performance optimization
+- Real-time metrics
+- Session management
 
-- Structured logging with correlation IDs
-- Error tracking with Sentry integration
-- Performance monitoring with Prometheus
-- Worker monitoring with Flower for Celery
-- Custom health check endpoints for services
-
-## 9. Additional Dependencies
+## 7. Dependencies (MVP)
 
 | Dependency | Version | Purpose |
-|------------|---------|---------|
-| celery | 5.3.0+ | Task queue library |
-| kafka-python | 2.0.2+ | Kafka client |
+|---|---|---|
 | spacy | 3.6.0+ | Natural language processing |
 | transformers | 4.28.0+ | Machine learning models |
 | scikit-learn | 1.2.0+ | Classical machine learning tools |
-| torch | 2.0.0+ | Deep learning framework |
 | sentence-transformers | 2.2.2+ | Text embedding generation |
+| pydantic | 2.0+ | Data validation and settings management |
+| motor | 3.2.0+ | Async MongoDB driver |
+| sqlmodel | 0.0.8+ | SQL database ORM |
