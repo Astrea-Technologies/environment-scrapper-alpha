@@ -8,7 +8,7 @@ from typing import Dict
 from app.api.api_v1.api import api_router
 from app.core.config import settings
 from app.core.errors import add_exception_handlers
-from app.db.connections import mongodb, redis_conn, pinecone_conn
+from app.db.connections import mongodb, pinecone_conn
 from app.schemas import StandardResponse
 
 # Configure logging
@@ -60,7 +60,7 @@ async def root():
 
 @app.get("/health", response_model=StandardResponse[Dict[str, str]])
 async def health_check():
-    """Enhanced health check endpoint that tests all database connections."""
+    """Enhanced health check endpoint that tests database connections (MVP)."""
     health_status = {}
     all_healthy = True
 
@@ -68,11 +68,6 @@ async def health_check():
     mongodb_status = await check_mongodb()
     health_status["mongodb"] = "healthy" if mongodb_status["connected"] else "unhealthy"
     all_healthy = all_healthy and mongodb_status["connected"]
-
-    # Check Redis
-    redis_status = await check_redis()
-    health_status["redis"] = "healthy" if redis_status["connected"] else "unhealthy"
-    all_healthy = all_healthy and redis_status["connected"]
 
     # Check Pinecone if configured
     if settings.PINECONE_API_KEY:
@@ -98,15 +93,6 @@ async def check_mongodb() -> Dict[str, bool]:
         return {"connected": True}
     except Exception as e:
         logger.error(f"MongoDB health check failed: {e}")
-        return {"connected": False, "error": str(e)}
-
-async def check_redis() -> Dict[str, bool]:
-    """Test Redis connection."""
-    try:
-        await redis_conn.client.ping()
-        return {"connected": True}
-    except Exception as e:
-        logger.error(f"Redis health check failed: {e}")
         return {"connected": False, "error": str(e)}
 
 def check_pinecone() -> Dict[str, bool]:
@@ -150,15 +136,6 @@ async def startup_db_client() -> None:
         logger.warning(f"Failed to connect to MongoDB: {e}")
         # Continue without raising the exception
 
-    # Redis connection
-    try:
-        logger.info("Connecting to Redis...")
-        await redis_conn.connect()
-        logger.info("Successfully connected to Redis")
-    except Exception as e:
-        logger.warning(f"Failed to connect to Redis: {e}")
-        # Continue without raising the exception
-
     # Pinecone connection (optional)
     try:
         logger.info("Connecting to Pinecone...")
@@ -187,11 +164,6 @@ async def shutdown_db_client() -> None:
             logger.info("Closing Pinecone connection...")
             pinecone_conn.close()
             logger.info("Pinecone connection closed")
-
-        # Close Redis (async)
-        logger.info("Closing Redis connection...")
-        await redis_conn.close()
-        logger.info("Redis connection closed")
 
         # Close MongoDB (async)
         logger.info("Closing MongoDB connection...")
