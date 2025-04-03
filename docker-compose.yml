@@ -42,83 +42,87 @@ services:
       start_period: 40s
 
   # Redis service for caching and real-time operations
-  redis:
-    image: redis:7.0
-    restart: always
-    networks:
-      - traefik-public
-      - default
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-    command: redis-server --appendonly yes
-    healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+  # REMOVED - Not in MVP
+  # redis:
+  #   image: redis:7.0
+  #   restart: always
+  #   networks:
+  #     - traefik-public
+  #     - default
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
+  #   command: redis-server --appendonly yes
+  #   healthcheck:
+  #     test: [ "CMD", "redis-cli", "ping" ]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 5
 
   # RabbitMQ service for message broker
-  rabbitmq:
-    image: rabbitmq:3.12-management
-    restart: always
-    networks:
-      - traefik-public
-      - default
-    ports:
-      - "5672:5672" # AMQP port
-      - "15672:15672" # Management UI
-    environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-rabbitmquser}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-rabbitmqpassword}
-    volumes:
-      - rabbitmq-data:/var/lib/rabbitmq
-    healthcheck:
-      test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 40s
+  # REMOVED - Not in MVP
+  # rabbitmq:
+  #   image: rabbitmq:3.12-management
+  #   restart: always
+  #   networks:
+  #     - traefik-public
+  #     - default
+  #   ports:
+  #     - "5672:5672" # AMQP port
+  #     - "15672:15672" # Management UI
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-rabbitmquser}
+  #     - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-rabbitmqpassword}
+  #   volumes:
+  #     - rabbitmq-data:/var/lib/rabbitmq
+  #   healthcheck:
+  #     test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 40s
 
   # Kafka service with Zookeeper for stream processing
-  zookeeper:
-    image: bitnami/zookeeper:latest
-    restart: always
-    networks:
-      - traefik-public
-      - default
-    ports:
-      - "2181:2181"
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    volumes:
-      - zookeeper-data:/bitnami/zookeeper
+  # REMOVED - Not in MVP
+  # zookeeper:
+  #   image: bitnami/zookeeper:latest
+  #   restart: always
+  #   networks:
+  #     - traefik-public
+  #     - default
+  #   ports:
+  #     - "2181:2181"
+  #   environment:
+  #     - ALLOW_ANONYMOUS_LOGIN=yes
+  #   volumes:
+  #     - zookeeper-data:/bitnami/zookeeper
 
-  kafka:
-    image: bitnami/kafka:3.4
-    restart: always
-    networks:
-      - traefik-public
-      - default
-    ports:
-      - "9092:9092"
-    environment:
-      - KAFKA_BROKER_ID=1
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
-    volumes:
-      - kafka-data:/bitnami/kafka
-    depends_on:
-      - zookeeper
-    healthcheck:
-      test: [ "CMD-SHELL", "kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 40s
+  # REMOVED - Not in MVP
+  # kafka:
+  #   image: bitnami/kafka:3.4
+  #   restart: always
+  #   networks:
+  #     - traefik-public
+  #     - default
+  #   ports:
+  #     - "9092:9092"
+  #   environment:
+  #     - KAFKA_BROKER_ID=1
+  #     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+  #     - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+  #     - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+  #     - ALLOW_PLAINTEXT_LISTENER=yes
+  #   volumes:
+  #     - kafka-data:/bitnami/kafka
+  #   depends_on:
+  #     - zookeeper
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 40s
 
   adminer:
     image: adminer
@@ -183,12 +187,12 @@ services:
       - MONGODB_DB=${MONGO_DB:-socialmediadb}
       - MONGODB_USER=${MONGO_USER:-mongouser}
       - MONGODB_PASSWORD=${MONGO_PASSWORD:-mongopassword}
-      - REDIS_SERVER=redis
-      - REDIS_PORT=6379
-      - RABBITMQ_SERVER=rabbitmq
-      - RABBITMQ_USER=${RABBITMQ_USER:-rabbitmquser}
-      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-rabbitmqpassword}
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      # - REDIS_SERVER=redis # REMOVED - Not in MVP
+      # - REDIS_PORT=6379 # REMOVED - Not in MVP
+      # - RABBITMQ_SERVER=rabbitmq # REMOVED - Not in MVP
+      # - RABBITMQ_USER=${RABBITMQ_USER:-rabbitmquser} # REMOVED - Not in MVP
+      # - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-rabbitmqpassword} # REMOVED - Not in MVP
+      # - KAFKA_BOOTSTRAP_SERVERS=kafka:9092 # REMOVED - Not in MVP
 
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
@@ -203,12 +207,13 @@ services:
       mongodb:
         condition: service_healthy
         restart: true
-      redis:
-        condition: service_healthy
-        restart: true
-      rabbitmq:
-        condition: service_healthy
-        restart: true
+      # REMOVED - Not in MVP
+      # redis:
+      #   condition: service_healthy
+      #   restart: true
+      # rabbitmq:
+      #   condition: service_healthy
+      #   restart: true
       prestart:
         condition: service_completed_successfully
     env_file:
@@ -236,12 +241,12 @@ services:
       - MONGODB_DB=${MONGO_DB:-socialmediadb}
       - MONGODB_USER=${MONGO_USER:-mongouser}
       - MONGODB_PASSWORD=${MONGO_PASSWORD:-mongopassword}
-      - REDIS_SERVER=redis
-      - REDIS_PORT=6379
-      - RABBITMQ_SERVER=rabbitmq
-      - RABBITMQ_USER=${RABBITMQ_USER:-rabbitmquser}
-      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-rabbitmqpassword}
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      # - REDIS_SERVER=redis # REMOVED - Not in MVP
+      # - REDIS_PORT=6379 # REMOVED - Not in MVP
+      # - RABBITMQ_SERVER=rabbitmq # REMOVED - Not in MVP
+      # - RABBITMQ_USER=${RABBITMQ_USER:-rabbitmquser} # REMOVED - Not in MVP
+      # - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-rabbitmqpassword} # REMOVED - Not in MVP
+      # - KAFKA_BOOTSTRAP_SERVERS=kafka:9092 # REMOVED - Not in MVP
 
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]

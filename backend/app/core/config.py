@@ -146,6 +146,12 @@ class Settings(BaseSettings):
     OPENAI_MODEL: str = "text-embedding-3-small"
     OPENAI_EMBEDDING_DIMENSION: int = 1536  # Dimension for text-embedding-3-small
     
+    # APIFY settings (MVP)
+    APIFY_API_KEY: str = ""
+
+    # Anthropic settings (MVP)
+    ANTHROPIC_API_KEY: str = ""
+
     # Email settings
     SMTP_TLS: bool = True
     SMTP_SSL: bool = False
@@ -187,6 +193,8 @@ class Settings(BaseSettings):
         self._check_default_secret("REDIS_PASSWORD", self.REDIS_PASSWORD)
         self._check_default_secret("PINECONE_API_KEY", self.PINECONE_API_KEY)
         self._check_default_secret("OPENAI_API_KEY", self.OPENAI_API_KEY)
+        self._check_default_secret("APIFY_API_KEY", self.APIFY_API_KEY)
+        self._check_default_secret("ANTHROPIC_API_KEY", self.ANTHROPIC_API_KEY)
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
         self._check_default_secret("FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD)
         return self

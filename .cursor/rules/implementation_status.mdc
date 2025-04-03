@@ -1,0 +1,118 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Backend Implementation Status (vs. next-implementations.mdc)
+
+This document summarizes the current implementation status of the backend project compared to the plan outlined in `next-implementations.mdc`, based on analysis of dependencies (`pyproject.toml`) and directory structure (`backend/app`).
+
+**Overall Discrepancies Noted:**
+
+*   **Non-MVP Dependencies:** The project includes dependencies for `redis`, `celery`, `pika` (RabbitMQ), and `aiokafka`, which are explicitly marked as **NOT in MVP** in the technical stack documentation. This suggests either the implementation exceeds the MVP scope or the documentation is not fully up-to-date.
+*   **Missing External Integration Dependencies:** Dependencies for `apify-client` and `anthropic` (planned for data collection and LLM analysis) are missing. The `openai` client is present, which might be used as an alternative for LLM tasks.
+
+---
+
+## Phase 1: Environment and Dependency Setup
+
+*   **Task 1.1: Update requirements.txt (pyproject.toml):**
+    *   **Status:** Partially Implemented / Discrepancy Found
+    *   **Notes:**
+        *   Core MVP dependencies (FastAPI, SQLModel, Pydantic, etc.) are present.
+        *   MVP Database clients (`pymongo`, `motor`) are present.
+        *   Non-MVP dependencies (`redis`, `celery`, `pika`, `aiokafka`) are present.
+        *   External integration dependencies (`apify-client`, `anthropic`) are **missing**. `openai` is present.
+        *   `httpx` and `pydantic` are present.
+*   **Task 1.2: Update Docker Configuration:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Requires inspection of `docker-compose.yml` to confirm if MongoDB service is included. The `Dockerfile` exists.
+*   **Task 1.3: Update Configuration Module:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Requires inspection of `backend/app/core/config.py` to confirm settings for MongoDB, external APIs (APIFY, LLM), and task processing.
+
+## Phase 2: Database Infrastructure Implementation
+
+*   **Task 2.1: Create MongoDB Connection Utilities:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Presence of `motor` suggests async connection utilities might exist, likely within `backend/app/db/` or a utils file.
+*   **Task 2.2: Implement Database Startup and Shutdown Events:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Requires inspection of `backend/app/main.py` or related application setup files.
+*   **Task 2.3: Create SQL Database Models:**
+    *   **Status:** Likely Implemented
+    *   **Notes:** The `backend/app/db/` directory exists, and `sqlmodel` is a dependency. Models (`PoliticalEntity`, `SocialMediaAccount`, `EntityRelationship`) are expected within a `models` subdirectory.
+*   **Task 2.4: Create MongoDB Document Schemas:**
+    *   **Status:** Likely Implemented
+    *   **Notes:** The `backend/app/schemas/` directory exists, and `pydantic` is a dependency. Schemas (`SocialMediaPost`, `SocialMediaComment`, etc.) are expected here.
+
+## Phase 3: Repository and Service Layer Implementation
+
+*   **Task 3.1: Implement PostgreSQL Repositories:**
+    *   **Status:** Likely Implemented
+    *   **Notes:** The `backend/app/services/` directory exists, often containing repositories. Requires inspection of this directory.
+*   **Task 3.2: Implement MongoDB Repositories:**
+    *   **Status:** Likely Implemented
+    *   **Notes:** Similar to SQL repositories, these are expected within `backend/app/services/`. Requires inspection.
+*   **Task 3.4: Implement Search Service:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Requires code inspection, potentially within `backend/app/services/` or `backend/app/api/`.
+
+## Phase 4: Task Processing Implementation
+
+*   **Task 4.1: Implement Simple Task Processing System:**
+    *   **Status:** Uncertain / Discrepancy Found
+    *   **Notes:** The `tasks/` directory exists, but the presence of `celery` dependency contradicts the plan for a *simple* system using FastAPI background tasks for MVP. It's unclear if the simple system exists or if Celery was implemented instead/in addition.
+*   **Task 4.2: Implement Data Collection Tasks Using APIFY:**
+    *   **Status:** Not Implemented
+    *   **Notes:** The required `apify-client` dependency is missing.
+*   **Task 4.3: Implement Content Analysis Tasks Using LLMs:**
+    *   **Status:** Partially Implemented / Needs Verification
+    *   **Notes:** The planned `anthropic` dependency is missing, but `openai` is present. Analysis tasks using OpenAI might be implemented. Requires inspection of `backend/app/processing/` or `backend/app/tasks/`.
+
+## Phase 5: API Endpoint Implementation
+
+*   **Task 5.1: Implement Entity Management Endpoints:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Requires inspection of `backend/app/api/api_v1/endpoints/`.
+*   **Task 5.2: Implement Content Collection Endpoints:**
+    *   **Status:** Needs Verification / Likely Partial
+    *   **Notes:** Depends on the implementation of Phase 4.2. Endpoints might exist but lack the APIFY integration.
+*   **Task 5.3: Implement Content Analysis Endpoints:**
+    *   **Status:** Needs Verification / Likely Partial
+    *   **Notes:** Depends on the implementation of Phase 4.3. Endpoints might exist, possibly using OpenAI.
+*   **Task 5.4: Implement Content Search Endpoints:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Depends on the implementation of Phase 3.4.
+
+## Phase 6: Testing and Integration
+
+*   **Task 6.1: Create Unit Tests:**
+    *   **Status:** Partially Implemented / Needs Verification
+    *   **Notes:** `pytest` is installed, and `tests/` or `testing/` directories exist. The extent of coverage is unknown.
+*   **Task 6.2: Create Integration Tests:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Requires inspection of test files.
+*   **Task 6.3: Create End-to-End Tests:**
+    *   **Status:** Needs Verification
+    *   **Notes:** Requires inspection of test files.
+
+## Phase 7: Documentation and Deployment
+
+*   **Task 7.1: Update API Documentation:**
+    *   **Status:** Likely Implemented (Auto-generated)
+    *   **Notes:** FastAPI provides automatic OpenAPI documentation. Manual updates might be needed.
+*   **Task 7.2: Create Technical Documentation:**
+    *   **Status:** Partially Implemented
+    *   **Notes:** `README.md` exists. Specific docs for architecture, schema, integrations need verification.
+*   **Task 7.3: Create Deployment Scripts:**
+    *   **Status:** Partially Implemented
+    *   **Notes:** `Dockerfile` exists. Specific scripts for DB initialization/seeding need verification (e.g., `initial_data.py` exists but might be basic).
+
+---
+
+**Next Steps:**
+
+*   Review the "Needs Verification" items by inspecting the relevant code sections.
+*   Update the project documentation (`backend-technical-stack.mdc`, `database-architecture.mdc`) to reflect the actual implemented stack, especially regarding non-MVP components like Redis and Celery.
+*   Decide whether to proceed with the missing `next-implementations` tasks (e.g., APIFY integration) or adjust the plan based on the current state. 
