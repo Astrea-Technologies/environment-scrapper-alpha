@@ -5,15 +5,9 @@ from app.tasks.worker import (
     process_data_pipeline,
     scrape_social_media,
 )
-from app.tasks.task_manager import TaskManager, get_task_manager
+from app.tasks.task_manager import TaskManager, task_manager
 from app.tasks.task_types import (
-    TaskPriority,
-    TaskStatus,
-    TaskResult,
-    collect_platform_data,
-    analyze_content,
-    analyze_relationships,
-    generate_report,
+    TaskType,
 )
 
 __all__ = [
@@ -26,12 +20,6 @@ __all__ = [
     
     # MVP Task Manager components
     "TaskManager",
-    "get_task_manager",
-    "TaskPriority",
-    "TaskStatus",
-    "TaskResult",
-    "collect_platform_data",
-    "analyze_content",
-    "analyze_relationships",
-    "generate_report",
+    "task_manager",
+    "TaskType",
 ] 
