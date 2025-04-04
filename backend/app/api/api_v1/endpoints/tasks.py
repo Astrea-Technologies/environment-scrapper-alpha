@@ -1,180 +1,118 @@
-from typing import Any, Dict, List, Optional
+import asyncio
+from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
-from pydantic import UUID4
+from fastapi import APIRouter, BackgroundTasks, HTTPException, status
+from pydantic import BaseModel
 
-from app.api.deps import CurrentUser, TaskManagerDep
-from app.tasks.task_types import TaskStatus
+from app.tasks.task_manager import task_manager # Singleton instance
+from app.tasks.task_types import TaskType
 
 router = APIRouter()
 
+# --- Dummy Task Implementations (Illustrative) ---
 
-@router.post("/data-collection")
-async def create_data_collection_task(
-    platform: str,
-    entity_ids: List[str],
-    background_tasks: BackgroundTasks,
-    task_manager: TaskManagerDep,
-    current_user: CurrentUser,
-) -> Dict[str, Any]:
-    """
-    Schedule a data collection task for social media platforms.
-    """
-    # Only allow superusers to schedule data collection tasks
-    if not current_user.is_superuser:
-        raise HTTPException(status_code=403, detail="Not enough permissions")
-    
-    task_id = task_manager.schedule_data_collection(
-        platform=platform,
-        entity_ids=entity_ids,
-        background_tasks=background_tasks,
-    )
-    
-    return {
-        "success": True,
-        "message": f"Data collection task scheduled for {platform}",
-        "task_id": task_id
-    }
-
-
-@router.post("/content-analysis")
-async def create_content_analysis_task(
-    content_ids: List[str],
-    background_tasks: BackgroundTasks,
-    task_manager: TaskManagerDep,
-    current_user: CurrentUser,
-    analysis_types: List[str] = Query(default=["sentiment", "topics", "entities"]),
-) -> Dict[str, Any]:
-    """
-    Schedule a content analysis task for collected social media content.
-    """
-    # Only allow superusers to schedule analysis tasks
-    if not current_user.is_superuser:
-        raise HTTPException(status_code=403, detail="Not enough permissions")
-    
-    task_id = task_manager.schedule_content_analysis(
-        content_ids=content_ids,
-        analysis_types=analysis_types,
-        background_tasks=background_tasks,
-    )
-    
-    return {
-        "success": True,
-        "message": f"Content analysis task scheduled for {len(content_ids)} items",
-        "task_id": task_id
-    }
-
-
-@router.post("/relationship-analysis")
-async def create_relationship_analysis_task(
-    entity_ids: List[str],
-    background_tasks: BackgroundTasks,
-    task_manager: TaskManagerDep,
-    current_user: CurrentUser,
-    time_period: str = "last_30_days",
-) -> Dict[str, Any]:
-    """
-    Schedule a relationship analysis task between political entities.
-    """
-    # Only allow superusers to schedule relationship analysis tasks
-    if not current_user.is_superuser:
-        raise HTTPException(status_code=403, detail="Not enough permissions")
-    
-    task_id = task_manager.schedule_relationship_analysis(
-        entity_ids=entity_ids,
-        background_tasks=background_tasks,
-        time_period=time_period,
-    )
-    
-    return {
-        "success": True,
-        "message": f"Relationship analysis task scheduled for {len(entity_ids)} entities",
-        "task_id": task_id
-    }
-
-
-@router.post("/report-generation")
-async def create_report_generation_task(
-    report_type: str,
-    background_tasks: BackgroundTasks,
-    task_manager: TaskManagerDep,
-    current_user: CurrentUser,
-    entity_ids: Optional[List[str]] = None,
-    time_period: str = "last_30_days",
-    format: str = "json",
-) -> Dict[str, Any]:
-    """
-    Schedule a report generation task.
-    """
-    # Only allow superusers to schedule report generation tasks
-    if not current_user.is_superuser:
-        raise HTTPException(status_code=403, detail="Not enough permissions")
-    
-    task_id = task_manager.schedule_report_generation(
-        report_type=report_type,
-        background_tasks=background_tasks,
-        entity_ids=entity_ids,
-        time_period=time_period,
-        format=format,
-    )
-    
-    return {
-        "success": True,
-        "message": f"{report_type} report generation task scheduled",
-        "task_id": task_id
-    }
-
-
-@router.get("/status/{task_id}")
-async def get_task_status(
-    task_id: str,
-    task_manager: TaskManagerDep,
-    current_user: CurrentUser,
-) -> Dict[str, Any]:
-    """
-    Get the status of a specific task.
-    """
+async def run_data_collection_task(task_id: str, params: Dict[str, Any]):
+    """Example background task implementation with error handling."""
+    await task_manager.update_task_status(task_id, status="running")
     try:
-        task_status = task_manager.get_task_status(task_id)
-        return {
-            "success": True,
-            "task": task_status
-        }
-    except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
+        # Simulate work
+        print(f"Running task {task_id} (Data Collection) with params: {params}")
+        await asyncio.sleep(5) # Simulate I/O bound operation
+        account_id = params.get("account_id", "unknown")
+        result = {"collected_items": 100, "account_processed": account_id}
+        print(f"Task {task_id} completed.")
+        await task_manager.update_task_status(task_id, status="completed", result=result)
 
+        # --- Simple Workflow Example --- 
+        # If this task succeeds, create a follow-up analysis task
+        # Note: For MVP, this new task isn't automatically run by this background task.
+        # It's just added to the queue. Another endpoint/mechanism would need to trigger it
+        # or the background task itself could add *another* background task.
+        follow_up_params = {"source_task_id": task_id, "items_to_analyze": result["collected_items"]}
+        follow_up_task_id = await task_manager.create_task(TaskType.CONTENT_ANALYSIS, follow_up_params)
+        print(f"Task {task_id} created follow-up task {follow_up_task_id}")
+        # --------------------------------
 
-@router.get("/list")
-async def list_tasks(
-    task_manager: TaskManagerDep,
-    current_user: CurrentUser,
-    status: Optional[str] = None,
-    limit: int = 100,
-    offset: int = 0,
-) -> Dict[str, Any]:
-    """
-    List all tasks, optionally filtered by status.
-    """
-    # Convert string status to enum if provided
-    task_status = None
-    if status:
-        try:
-            task_status = TaskStatus(status)
-        except ValueError:
-            raise HTTPException(
-                status_code=400, 
-                detail=f"Invalid status. Must be one of: {', '.join([s.value for s in TaskStatus])}"
-            )
+    except Exception as e:
+        error_msg = f"Task {task_id} failed: {str(e)}"
+        print(error_msg)
+        await task_manager.update_task_status(task_id, status="failed", error=error_msg)
+    # finally: 
+        # Add cleanup logic here if needed
+
+async def run_content_analysis_task(task_id: str, params: Dict[str, Any]):
+    """Example background task for content analysis."""
+    await task_manager.update_task_status(task_id, status="running")
+    try:
+        print(f"Running task {task_id} (Content Analysis) with params: {params}")
+        await asyncio.sleep(3)
+        result = {"analysis_complete": True, "sentiment": "positive", "source": params.get("source_task_id")}
+        print(f"Task {task_id} completed.")
+        await task_manager.update_task_status(task_id, status="completed", result=result)
+    except Exception as e:
+        error_msg = f"Task {task_id} failed: {str(e)}"
+        print(error_msg)
+        await task_manager.update_task_status(task_id, status="failed", error=error_msg)
+
+# Mapping task types to their execution functions
+TASK_RUNNERS = {
+    TaskType.DATA_COLLECTION: run_data_collection_task,
+    TaskType.CONTENT_ANALYSIS: run_content_analysis_task,
+    # Add other task types and their runners here
+}
+
+# --- API Models --- 
+
+class TaskCreateRequest(BaseModel):
+    task_type: TaskType
+    params: Dict[str, Any]
+
+class TaskCreateResponse(BaseModel):
+    task_id: str
+
+class TaskStatusResponse(BaseModel):
+    task_id: str
+    status: str
+    created_at: Any # Use Any for simplicity, ideally datetime
+    updated_at: Any # Use Any for simplicity, ideally datetime
+    result: Optional[Any] = None
+    error: Optional[str] = None
+
+# --- API Endpoints --- 
+
+@router.post("/", response_model=TaskCreateResponse, status_code=status.HTTP_202_ACCEPTED)
+async def create_task_endpoint(
+    task_request: TaskCreateRequest,
+    background_tasks: BackgroundTasks
+):
+    """Creates a new task and schedules it for background execution."""
+    if task_request.task_type not in TASK_RUNNERS:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid task type: {task_request.task_type}"
+        )
+
+    task_id = await task_manager.create_task(task_request.task_type, task_request.params)
     
-    tasks = task_manager.get_all_tasks(
-        status=task_status,
-        limit=limit,
-        offset=offset
-    )
+    # Get the appropriate runner function for the task type
+    task_runner = TASK_RUNNERS[task_request.task_type]
     
-    return {
-        "success": True,
-        "tasks": tasks,
-        "count": len(tasks),
-        "total": len(task_manager.tasks)
-    } 
+    # Add the task runner to FastAPI's background tasks
+    background_tasks.add_task(task_runner, task_id=task_id, params=task_request.params)
+    
+    return {"task_id": task_id}
+
+@router.get("/{task_id}/status", response_model=TaskStatusResponse)
+async def get_task_status_endpoint(task_id: str):
+    """Retrieves the status and details of a specific task."""
+    task_data = await task_manager.get_task(task_id)
+    if not task_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail=f"Task with ID {task_id} not found"
+        )
+    # Convert datetime objects to string for JSON serialization if needed
+    # For production, consider a more robust serialization approach
+    # task_data["created_at"] = task_data["created_at"].isoformat()
+    # task_data["updated_at"] = task_data["updated_at"].isoformat()
+    return task_data 
