@@ -12,200 +12,327 @@ alwaysApply: false
 | Relational Database | PostgreSQL | 13+ | Entity data and relationships | ✅ Included |
 | Document Database | MongoDB | 6.0+ | Social media content and engagement | ✅ Included |
 | In-memory Database | Redis | 7.0+ | Caching and real-time operations | ❌ **NOT in MVP** |
-| Vector Database | Pinecone | Latest | Semantic similarity analysis | ✅ Included |
+| Vector Database | Pinecone | Latest | Semantic content analysis | ✅ Included |
 
-## 2. Relational Database Design
+## 2. Relational Database Design (PostgreSQL)
 
 ### 2.1 Primary Technology
 
-PostgreSQL with SQLModel ORM integration
+PostgreSQL with SQLModel ORM integration.
 
 ### 2.2 Key Design Decisions
 
-- **UUID Primary Keys**: All entities use UUID primary keys for security and distributed system compatibility
-- **Relationship Management**: Proper foreign key constraints with cascade delete
-- **String Field Constraints**: Appropriate length limits on all VARCHAR fields
-- **Migration Strategy**: Alembic for version-controlled schema changes
+- **UUID Primary Keys**: All entities use UUID primary keys for security and distributed system compatibility.
+- **Relationship Management**: Proper foreign key constraints with cascade delete (`ondelete="CASCADE"` in models).
+- **String Field Constraints**: Appropriate length limits on VARCHAR fields (e.g., `max_length=255`).
+- **Migration Strategy**: Alembic for version-controlled schema changes.
 
-### 2.3 Domain Models
+### 2.3 Domain Models (SQLModel)
 
+The SQLModel definitions are located in individual files within the `backend/app/db/models/` directory.
+
+**`backend/app/db/models/political_entity.py`:**
 ```python
+import uuid
+from datetime import datetime
+from enum import Enum
+from typing import TYPE_CHECKING, List, Optional
+
+from sqlmodel import Field, Relationship, SQLModel
+
+if TYPE_CHECKING:
+    from app.db.models.social_media_account import SocialMediaAccount
+    from app.db.models.entity_relationship import EntityRelationship
+
+
+class EntityType(str, Enum):
+    POLITICIAN = "politician"
+    PARTY = "party"
+    ORGANIZATION = "organization"
+
+
 class PoliticalEntity(SQLModel, table=True):
-    id: UUID = Field(default_factory=uuid4, primary_key=True)
-    name: str = Field(index=True)
-    entity_type: str  # politician, party, organization
-    platforms: List["SocialMediaAccount"] = Relationship(back_populates="entity")
-    relationships: List["EntityRelationship"] = Relationship(back_populates="source_entity")
+    """
+    PoliticalEntity model for database storage.
+    
+    This model represents a political entity (politician, party, organization) 
+    in the system and is stored in PostgreSQL.
+    """
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    name: str = Field(index=True, max_length=255)
+    entity_type: EntityType
+    description: Optional[str] = Field(default=None)
+    country: Optional[str] = Field(default=None, max_length=100)
+    region: Optional[str] = Field(default=None, max_length=100)
+    political_alignment: Optional[str] = Field(default=None, max_length=100)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
-class SocialMediaAccount(SQLModel, table=True):
-    id: UUID = Field(default_factory=uuid4, primary_key=True)
-    platform: str  # twitter, facebook, instagram, etc.
-    platform_id: str = Field(index=True)  # platform-specific identifier
-    handle: str
-    entity_id: UUID = Field(foreign_key="politicalentity.id")
-    entity: PoliticalEntity = Relationship(back_populates="platforms")
-
-class EntityRelationship(SQLModel, table=True):
-    id: UUID = Field(default_factory=uuid4, primary_key=True)
-    source_entity_id: UUID = Field(foreign_key="politicalentity.id")
-    target_entity_id: UUID = Field(foreign_key="politicalentity.id")
-    relationship_type: str  # ally, opponent, neutral
-    strength: float  # normalized relationship strength
-    last_updated: datetime = Field(default_factory=datetime.utcnow)
-    source_entity: PoliticalEntity = Relationship(back_populates="relationships")
+    # Relationships
+    social_media_accounts: List["SocialMediaAccount"] = Relationship(
+        back_populates="political_entity",
+        sa_relationship_kwargs={"cascade": "all, delete-orphan"},
+    )
+    
+    # Relationships for EntityRelationship
+    source_relationships: List["EntityRelationship"] = Relationship(
+        back_populates="source_entity",
+        sa_relationship_kwargs={
+            "primaryjoin": "PoliticalEntity.id==EntityRelationship.source_entity_id",
+            "cascade": "all, delete-orphan",
+        },
+    )
+    
+    target_relationships: List["EntityRelationship"] = Relationship(
+        back_populates="target_entity",
+        sa_relationship_kwargs={
+            "primaryjoin": "PoliticalEntity.id==EntityRelationship.target_entity_id",
+            "cascade": "all, delete",
+        },
+    ) 
 ```
 
-## 3. Document Database Design
+**`backend/app/db/models/social_media_account.py`:**
+```python
+import uuid
+from enum import Enum
+from typing import Optional
+
+from sqlmodel import Field, Relationship, SQLModel
+
+from app.db.models.political_entity import PoliticalEntity
+
+
+class Platform(str, Enum):
+    TWITTER = "twitter"
+    FACEBOOK = "facebook"
+    INSTAGRAM = "instagram"
+    LINKEDIN = "linkedin"
+    YOUTUBE = "youtube"
+    TIKTOK = "tiktok"
+    OTHER = "other"
+
+
+class SocialMediaAccount(SQLModel, table=True):
+    """
+    SocialMediaAccount model for database storage.
+    
+    This model represents a social media account linked to a political entity
+    and is stored in PostgreSQL.
+    """
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    platform: Platform
+    platform_id: str = Field(index=True, max_length=255)
+    handle: str = Field(max_length=255)
+    name: Optional[str] = Field(default=None, max_length=255)
+    url: Optional[str] = Field(default=None, max_length=2083)
+    verified: bool = Field(default=False)
+    follower_count: Optional[int] = Field(default=None)
+    following_count: Optional[int] = Field(default=None)
+    
+    # Foreign key
+    political_entity_id: uuid.UUID = Field(
+        foreign_key="politicalentity.id",
+        nullable=False,
+        ondelete="CASCADE"
+    )
+    
+    # Relationship
+    political_entity: PoliticalEntity = Relationship(back_populates="social_media_accounts") 
+```
+
+**`backend/app/db/models/entity_relationship.py`:**
+```python
+import uuid
+from datetime import datetime
+from enum import Enum
+from typing import Optional
+
+from sqlmodel import Field, Relationship, SQLModel
+
+from app.db.models.political_entity import PoliticalEntity
+
+
+class RelationshipType(str, Enum):
+    ALLY = "ally"
+    OPPONENT = "opponent"
+    NEUTRAL = "neutral"
+
+
+class EntityRelationship(SQLModel, table=True):
+    """
+    EntityRelationship model for database storage.
+    
+    This model represents a relationship between two political entities
+    and is stored in PostgreSQL.
+    """
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    relationship_type: RelationshipType
+    strength: float = Field(default=0.5, ge=0.0, le=1.0)
+    last_updated: datetime = Field(default_factory=datetime.utcnow)
+    
+    # Foreign keys
+    source_entity_id: uuid.UUID = Field(
+        foreign_key="politicalentity.id",
+        nullable=False,
+        ondelete="CASCADE"
+    )
+    target_entity_id: uuid.UUID = Field(
+        foreign_key="politicalentity.id",
+        nullable=False,
+        ondelete="CASCADE"
+    )
+    
+    # Relationships
+    source_entity: PoliticalEntity = Relationship(
+        back_populates="source_relationships",
+        sa_relationship_kwargs={"foreign_keys": "EntityRelationship.source_entity_id"}
+    )
+    target_entity: PoliticalEntity = Relationship(
+        back_populates="target_relationships",
+        sa_relationship_kwargs={"foreign_keys": "EntityRelationship.target_entity_id"}
+    ) 
+```
+
+## 3. Document Database Design (MongoDB)
 
 ### 3.1 Primary Technology
 
-MongoDB for flexible document storage and querying
+MongoDB for flexible document storage and querying. Asynchronous access via `motor`.
 
 ### 3.2 Key Collections
 
-- **posts**: Social media posts from tracked accounts
-- **comments**: User comments on tracked posts
-- **metrics**: Aggregated engagement statistics
-- **topics**: Topic analysis results and trends
+- **posts**: Social media posts from tracked accounts (`SocialMediaPost` schema).
+- **comments**: User comments on tracked posts (`SocialMediaComment` schema).
+- **topics**: Topic definitions and metadata (`TopicAnalysis` schema).
+- **topic_occurrences**: Instances where topics are detected in content (`TopicOccurrence` schema).
+- **topic_trends**: Aggregated topic analysis over time (`TopicTrend` schema).
+- **metrics**: (Potentially) Aggregated engagement statistics (Schema TBD or integrated into other collections).
 
-### 3.3 Schema Patterns
+### 3.3 Schema Definitions (Pydantic)
 
-**Post Document Example:**
-```javascript
-{
-  "_id": ObjectId,
-  "platform_id": String,        // Original ID from the platform
-  "platform": String,           // instagram, twitter, facebook, etc.
-  "account_id": String,         // Reference to PostgreSQL SocialMediaAccount.id
-  "content_type": String,       // post, sidecar, video, story, reel, etc.
-  "short_code": String,         // Platform shortcode for URL (e.g., Instagram)
-  "url": String,                // Direct URL to the post
-  "content": {
-    "text": String,
-    "media": Array,             // URLs to media content
-    "links": Array,             // External links
-    "hashtags": Array,          // Hashtags used in the post
-    "mentions": Array           // Accounts mentioned in the post
-  },
-  "metadata": {
-    "created_at": Date,
-    "language": String,
-    "location": {
-      "name": String,
-      "id": String,
-      "country": String,
-      "state": String,
-      "city": String
-    },
-    "client": String,
-    "is_repost": Boolean,
-    "is_reply": Boolean,
-    "dimensions": {
-      "height": Number,
-      "width": Number
-    },
-    "alt_text": String,
-    "product_type": String,     // For videos: clips, igtv, etc.
-    "owner": {
-      "username": String,
-      "id": String,
-      "verified": Boolean
-    },
-    "tagged_users": Array       // Users tagged in the post
-  },
-  "engagement": {
-    "likes_count": Number,
-    "shares_count": Number,
-    "comments_count": Number,
-    "views_count": Number,
-    "engagement_rate": Number,
-    "saves_count": Number
-  },
-  "child_posts": Array,         // For sidecar/carousel posts with child items
-  "video_data": {               // Present for video posts
-    "duration": Number,
-    "video_url": String,
-    "thumbnail_url": String,
-    "is_muted": Boolean
-  },
-  "analysis": {
-    "sentiment_score": Number,
-    "topics": Array,
-    "entities_mentioned": Array,
-    "key_phrases": Array,
-    "emotional_tone": String
-  },
-  "vector_id": String           // Reference to vector database entry
-}
+The Pydantic models defining the structure for MongoDB documents are located in:
+`backend/app/db/schemas/mongodb.py`
+
+Key schemas include:
+
+**`SocialMediaPost`:**
+```python
+class SocialMediaPost(BaseModel):
+    """
+    Schema for social media posts stored in MongoDB.
+    
+    This model represents a post from various social media platforms
+    including its content, metadata, engagement metrics, and analysis.
+    """
+    platform_id: str = Field(..., description="Original ID from the social media platform")
+    platform: str = Field(..., description="Social media platform name (e.g., twitter, facebook)")
+    account_id: UUID = Field(..., description="Reference to PostgreSQL SocialMediaAccount UUID")
+    content_type: str = Field(..., description="Type of post (e.g., post, sidecar, video)")
+    short_code: Optional[str] = Field(None, description="Platform shortcode for URL (e.g., Instagram)")
+    url: Optional[HttpUrl] = Field(None, description="Direct URL to the post")
+    
+    content: PostContent  # Defined in mongodb.py
+    metadata: PostMetadata # Defined in mongodb.py
+    engagement: PostEngagement # Defined in mongodb.py
+    analysis: Optional[PostAnalysis] = None # Defined in mongodb.py
+    child_posts: Optional[List[ChildPost]] = None # Defined in mongodb.py
+    video_data: Optional[VideoData] = None # Defined in mongodb.py
+    vector_id: Optional[str] = Field(None, description="Reference to vector database entry")
+    
+    # Note: _id is handled implicitly by MongoDB/Motor or via repository layer
+    class Config:
+        schema_extra = { ... } # Example included in mongodb.py
 ```
 
-**Comment Document Example:**
-```javascript
-{
-  "_id": ObjectId,
-  "platform_id": String,       // Original ID from the platform
-  "platform": String,          // instagram, twitter, facebook, etc.
-  "post_id": String,           // Reference to MongoDB post ID
-  "post_url": String,          // URL of the original post
-  
-  "user_id": String,           // ID of the commenter
-  "user_name": String,         // Username of the commenter
-  "user_full_name": String,    // Full display name of the commenter
-  "user_profile_pic": String,  // Profile picture URL of the commenter
-  "user_verified": Boolean,    // Whether user has a verification badge
-  "user_private": Boolean,     // Whether user's account is private
-  
-  "content": {
-    "text": String,            // Text content of the comment
-    "media": Array,            // Optional media attachments
-    "mentions": Array          // User mentions in the comment
-  },
-  
-  "metadata": {
-    "created_at": Date,
-    "language": String,
-    "location": Object,        // Optional location data
-    "is_reply": Boolean,       // Whether this is a reply
-    "parent_comment_id": String // For replies, references parent comment
-  },
-  
-  "engagement": {
-    "likes_count": Number,
-    "replies_count": Number
-  },
-  
-  "replies": Array,            // Array of reply objects with same structure
-  
-  "analysis": {
-    "sentiment_score": Number,
-    "emotional_tone": String,
-    "toxicity_flag": Boolean,
-    "entities_mentioned": Array,
-    "language_detected": String,
-    "contains_question": Boolean
-  },
-  
-  "user_details": {            // Additional user information
-    "fbid_v2": Number,         // Facebook/Meta ID
-    "is_mentionable": Boolean,
-    "latest_reel_media": Number,
-    "profile_pic_id": String
-  },
-  
-  "vector_id": String          // Reference to vector database entry
-}
+**`SocialMediaComment`:**
+```python
+class SocialMediaComment(BaseModel):
+    """
+    Schema for social media comments stored in MongoDB.
+    
+    This model represents a comment on a social media post including
+    its content, metadata, engagement metrics, replies, and analysis.
+    """
+    platform_id: str = Field(..., description="Original ID from the social media platform")
+    platform: str = Field(..., description="Social media platform name (e.g., twitter, facebook)")
+    post_id: str = Field(..., description="Reference to MongoDB post ID")
+    post_url: Optional[HttpUrl] = Field(None, description="URL of the original post")
+    
+    user_id: str = Field(..., description="ID of the commenter")
+    user_name: str = Field(..., description="Username of the commenter")
+    user_full_name: Optional[str] = Field(None, description="Full display name of the commenter")
+    user_profile_pic: Optional[HttpUrl] = Field(None, description="Profile picture URL of the commenter")
+    user_verified: bool = Field(False, description="Whether the user has a verification badge")
+    user_private: bool = Field(False, description="Whether the user's account is private")
+    
+    content: CommentContent # Defined in mongodb.py
+    metadata: CommentMetadata # Defined in mongodb.py
+    engagement: CommentEngagement # Defined in mongodb.py
+    
+    replies: List[CommentReply] = [] # Defined in mongodb.py
+    
+    analysis: Optional[CommentAnalysis] = None # Defined in mongodb.py
+    user_details: Optional[CommentUserDetails] = None # Defined in mongodb.py
+    vector_id: Optional[str] = Field(None, description="Reference to vector database entry")
+
+    # Note: _id is handled implicitly by MongoDB/Motor or via repository layer
+    class Config:
+        schema_extra = { ... } # Example included in mongodb.py
 ```
+
+**`TopicAnalysis`:**
+```python
+class TopicAnalysis(BaseModel):
+    """
+    Schema for topic analysis data stored in MongoDB.
+    
+    This model represents a topic that can be analyzed across social media content,
+    including its definition, related keywords, and categorization.
+    """
+    topic_id: str = Field(..., description="Unique identifier for the topic")
+    name: str = Field(..., description="Descriptive name of the topic")
+    keywords: List[str] = Field(..., description="List of related keywords or phrases")
+    description: Optional[str] = Field(None, description="Optional explanation of the topic")
+    category: str = Field(..., description="Broader category the topic belongs to (e.g., Economy, Healthcare)")
+    created_at: datetime = Field(default_factory=datetime.utcnow, description="Timestamp when the topic was created")
+    updated_at: datetime = Field(default_factory=datetime.utcnow, description="Timestamp when the topic was last updated")
+
+    # Note: _id is handled implicitly by MongoDB/Motor or via repository layer
+    class Config:
+        schema_extra = { ... } # Example included in mongodb.py
+```
+
+**(Other schemas like `TopicOccurrence`, `TopicTrend`, and nested sub-models are also defined in `mongodb.py`)**
 
 ### 3.4 Indexing Strategy
 
-- Compound index on `platform` and `account_id`
-- Compound index on `metadata.created_at` and `account_id`
-- Text index on `content.text` for content search
-- Single field indexes on `engagement` metrics
-- Index on `short_code` for quick URL lookups
-- Index on `platform_id` for platform-specific queries
+*(This section remains largely conceptual and should guide index creation)*
+- **posts collection:**
+    - Compound index on `platform` and `account_id`
+    - Compound index on `metadata.created_at` and `account_id`
+    - Text index on `content.text` for content search
+    - Index on `platform_id` (unique potentially)
+    - Index on `short_code`
+    - Consider indexes on frequently queried `engagement` fields.
+- **comments collection:**
+    - Compound index on `platform` and `post_id`
+    - Index on `platform_id` (unique potentially)
+    - Index on `user_id`
+    - Compound index on `metadata.created_at` and `post_id`
+- **topics collection:**
+    - Index on `topic_id` (unique)
+    - Index on `name`
+    - Index on `category`
+- **topic_occurrences collection:**
+    - Compound index on `topic_id` and `content_id`
+    - Compound index on `topic_id` and `detected_at`
+- **topic_trends collection:**
+    - Compound index on `topic_id`, `time_period`, `start_date`
 
-## 4. In-memory Database Design (NOT in MVP)
+*(Actual indexes should be managed via Motor/PyMongo commands or an ODM like Beanie if adopted later)*
+
+## 4. In-memory Database Design (Redis - NOT in MVP)
 
 ### 4.1 Primary Technology
 
@@ -214,15 +341,14 @@ Redis for caching, real-time metrics and messaging - **NOT IMPLEMENTED IN MVP**
 ### 4.2 MVP Alternative
 
 In the MVP version, the application will:
-- Use application-level caching where necessary
-- Store metrics directly in MongoDB
-- Use the TaskManager system for basic message processing
-- Defer real-time notifications to future releases
+- Use application-level caching where necessary (e.g., in-memory dicts, potentially FastAPI Cache).
+- Store metrics directly in MongoDB.
+- Use the simple TaskManager system for background tasks.
+- Defer real-time notifications to future releases.
 
 ### 4.3 Post-MVP Implementation
 
 The following Redis features will be implemented after the MVP:
-
 - **Hash maps**: Entity and post metrics (`entity:{id}:metrics`)
 - **Sorted sets**: Trending topics and influencers (`trending:topics:{timeframe}`)
 - **Lists**: Recent activity streams (`activity:entity:{id}`)
@@ -230,84 +356,86 @@ The following Redis features will be implemented after the MVP:
 
 ### 4.4 Caching Strategy (Post-MVP)
 
-- Time-based expiration for volatile metrics
-- LRU eviction policy for cached data
-- Write-through cache for critical metrics
+- Time-based expiration for volatile metrics.
+- LRU eviction policy for cached data.
+- Write-through cache for critical metrics.
 
-## 5. Vector Database Design
+## 5. Vector Database Design (Pinecone)
 
 ### 5.1 Primary Technology
 
-Pinecone or similar vector database for semantic similarity analysis
+Pinecone for semantic similarity analysis. Connection managed via `pinecone-client`.
 
 ### 5.2 Embedding Strategy
 
-- Text embeddings using sentence-transformers
-- 1536-dimension vectors for high-fidelity similarity
-- Namespaces separated by content type
-- Metadata filtering for efficient queries
+- Text embeddings generated (e.g., using `sentence-transformers`).
+- Vector dimensionality depends on the chosen embedding model.
+- Namespaces likely separated by content type (e.g., `posts`, `comments`).
+- Metadata stored alongside vectors for filtering.
 
-### 5.3 Vector Schema
+### 5.3 Vector Schema (Conceptual)
 
 ```javascript
 {
-  "id": String,           // Unique identifier
-  "values": Array,        // Embedding vector
+  "id": String,           // Unique identifier (e.g., MongoDB document platform_id)
+  "values": Array,        // Embedding vector (e.g., [0.1, 0.2, ...])
   "metadata": {
-    "content_type": String, // post, comment
-    "source_id": String,    // MongoDB ID of source content
-    "entity_id": String,    // PostgreSQL ID of political entity
-    "platform": String,
-    "created_at": Date,
-    "topics": Array,
-    "sentiment_score": Number
+    "content_type": String, // "post" or "comment"
+    "source_id": String,    // MongoDB document platform_id
+    "account_id": String,   // PostgreSQL SocialMediaAccount UUID (as string)
+    "entity_id": String,    // PostgreSQL PoliticalEntity UUID (as string)
+    "platform": String,     // e.g., "twitter", "instagram"
+    "created_at": ISODate,  // Timestamp of original content
+    "topics": Array,        // List of associated topic IDs/labels
+    "sentiment_score": Number // Sentiment of the source content
+    // Add other filterable metadata as needed
   }
 }
 ```
+*(Actual interaction via `pinecone-client` library)*
 
 ## 6. Cross-Database Integration
 
 ### 6.1 Reference Patterns
 
-- PostgreSQL → MongoDB: UUID references stored as strings
-- MongoDB → Vector DB: Document IDs linked to vector entries
-- All DBs → Redis: **Not applicable in MVP** (will be implemented post-MVP)
+- **PostgreSQL → MongoDB**: UUIDs from PostgreSQL (`PoliticalEntity.id`, `SocialMediaAccount.id`) are stored as strings within relevant MongoDB documents (e.g., `SocialMediaPost.account_id`).
+- **MongoDB → Vector DB**: The `platform_id` (or potentially MongoDB's `_id` as string) of posts/comments is used as the vector `id` in Pinecone. The `vector_id` field in MongoDB schemas stores this Pinecone ID.
+- **All DBs → Redis**: **Not applicable in MVP**. (Post-MVP: Relevant IDs will be used as keys in Redis).
 
 ### 6.2 Synchronization Strategy (MVP Version)
 
-- PostgreSQL as the source of truth for entity data
-- MongoDB used for document storage
-- Task-based processing for updates between systems
-- Direct connections between databases in the MVP
+- PostgreSQL is the source of truth for entity and account data.
+- MongoDB stores the collected social media content.
+- Relationships are established during data ingestion/processing (e.g., when a post is saved, its `account_id` links it to the PostgreSQL `SocialMediaAccount`).
+- Updates requiring cross-database consistency rely on application logic (e.g., updating entity info might trigger reprocessing of related content if necessary).
 
 ### 6.3 Post-MVP Synchronization
 
-- MongoDB change streams for data propagation
-- Redis as intermediary for real-time updates
-- Periodic reconciliation for data consistency
+- Explore MongoDB change streams or event-driven patterns for propagating updates (e.g., entity name change triggers updates in related analysis).
+- Use Redis Pub/Sub or a message queue (like RabbitMQ with Celery) for inter-service communication if the application becomes more distributed.
 
 ### 6.4 Transaction Management
 
-- Two-phase commit for critical cross-database operations
-- Eventual consistency model for non-critical updates
-- Compensating transactions for error recovery
+- Standard database transactions used within single database operations (PostgreSQL commit/rollback, MongoDB atomic operations).
+- Cross-database operations in MVP are typically not transactional. Design for eventual consistency or use compensating actions in application logic if failures occur mid-process.
+- Post-MVP: Consider two-phase commit patterns or Saga pattern for critical cross-database workflows if required.
 
 ## 7. Performance Optimization
 
 ### 7.1 Query Optimization
 
-- Direct database queries for frequent operations in MVP
-- Application-level caching for repetitive queries
-- Query result caching with Redis (post-MVP)
+- Leverage database indexes effectively (see section 3.4).
+- Write efficient queries in repository layers.
+- Use projection in MongoDB to fetch only necessary fields.
+- Implement pagination for all list endpoints.
+- Application-level caching for frequently accessed, rarely changing data.
 
 ### 7.2 Sharding Strategy (Post-MVP)
 
-- MongoDB sharded by entity and time period
-- Vector database partitioned by content domains
-- Redis cluster for horizontal scaling
+- Consider sharding MongoDB collections based on high-cardinality keys like `account_id` or time ranges if data volume grows significantly.
+- Vector database partitioning/sharding handled by the service provider (Pinecone).
 
 ### 7.3 Connection Pooling
 
-- Optimized connection pools for each database
-- Connection reuse across related operations
-- Graceful handling of connection failures
+- Rely on connection pooling provided by database drivers (`psycopg` for SQLModel/PostgreSQL, `motor` for MongoDB).
+- Ensure pool sizes are configured appropriately based on expected load and application concurrency (e.g., FastAPI worker count). 

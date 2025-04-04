@@ -1,3 +1,11 @@
+# Remove temporary debug prints
+# import sys
+# import os
+# print("--- Debug Info Start ---")
+# print(f"Current working directory: {os.getcwd()}")
+# print(f"sys.path: {sys.path}")
+# print("--- Debug Info End ---")
+
 import logging
 import sentry_sdk
 from fastapi import FastAPI
@@ -8,8 +16,9 @@ from typing import Dict
 from app.api.api_v1.api import api_router
 from app.core.config import settings
 from app.core.errors import add_exception_handlers
-from app.db.connections import mongodb, pinecone_conn
+from app.db.connections import pinecone_conn
 from app.schemas import StandardResponse
+from app.db.mongo_utils import get_mongo_client, close_mongo_connection
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -89,7 +98,9 @@ async def health_check():
 async def check_mongodb() -> Dict[str, bool]:
     """Test MongoDB connection."""
     try:
-        await mongodb.client.admin.command('ping')
+        # Use the new utility function to get the client
+        client = await get_mongo_client() 
+        await client.admin.command('ping')
         return {"connected": True}
     except Exception as e:
         logger.error(f"MongoDB health check failed: {e}")
@@ -129,11 +140,14 @@ async def startup_db_client() -> None:
     """Initialize database connections on application startup."""
     # MongoDB connection
     try:
-        logger.info("Connecting to MongoDB...")
-        await mongodb.connect()
-        logger.info("Successfully connected to MongoDB")
+        logger.info("Initializing MongoDB connection...")
+        # Use the new utility function
+        await get_mongo_client() 
+        # Assuming the utility handles logging success/failure internally now
+        # logger.info("Successfully connected to MongoDB") # Removed as mongo_utils logs this
     except Exception as e:
-        logger.warning(f"Failed to connect to MongoDB: {e}")
+        # The utility function logs the error, just log a warning here
+        logger.warning(f"Failed to initialize MongoDB connection during startup: {e}")
         # Continue without raising the exception
 
     # Pinecone connection (optional)
@@ -160,15 +174,17 @@ async def shutdown_db_client() -> None:
         # Close connections in reverse order of initialization
         
         # Close Pinecone (sync) - if it was initialized
-        if settings.PINECONE_API_KEY:
+        if settings.PINECONE_API_KEY and pinecone_conn.available: # Added check for availability
             logger.info("Closing Pinecone connection...")
             pinecone_conn.close()
             logger.info("Pinecone connection closed")
 
         # Close MongoDB (async)
-        logger.info("Closing MongoDB connection...")
-        await mongodb.close()
-        logger.info("MongoDB connection closed")
+        # Use the new utility function
+        await close_mongo_connection() 
+        # logger.info("Closing MongoDB connection...") # Removed as mongo_utils logs this
+        # await mongodb.close() # Removed old call
+        # logger.info("MongoDB connection closed") # Removed as mongo_utils logs this
 
     except Exception as e:
         logger.error(f"Error during database shutdown: {e}")
